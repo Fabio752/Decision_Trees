@@ -31,9 +31,23 @@ class Dataset:
             counts = np.append(counts, percentage)
         return(np.array(list(zip(unique_elems,counts))))
 
-    def loadIntoDict
+    def getDictionary(self):
+        dict = {}
+        for i in range(len(self.labels)):
+            key = ','.join(str(v) for v in self.attrib[i])
+            dict[key] = str(self.labels[i])
+        return(dict)
 
-    def getWrongProportions(self, otherFilePath):
-
+# take in a full dataset and a noisy dataset
+# return mistakes of noisy dataset relative to full dataset
+def getWrongNumbers(full_dat, noisy_dat):
+    ref_dict = full_dat.getDictionary()
+    wrongNo = 0
+    for i in range(len(noisy_dat.attrib)):
+        key = ",".join(str(v) for v in noisy_dat.attrib[i])
+        noisyVal = noisy_dat.labels[i]
+        if (noisyVal != ref_dict[key]):
+            wrongNo += 1
+    return wrongNo
 
 

@@ -1,7 +1,13 @@
 import numpy as np 
 import dataset_reader as ds
 
-pathToFilename = './data/train_full.txt'
+pathToFull = './data/train_full.txt'
+pathToNoisy = './data/train_noisy.txt'
 
-dataset = ds.Dataset(pathToFilename)
-print(dataset.getLabelFractions())
+datasetFull = ds.Dataset(pathToFull)
+datasetNoisy = ds.Dataset(pathToNoisy)
+
+# print(ds.getWrongNumbers(datasetFull, datasetNoisy))
+
+print(datasetFull.getLabelFractions())
+print(datasetNoisy.getLabelFractions())
