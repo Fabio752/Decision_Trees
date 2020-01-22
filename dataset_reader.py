@@ -14,7 +14,7 @@ class Dataset:
         return(first_line.count(',') + 1)
 
     def loadAttributes(self):
-        return np.genfromtxt(self.pathToFile, delimiter=',', dtype=np.int8, usecols=range(0,self.nCol-1))
+        return np.genfromtxt(self.pathToFile, delimiter=',', dtype=np.int32, usecols=range(0,self.nCol-1))
 
     def loadLabels(self):
         return np.genfromtxt(self.pathToFile, delimiter=',', dtype=np.unicode_, usecols=(self.nCol-1))
@@ -27,9 +27,10 @@ class Dataset:
         counts = np.array([])
         for count_elem in count_elems:
             # fraction = str(count_elem) + "/" + str(len(self.labels))
-            percentage = str(float(count_elem) / float(len(self.labels)))[0:5]
+            percentage = float(count_elem) / float(len(self.labels))
             counts = np.append(counts, percentage)
-        return(np.array(list(zip(unique_elems,counts))))
+        # return(np.array(list(zip(unique_elems,counts))))
+        return unique_elems, counts
 
     def getDictionary(self):
         dict = {}
