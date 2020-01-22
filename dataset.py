@@ -1,5 +1,6 @@
 import numpy as np
 import math
+import classification
 
 # take in an array of probabilities, calculate entropy
 def calculateEntropy(probs):
@@ -15,18 +16,30 @@ class Dataset:
         self.labels = np.array([])
         self.totalInstances = 0
         self.pathToFile = ''
+        self.splitter = classification.Splitter()
 
     def initFromFile(self, pathToFile): 
         self.pathToFile = pathToFile
         self.nCol = self.getNCol()
+        
+        assert self.nCol > 1, \
+            "File must have more than 1 attributes"
+        
         self.attrib = self.loadAttributes()
         self.labels = self.loadLabels()
+                
+        assert self.attrib == self.labels, \
+            "File must have same number of attributes and labels"
+
         self.totalInstances = len(self.attrib)
 
     def initFromData(self, attrib, labels):
+        assert attrib == labels, \
+            "Data must have same number of attributes and labels"
         self.attrib = attrib
         self.labels = labels
         self.nCol = len(self.attrib[0])
+        self.totalInstances = len(self.attrib)
     
     # get number of cols in one line
     def getNCol(self):
@@ -62,9 +75,34 @@ class Dataset:
             dict[key] = str(self.labels[i])
         return(dict)
 
+    # calculate overall entropy of labels in dataset
     def getLabelEntropy(self):
         _, fractions = self.getLabelFractions()
         return calculateEntropy(fractions)
+
+    # calculate entropy of data based on column
+    def getColumnEntropy(self, col):
+        # < because nCol includes column of label
+        assert col < self.nCol, \
+            "Column out of range of dataset"
+
+        binCounts = {} # dict containing key consisting of (splitterKey and Label) to value number of Counts        
+        # Example: "[0,4]A": 10 
+
+        for i in range(self.totalInstances):
+            attr = self.attrib[i]
+            label = self.labels[i]
+            
+            val = attr[col]
+            key = self.splitter.getKey(val)
+            
+            binCountKey = key + label[i] # [0,4]A
+
+            # binCounts[binCountKey]
+            # TODO:- complete this function
+
+
+        
 
 
             

@@ -9,6 +9,19 @@
 
 import numpy as np
 
+# Defines how we split into nodes
+class Splitter:
+    def __init__():
+        return
+
+    def getKey(self, x):
+        if (x < 5):
+            return "[0,4]"
+        elif (x < 10):
+            return "[5,9]"
+        else:
+            return "[10,15]"
+
 class ClassifierTree:
     def __init__(self, usedCols, dataset):
         self.char = None # if not None, then we have reached a leaf Node
@@ -17,18 +30,8 @@ class ClassifierTree:
     # return a dict mapping from key to next trees
     # Actually build the tree based on usedCols 
     def buildTree(self, dataset):
-        
+        # TODO:- build Tree based on the best IG 
         return {}
-    
-
-    # Can change the conditions here to change to split
-    def getKey(self, x):
-        if (x < 5):
-            return 'a'
-        elif (x < 10):
-            return 'b'
-        else:
-            return 'c'
 
 
 class DecisionTreeClassifier(object):
@@ -51,7 +54,7 @@ class DecisionTreeClassifier(object):
 
     def __init__(self):
         self.is_trained = False
-        self.classifierTree = ClassifierTree()
+        # self.classifierTree = ClassifierTree()
     
     
     def train(self, x, y):
