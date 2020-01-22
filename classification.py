@@ -9,6 +9,27 @@
 
 import numpy as np
 
+class ClassifierTree:
+    def __init__(self, usedCols, dataset):
+        self.char = None # if not None, then we have reached a leaf Node
+        self.next = self.buildTree(dataset) # maps to the next tree if not a leaf Node. They key is numeric, starting from 0. The values are the subsequent trees
+
+    # return a dict mapping from key to next trees
+    # Actually build the tree based on usedCols 
+    def buildTree(self, dataset):
+        
+        return {}
+    
+
+    # Can change the conditions here to change to split
+    def getKey(self, x):
+        if (x < 5):
+            return 'a'
+        elif (x < 10):
+            return 'b'
+        else:
+            return 'c'
+
 
 class DecisionTreeClassifier(object):
     """
@@ -30,6 +51,7 @@ class DecisionTreeClassifier(object):
 
     def __init__(self):
         self.is_trained = False
+        self.classifierTree = ClassifierTree()
     
     
     def train(self, x, y):
@@ -60,6 +82,7 @@ class DecisionTreeClassifier(object):
         #                 ** TASK 2.1: COMPLETE THIS METHOD **
         #######################################################################
         
+
         
         
         # set a flag so that we know that the classifier has been trained

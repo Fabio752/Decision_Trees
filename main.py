@@ -6,10 +6,7 @@ pathToFull = './data/train_full.txt'
 pathToNoisy = './data/train_noisy.txt'
 pathToSub = './data/train_sub.txt'
 
-datasetFull = ds.Dataset(pathToFull)
-datasetNoisy = ds.Dataset(pathToNoisy)
-datasetSub = ds.Dataset(pathToSub)
-
-# q1.q2(datasetNoisy, 'train_noisy')
-
-q1.getLabelCount(datasetFull, datasetNoisy)
+datasetFull = ds.Dataset()
+datasetFull.initFromFile(pathToFull)
+print(datasetFull.getLabelFractions())
+print(datasetFull.getLabelEntropy())

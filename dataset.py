@@ -1,11 +1,32 @@
 import numpy as np
+import math
+
+# take in an array of probabilities, calculate entropy
+def calculateEntropy(probs):
+    ret = 0.
+    for p in probs:
+        ret -= (p * math.log2(p))
+    return ret
 
 class Dataset: 
-    def __init__(self, _pathToFile):
-        self.pathToFile = _pathToFile
+    def __init__(self):
+        self.nCol = 0
+        self.attrib = np.array([])
+        self.labels = np.array([])
+        self.totalInstances = 0
+        self.pathToFile = ''
+
+    def initFromFile(self, pathToFile): 
+        self.pathToFile = pathToFile
         self.nCol = self.getNCol()
         self.attrib = self.loadAttributes()
         self.labels = self.loadLabels()
+        self.totalInstances = len(self.attrib)
+
+    def initFromData(self, attrib, labels):
+        self.attrib = attrib
+        self.labels = labels
+        self.nCol = len(self.attrib[0])
     
     # get number of cols in one line
     def getNCol(self):
@@ -21,15 +42,13 @@ class Dataset:
 
     # returns tuple, first: label; second: fraction
     def getLabelFractions(self):
-        unique_elems, count_elems = np.unique(self.labels, return_counts=True)
+        unique_elems, count_elems = self.getLabelCount()
         # fraction = []
-        counts = np.array([])
+        fractions = np.array([])
         for count_elem in count_elems:
-            # fraction = str(count_elem) + "/" + str(len(self.labels))
             percentage = float(count_elem) / float(len(self.labels))
-            counts = np.append(counts, percentage)
-        # return(np.array(list(zip(unique_elems,counts))))
-        return unique_elems, counts
+            fractions = np.append(fractions, percentage)
+        return unique_elems, fractions
 
     # returns tuple, first: label; second: count
     def getLabelCount(self):
@@ -42,5 +61,13 @@ class Dataset:
             key = ','.join(str(v) for v in self.attrib[i])
             dict[key] = str(self.labels[i])
         return(dict)
+
+    def getLabelEntropy(self):
+        _, fractions = self.getLabelFractions()
+        return calculateEntropy(fractions)
+
+
+            
+
 
 

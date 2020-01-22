@@ -33,7 +33,7 @@ def plotProportion(dataset, filename):
 # Positive value means how many more did noisy get compared to full
 def getLabelCount(datasetFull, datasetNoisy):
     full_label, full_count = datasetFull.getLabelCount()
-    nosiy_label, noisy_count = datasetNoisy.getLabelCount()
+    _, noisy_count = datasetNoisy.getLabelCount()
 
     diff_count = [] # difference (noisy - full)
 
