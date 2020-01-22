@@ -1,4 +1,4 @@
-import numpy as np 
+import numpy as np
 import dataset as ds
 import q1 as q1
 
@@ -7,6 +7,5 @@ pathToNoisy = './data/train_noisy.txt'
 pathToSub = './data/train_sub.txt'
 
 datasetFull = ds.Dataset()
-datasetFull.initFromFile(pathToFull)
-print(datasetFull.getLabelFractions())
-print(datasetFull.getLabelEntropy())
+datasetFull.initFromFile(pathToSub)
+print(datasetFull.getColumnEntropy(1))
