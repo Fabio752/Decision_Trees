@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 # Question 1.1
 # gets the minimum and maximum number from the attributes
-def q1(datasetFull):
+def getMinMax(datasetFull):
     minRes = 65536
     maxRes = 0
     for attrib in datasetFull.attrib:
@@ -16,7 +16,7 @@ def q1(datasetFull):
 # Question 1.2
 # Get in full dataset and sub dataset, output the class label distribution
 # Plot graph using matplotlib
-def q2(dataset, filename):
+def plotProportion(dataset, filename):
     label, fraction = dataset.getLabelFractions()
 
     y_pos = np.arange(len(label))
@@ -29,22 +29,37 @@ def q2(dataset, filename):
     plt.show()
 
 # Question 1.3
-# Get in ref full dataset and noisy dataset, output graph showing proportion difference
-def q3(datasetFull, datasetNoisy):
-    flabel, ffraction = datasetFull.getLabelFractions()
-    nlabel, nfraction = datasetNoisy.getLabelFractions()
+# Get in ref full dataset and noisy dataset, output graph showing count difference (noisy - full)
+# Positive value means how many more did noisy get compared to full
+def getLabelCount(datasetFull, datasetNoisy):
+    full_label, full_count = datasetFull.getLabelCount()
+    nosiy_label, noisy_count = datasetNoisy.getLabelCount()
+
+    diff_count = [] # difference (noisy - full)
+
+    for i in range(len(full_count)):
+        diff_count.append(noisy_count[i] - full_count[i])
+
+    y_pos = np.arange(len(full_label))
     
-    dfraction = [] # diff in fractions
-    
-    for i in range(len(ffraction)):
-        dfraction.append(ffraction[i] - nfraction[i])
-    
-    y_pos = np.arange(len(flabel))
-    
-    plt.bar(y_pos, dfraction, align='center', alpha=0.5)
-    plt.xticks(y_pos, flabel)
-    plt.ylabel('Proportion difference')
-    plt.title('Proportion difference between train_full.txt and train_noisy.txt')
+    plt.bar(y_pos, diff_count, align='center', alpha=0.5)
+    plt.xticks(y_pos, full_label)
+    plt.ylabel('Count difference')
+    plt.title('Count difference of each label (train_noisy.txt w.r.t. train_full.txt)')
 
     plt.show()
+
+# Question 1.4
+# take in a full dataset and a noisy dataset
+# return mistakes of noisy dataset relative to full dataset
+def q4(full_dat, noisy_dat):
+    ref_dict = full_dat.getDictionary()
+    wrongNo = 0
+    for i in range(len(noisy_dat.attrib)):
+        key = ",".join(str(v) for v in noisy_dat.attrib[i])
+        noisyVal = noisy_dat.labels[i]
+        if (noisyVal != ref_dict[key]):
+            wrongNo += 1
+    return wrongNo
+
 

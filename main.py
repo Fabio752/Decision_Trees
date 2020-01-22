@@ -1,5 +1,5 @@
 import numpy as np 
-import dataset_reader as ds
+import dataset as ds
 import q1 as q1
 
 pathToFull = './data/train_full.txt'
@@ -12,4 +12,4 @@ datasetSub = ds.Dataset(pathToSub)
 
 # q1.q2(datasetNoisy, 'train_noisy')
 
-q1.q3(datasetFull, datasetNoisy)
+q1.getLabelCount(datasetFull, datasetNoisy)
