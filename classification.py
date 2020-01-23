@@ -8,30 +8,93 @@
 ##############################################################################
 
 import numpy as np
+import dataset as ds
+import pickle
 
 # Defines how we split into nodes
-class Splitter:
-    def __init__(self):
-        return
+def getBinKey(x):
+    if (x < 5):
+        return "0,4"
+    elif (x < 10):
+        return "5,9"
+    else:
+        return "10,15"
 
-    def getKey(self, x):
-        if (x < 5):
-            return "[0,4]"
-        elif (x < 10):
-            return "[5,9]"
-        else:
-            return "[10,15]"
+# Print Tree in JSON format
+def printTree(tree, indentationLevel = ""):
+    if not tree.char is None:
+        print(indentationLevel + "\"" + tree.char + "\": true")
+    else:
+        print(indentationLevel + "\"" +str(tree.splitCol) + "\": {")
+        for key, val in tree.next.items():
+            print(indentationLevel + "\t\"[" + key + "]\": {")
+            printTree(val, indentationLevel + "\t\t")
+            print(indentationLevel + "\t},")
+        print(indentationLevel + "},")
 
 class ClassifierTree:
-    def __init__(self, usedCols, dataset):
+    '''
+    usedCols: Column already used, don't use again
+    leftRows: after splitting, the rows left
+    '''
+    def __init__(self, dataset, usedCols, leftRows):
         self.char = None # if not None, then we have reached a leaf Node
-        self.next = self.buildTree(dataset) # maps to the next tree if not a leaf Node. They key is numeric, starting from 0. The values are the subsequent trees
+        self.dataset = dataset
+        self.usedCols = usedCols
+        self.leftRows = leftRows
+        self.splitCol = None # which col do we use to split next
+        self.next = self.buildTree() # maps to the next tree if not a leaf Node. They key is "0,4" for example . The values are the subsequent trees
 
     # return a dict mapping from key to next trees
     # Actually build the tree based on usedCols
-    def buildTree(self, dataset):
-        # TODO:- build Tree based on the best IG
-        return {}
+    def buildTree(self):
+        currentOverallEntropy, majorityElem = self.dataset.getOverallEntropyAndMajorityElem(self.leftRows)
+        attribCount = self.dataset.attribCount # number of attributes
+        colsToInvestigate = [x for x in range(attribCount) if x not in self.usedCols] # unusedCols we can continue splitting
+
+        # if all samples have same label (currentOverallEntropy == 0) or dataset cannot be split further, set self.char with majority label, return None
+        if currentOverallEntropy == 0 or len(colsToInvestigate) == 0:
+            self.char = majorityElem
+            return None
+
+        # best IG just means lowest overallEntropy, so we are looking to minimise overallEntropy
+        overallEntropy = 1000000. # large constant
+        chosenCol = -1
+        binRows = {} 
+        for col in colsToInvestigate:
+            gottenOverallEntropy, gottenBinRows = self.dataset.getColumnEntropy(col, self.leftRows)
+            if (gottenOverallEntropy < overallEntropy):
+                chosenCol = col
+                overallEntropy = gottenOverallEntropy
+                binRows = gottenBinRows
+
+        # Make sure that chosenCol is not -1
+        assert chosenCol != -1, \
+            "buildTree failed. No column chosen"
+
+        # we have chosen a col to split with, hooray
+        self.splitCol = chosenCol
+
+        next = {}
+        
+        nextUsedCols = [chosenCol]
+        for c in self.usedCols:
+            nextUsedCols.append(c) # deepcopy
+
+        for key in binRows:
+            next[key] = ClassifierTree(self.dataset, nextUsedCols, binRows[key])
+        
+        return next
+
+    def predict(self, attrib):
+        tree = self
+        while tree.char is None:
+            attr = attrib[tree.splitCol]
+            key = getBinKey(attr)
+            assert key in tree.next, \
+                "predict failed, key not found!"
+            tree = tree.next[key]
+        return tree.char
 
 
 class DecisionTreeClassifier(object):
@@ -54,7 +117,7 @@ class DecisionTreeClassifier(object):
 
     def __init__(self):
         self.is_trained = False
-        # self.classifierTree = ClassifierTree()
+        self.classifierTree = None
 
 
     def train(self, x, y):
@@ -85,8 +148,14 @@ class DecisionTreeClassifier(object):
         #                 ** TASK 2.1: COMPLETE THIS METHOD **
         #######################################################################
 
+        dataset = ds.Dataset()
+        dataset.initFromData(x, y)
 
+        self.classifierTree = ClassifierTree(dataset, [], range(dataset.totalInstances))
 
+        print("{")
+        printTree(self.classifierTree, "\t")
+        print("}")
 
         # set a flag so that we know that the classifier has been trained
         self.is_trained = True
@@ -124,7 +193,20 @@ class DecisionTreeClassifier(object):
         #######################################################################
         #                 ** TASK 2.2: COMPLETE THIS METHOD **
         #######################################################################
-
+        for i in range(len(x)):
+            predictions[i] = self.classifierTree.predict(x[i])
 
         # remember to change this if you rename the variable
         return predictions
+
+    # write object (model) to a file
+    def writeToFile(self, outfilepath):
+        with open(outfilepath, 'wb') as file:
+            pickle.dump(self, file)
+        print("Written to file" + outfilepath)
+
+    # read object (model) from a file
+    def readFromFile(self, infilepath):
+        with open(infilepath, 'rb') as file:
+            self = pickle.load(file)
+        print("Read from file: " + infilepath)

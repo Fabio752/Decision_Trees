@@ -16,13 +16,14 @@ class Dataset:
         self.labels = np.array([])
         self.totalInstances = 0
         self.pathToFile = ''
-        self.splitter = classification.Splitter()
+        self.attribCount = 0
 
     def initFromFile(self, pathToFile):
         self.pathToFile = pathToFile
         self.nCol = self.getNCol()
+        self.attribCount = self.nCol - 1
 
-        assert self.nCol > 1, \
+        assert self.attribCount > 0, \
             "File must have more than 1 attributes"
 
         self.attrib = self.loadAttributes()
@@ -34,11 +35,16 @@ class Dataset:
         self.totalInstances = len(self.attrib)
 
     def initFromData(self, attrib, labels):
-        assert attrib == labels, \
+        assert len(attrib) == len(labels), \
             "Data must have same number of attributes and labels"
         self.attrib = attrib
         self.labels = labels
         self.nCol = len(self.attrib[0])
+        self.attribCount = self.nCol - 1
+
+        assert self.attribCount > 0, \
+            "File must have more than 1 attributes"
+
         self.totalInstances = len(self.attrib)
 
     # get number of cols in one line
@@ -75,60 +81,132 @@ class Dataset:
             dict[key] = str(self.labels[i])
         return(dict)
 
-    # calculate overall entropy of labels in dataset
-    def getLabelEntropy(self):
-        _, fractions = self.getLabelFractions()
-        return calculateEntropy(fractions)
+    # # calculate overall entropy of labels in dataset
+    # def getLabelEntropy(self):
+    #     _, fractions = self.getLabelFractions()
+    #     return calculateEntropy(fractions)
+
+    # calculate overall entropy, majority elem in given rows
+    def getOverallEntropyAndMajorityElem(self, rows):
+        elem_counts = {} # map of elem to number of occurences
+
+        for i in rows:
+            label = self.labels[i]
+            
+            if (label not in elem_counts):
+                elem_counts[label] = 0
+
+            elem_counts[label] += 1
+
+        totalRows = len(rows)
+
+        probabilities = []
+
+        for elem, count in elem_counts.items():
+            probabilities.append(float(count) / totalRows)
+
+        overallEntropy = calculateEntropy(probabilities)
+
+        # get majority element, if duplicate, return the earlier one
+        max_elem = None
+        max_elem_count = 0
+
+        for elem, count in elem_counts.items():
+            if (count > max_elem_count):
+                max_elem_count = count
+                max_elem = elem
+        return overallEntropy, max_elem
+
 
     # calculate entropy of data based on column
-    def getColumnEntropy(self, col):
+    # return overallEntropy, binRows (useful for tree later)
+    # binRows is the rows associated with the split after the split
+    # only search through rows defined in rows
+    def getColumnEntropy(self, col, rows):
+        # make sure columns within range of dataset
         # < because nCol includes column of label
         assert col < self.nCol, \
             "Column out of range of dataset"
 
-        binCounts = {} # dict containing key consisting of (splitterKey and Label) to value number of Counts
-        # Example: [0,4] : A: 10
+        # make sure last row within range of rows in whole dataset
+        assert rows[-1] < self.totalInstances, \
+            "Rows out of range of dataset"
 
-        for i in range(self.totalInstances):
+        # dict of bin to label to count
+        '''
+        Ex: 
+        {
+            "0,4": {
+                "A": 4, // 4 A's in the 0,4 range
+                "B": 5,
+                ...
+            }
+        }
+        '''
+        binCounts = {}
+
+        '''
+        Total number of instances in a bin
+        Ex:
+        {
+            "0,4": 22, // 22 total labels in the 0,4 range
+            "5,9": 42,
+            ...
+        }
+        ''' 
+        binTotals = {}
+
+        '''
+        Rows left after a split at that bin 
+        Ex:
+        {
+            "0,4": [1,2,3], // after we split at 0,4, these rows are left
+            "5,9": [0,4,5],
+            ...
+        }
+        '''
+        binRows = {}
+        for i in rows:
             attr = self.attrib[i]
-            label = self.labels[i] #A
-            val = attr[col] #Value at column of interest
+            label = self.labels[i] # A
+            val = attr[col] # Value at column of interest
 
-            key = self.splitter.getKey(val) #Will generate key such as [0,4]
+            key = classification.getBinKey(val) # Will generate key such as "0,4"
 
-            #Nested dictionary, the key will map to a dictionary containing label:count pair
-            #Eg. [0,4] = {}
             if not key in binCounts:
                 binCounts[key] = {}
-                #Initialize total count
-                binCounts[key]["total"] = 0
+                binTotals[key] = 0
+                binRows[key] = []
 
             #If label does not exit, then create an instance in the nested dictionary and if not increment counter
-            #Eg. [0,4]:A = 1
             if not label in binCounts[key]:
-                binCounts[key][label] = 1
-                binCounts[key]["total"] += 1
-            else:
-                binCounts[key][label] += 1
-                binCounts[key]["total"] += 1
+                binCounts[key][label] = 0
 
-            
-            #print("Key: ", key, "Label: ", label, "Count. ", binCounts[key][label])
+            binCounts[key][label] += 1
+            binTotals[key] += 1
+            binRows[key].append(i)
 
+
+        # Calculate the entropy of each key based on count results
         keyEntropies = {}
-        #Calculate the entropy of each key based on count results
-        for key in binCounts:
+        for key, binCount in binCounts.items():
             keyEntropies[key] = {}
             probabilities = []
-            for label in binCounts[key]:
+                
+            for label, count in binCount.items():
                 #Append probability to probabilities array
-                p = (binCounts[key][label])/(binCounts[key]["total"])
+                p = float(count) / binTotals[key]
                 probabilities.append(p)
+
             #Calculate entropy based on the probabilities
             entropy = calculateEntropy(probabilities)
             keyEntropies[key] = entropy
-            #print("Key: ", key, "Counts:", binCounts[key])
-            #print("Key: ", key, "Entropy:", entropy)
 
-        #return keyEntropies dictionary
-        return keyEntropies
+        # Calculate total entropy weighted by total rows
+        overallEntropy = 0.
+        totalRows = len(rows)
+
+        for key, total in binTotals.items():
+            overallEntropy += float(total) / totalRows * keyEntropies[key]
+
+        return overallEntropy, binRows
