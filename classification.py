@@ -43,12 +43,14 @@ class ClassifierTree:
         self.usedCols = usedCols
         self.leftRows = leftRows
         self.splitCol = None # which col do we use to split next
+        self.entropy = None
         self.next = self.buildTree() # maps to the next tree if not a leaf Node. They key is "0,4" for example . The values are the subsequent trees
 
     # return a dict mapping from key to next trees
     # Actually build the tree based on usedCols
     def buildTree(self):
         currentOverallEntropy, majorityElem = self.dataset.getOverallEntropyAndMajorityElem(self.leftRows)
+        self.entropy = currentOverallEntropy
         attribCount = self.dataset.attribCount # number of attributes
         colsToInvestigate = [x for x in range(attribCount) if x not in self.usedCols] # unusedCols we can continue splitting
 
