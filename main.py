@@ -7,15 +7,15 @@ pathToFull = './data/train_full.txt'
 pathToNoisy = './data/train_noisy.txt'
 pathToSub = './data/train_sub.txt'
 pathToTest = './data/simple1.txt'
+pathToToy = './data/toy.txt'
 
 
 dataset = ds.Dataset()
-dataset.initFromFile(pathToTest)
+dataset.initFromFile(pathToToy)
 
 dtc = cs.DecisionTreeClassifier()
-# dtc.train(dataset.attrib, dataset.labels)
+dtc.train(dataset.attrib, dataset.labels)
 
-dtc.readFromFile("./testpickle.blob")
 # print("predicted: " + str(dtc.predict(np.array([
 # [8,12,7,8],
 # [5,11,6,7],

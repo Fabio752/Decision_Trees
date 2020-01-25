@@ -29,8 +29,8 @@ class Dataset:
         self.attrib = self.loadAttributes()
         self.labels = self.loadLabels()
 
-        #assert self.attrib == self.labels, \
-            #"File must have same number of attributes and labels"
+        assert len(self.attrib) == len(self.labels), \
+            "File must have same number of attributes and labels"
 
         self.totalInstances = len(self.attrib)
 
@@ -39,7 +39,7 @@ class Dataset:
             "Data must have same number of attributes and labels"
         self.attrib = attrib
         self.labels = labels
-        self.nCol = len(self.attrib[0])
+        self.nCol = len(self.attrib[0]) + 1
         self.attribCount = self.nCol - 1
 
         assert self.attribCount > 0, \
@@ -210,3 +210,188 @@ class Dataset:
             overallEntropy += float(total) / totalRows * keyEntropies[key]
 
         return overallEntropy, binRows
+
+
+
+    #
+    #
+    # -------------------------- NEW -----------------------------
+    '''
+    Return a dictionary of attrib to dictionary of label to list of row numbers
+        e.g. 
+        {
+            1: { 'A': [1, 3, 5] },
+            2: { 'A': [2, 4], 'C': [6, 7] },
+            ...
+        }
+        and also a dictionary of labels to row numbers with the cumulative rows 
+        e.g.
+        {
+            'A': [1, 2, 3, 4, 5],
+            'C': [6, 7],
+            ...
+        }
+    '''
+    def getAttribRowDict(self, col, rows):
+        attribLabelDict = {}
+        cumulativeDict = {}
+        for row in rows:
+            attr = self.attrib[row][col]
+            label = self.labels[row]
+            
+            if not attr in attribLabelDict:
+                attribLabelDict[attr] = {}
+
+            if not label in attribLabelDict[attr]:
+                attribLabelDict[attr][label] = []
+
+            if not label in cumulativeDict:
+                cumulativeDict[label] = []
+
+            attribLabelDict[attr][label].append(row)
+            cumulativeDict[label].append(row)
+
+        return attribLabelDict, cumulativeDict
+
+    '''
+    get entropy for a particular dictionary containing keys labels and values list of row numbers
+    also get the total_count of elements in the split
+    '''
+    def getEntropyForSplit(self, splitDict):
+        elem_counts = [] # frequency of elements
+        total_count = 0
+        for _, lstRow in splitDict.items():
+            rowLen = len(lstRow)
+            if (rowLen > 0):
+                elem_counts.append(rowLen)
+                total_count += rowLen
+        probs = [] # probabilities
+        for elemCount in elem_counts:
+            probs.append(float(elemCount) / total_count)
+        return calculateEntropy(probs), total_count
+
+    '''
+    get them min entropy, splitK, LHSSplitDict, RHSSplitDict for all K in attribRange
+    '''
+    def getMinEntropyForColumn(self, attribLabelDict, cumulativeDict, attribRange):
+        minEntropy = float('inf')
+        splitK = None # K to use
+        LHSSplitDict = {}
+        RHSSplitDict = cumulativeDict
+
+        # initial
+        LHSDict = {} # LHS node
+        RHSDict = cumulativeDict # RHS node
+
+        # for every split point k in attrib range, we
+        # calculate the entropy after splitting at x <= k (LHS) and x > k (RHS)
+        for K in attribRange:
+            splitDict = attribLabelDict[K]
+
+            # add to LHSDict
+            for label, lstRows in splitDict.items():
+                if not label in LHSDict:
+                    LHSDict[label] = []
+                LHSDict[label] = LHSDict[label] + lstRows
+
+                # remove first len(lstRows) elements from RHS dict
+                # this works because rows are added sequentially
+                RHSDict[label] = RHSDict[label][len(lstRows):]
+
+            # Now calculate the entropy 
+            LHSEntropy, LHSCount = self.getEntropyForSplit(LHSDict)
+            RHSEntropy, RHSCount = self.getEntropyForSplit(RHSDict)
+
+            # get the weighted entropy
+            totalCount = LHSCount + RHSCount
+            weightedEntropy = LHSEntropy * LHSCount / totalCount + RHSEntropy * RHSCount / totalCount
+
+            # check if lower than minEntropy
+            if weightedEntropy < minEntropy:
+                minEntropy = weightedEntropy
+                splitK = K
+                LHSSplitDict = LHSDict
+                RHSSplitDict = RHSDict
+
+
+        assert not K is None, \
+            "can't get split range K"
+
+        return minEntropy, splitK, LHSSplitDict, RHSSplitDict 
+
+    '''
+    From 
+    {
+        'A': [1,2,3],
+        'B': [4,5]
+    }
+    get
+    {
+        [1,2,3,4,5]
+    }
+    '''
+    def splitDictToRows(self, splitDict):
+        ret = []
+        
+        for _, lstRow in splitDict.items():
+            ret = ret + lstRow
+
+        return ret
+
+    '''
+    Get the best split point in the column in the given rows.
+    Return entropy and dictionary of key range (e.g. "0,5") and values rows
+    '''
+    def getSplitPointForColumn(self, col, rows):
+        attribLabelDict, cumulativeDict = self.getAttribRowDict(col, rows)
+
+        # sorted range of attributes in the row range, e.g. 0..15
+        attribRangeList = list(attribLabelDict.keys())
+        attribRangeList.sort()
+        attribRange = attribRangeList
+
+        lastAttrib = attribRange.pop() # we do not need the last element as this means the RHS is empty
+
+        entropy, splitK, LHSSplitDict, RHSSplitDict = self.getMinEntropyForColumn(attribLabelDict, cumulativeDict, attribRange)
+
+        LHSSplit = "<=" + str(splitK) # e.g. 0,5 for splitK = 5
+        RHSSplit = "> " + str(splitK) # e.g. 6,15
+
+        splitDict = {
+            LHSSplit: self.splitDictToRows(LHSSplitDict),
+            RHSSplit: self.splitDictToRows(RHSSplitDict),
+        }
+
+        return entropy, splitDict
+
+    '''
+    Get the best column and split
+    return splitCol, entropy, splitDict
+    '''
+    def getBestColumnAndSplit(self, unusedCols, rows):
+        print(rows)
+        minEntropy = float('inf')
+        splitCol = None
+        splitDict = {}
+
+        for tryCol in unusedCols:
+            entropy, trySplitDict = self.getSplitPointForColumn(tryCol, rows)
+            
+            print (entropy, trySplitDict)
+            if entropy < minEntropy:
+                minEntropy = entropy
+                splitCol = tryCol
+                splitDict = trySplitDict
+
+        assert not splitCol is None, \
+            "Can't split anymore"
+
+        return splitCol, splitDict        
+        
+
+
+
+
+
+        
+
