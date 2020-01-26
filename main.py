@@ -12,7 +12,7 @@ pathToToy2 = './data/toy2.txt'
 
 
 dataset = ds.Dataset()
-dataset.initFromFile(pathToSimple1)
+dataset.initFromFile(pathToToy)
 
 dtc = cs.DecisionTreeClassifier()
 dtc.train(dataset.attrib, dataset.labels)

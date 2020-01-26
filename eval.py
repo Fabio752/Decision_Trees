@@ -72,8 +72,8 @@ class Evaluator(object):
 
         '''classes_transposed = np.transpose(class_labels)
         print(classes_transposed)
-        full_confusion_matrix = np.hstack((classes_transposed, confusion))
-        print(full_confusion_matrix)'''
+        full_confusion_matrix = np.hstack((classes_transposed, confusion))'''
+        print(confusion)
 
         return confusion
 
