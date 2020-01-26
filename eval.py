@@ -13,7 +13,7 @@
 ##############################################################################
 
 import numpy as np
-
+debug = False
 
 class Evaluator(object):
     """ Class to perform evaluation
@@ -43,9 +43,11 @@ class Evaluator(object):
             Rows are ground truth per class, columns are predictions.
         """
 
+        '''
         print("Predicted: " + str(prediction))
         print("Annotated: " + str(annotation))
         print("-------")
+        '''
 
         if not class_labels:
             class_labels = np.unique(annotation)
@@ -59,24 +61,19 @@ class Evaluator(object):
         for i in range(len(class_labels)):
             elements_dict[class_labels[i]] = i
 
-        print(elements_dict)
+        #print(elements_dict)
 
         for i in range(len(annotation)):
             a_character = annotation[i]
             p_character = prediction[i]
-            confusion[elements_dict[a_character]][elements_dict[p_character]] +=1
+            confusion[elements_dict[a_character]][elements_dict[p_character]]+=1
 
-        print(confusion)
+        print("Confusion matrix: ")
 
-
-
-
-
-
-        #######################################################################
-        #                 ** TASK 3.1: COMPLETE THIS METHOD **
-        #######################################################################
-
+        '''classes_transposed = np.transpose(class_labels)
+        print(classes_transposed)
+        full_confusion_matrix = np.hstack((classes_transposed, confusion))
+        print(full_confusion_matrix)'''
 
         return confusion
 
@@ -95,9 +92,9 @@ class Evaluator(object):
         float
             The accuracy (between 0.0 to 1.0 inclusive)
         """
-        accurate = 0
-        for i in range(len(confusion)):
-            accurate += confusion[i][i]
+        accurate = confusion.trace()
+        '''for i in range(len(confusion)):
+            accurate += confusion[i][i]'''
 
         accuracy = float(str(float(accurate/np.sum(confusion)))[0:5])
 
@@ -130,8 +127,8 @@ class Evaluator(object):
         for i in range(len(p)):
             numerator=confusion[i][i]
             denominator = np.sum(confusion, axis = 0)[i]
-            print(numerator, denominator)
-            p[i] = numerator/denominator
+            if debug: print(numerator, denominator)
+            p[i] = float(str(numerator/denominator)[0:5]) if denominator != 0 else 0
 
 
         macro_p = float(str(np.average(p))[0:5])
@@ -166,8 +163,8 @@ class Evaluator(object):
         for i in range(len(r)):
             numerator=confusion[i][i]
             denominator = np.sum(confusion, axis = 1)[i]
-            print(numerator, denominator)
-            r[i] = numerator/denominator
+            if debug: print(numerator, denominator)
+            r[i] = float(str(numerator/denominator)[0:5]) if denominator != 0 else 0
 
         macro_r = float(str(np.average(r))[0:5])
 
@@ -202,7 +199,7 @@ class Evaluator(object):
         recall, _ = self.recall(confusion)
 
         for i in range(len(f)):
-            f[i] = 2*recall[i]*precision[i]/(recall[i]+precision[i]) if (recall[i]+precision[i]) != 0 else 0
+            f[i] = float(str(2*recall[i]*precision[i]/(recall[i]+precision[i]))[0:5]) if (recall[i]+precision[i]) != 0 else 0
 
         macro_f = float(str(np.average(f))[0:5])
 
