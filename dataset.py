@@ -326,8 +326,8 @@ class Dataset:
                 minEntropy = entropy
                 splitCol = tryCol
                 splitK = trySplitK
-                LHSSplitRows = tryLHSSplit
-                RHSSplitRows = tryRHSSplit
+                LHSSplitRows = deepcopy(tryLHSSplit)
+                RHSSplitRows = deepcopy(tryRHSSplit)
 
         assert not splitCol is None, \
             "Can't split anymore"
