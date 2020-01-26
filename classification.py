@@ -16,38 +16,42 @@ class ClassifierTree:
     usedCols: Column already used, don't use again
     leftRows: after splitting, the rows left
     '''
-    def __init__(self, dataset, usedCols, leftRows):
-        self.char = None # if not None, then we have reached a leaf Node
+    def __init__(self, dataset, usedCols, leftRows, depth = 1):
         self.dataset = dataset
         self.usedCols = usedCols
         self.leftRows = leftRows
+        self.depth = depth
+        self.char = None # if not None, then we have reached a leaf Node
         self.splitCol = None # which col do we use to split next
         self.splitK = None
-        self.left, self.right = self.buildTree()
+        self.pruned = False # whether this is tried to pruned
+        self.majorityElem = None # majority elem
+        self.left = None
+        self.right = None 
+        self.buildTree()
 
     def buildTree(self):
         currentOverallEntropy, majorityElem = self.dataset.getOverallEntropyAndMajorityElem(self.leftRows)
+
+        self.entropy = currentOverallEntropy
+        self.majorityElem = majorityElem
 
         unusedCols = self.dataset.getUnusedCols(self.usedCols, self.leftRows) # unusedCols that are valid, we can continue splitting
 
         # if all samples have same label (currentOverallEntropy == 0) or dataset cannot be split further, set self.char with majority label, return None
         if currentOverallEntropy == 0 or len(unusedCols) == 0:
             self.char = majorityElem
-            return None, None
+        else:
+            splitCol, splitK, LHSSplitRows, RHSSplitRows = self.dataset.getBestColumnAndSplit(unusedCols, self.leftRows)
 
-        self.entropy = currentOverallEntropy
+            self.splitCol = splitCol
+            self.splitK = splitK
 
-        splitCol, splitK, LHSSplitRows, RHSSplitRows = self.dataset.getBestColumnAndSplit(unusedCols, self.leftRows)
+            nextUsedCols = [splitCol] + self.usedCols
 
-        self.splitCol = splitCol
-        self.splitK = splitK
+            self.left = ClassifierTree(self.dataset, nextUsedCols, LHSSplitRows, self.depth + 1)
+            self.right = ClassifierTree(self.dataset, nextUsedCols, RHSSplitRows, self.depth + 1)
 
-        nextUsedCols = [splitCol] + self.usedCols
-
-        left = ClassifierTree(self.dataset, nextUsedCols, LHSSplitRows)
-        right = ClassifierTree(self.dataset, nextUsedCols, RHSSplitRows)
-
-        return left, right
 
     def predict(self, attrib): 
         if not self.char is None:
@@ -65,11 +69,12 @@ class ClassifierTree:
         if not self.char is None:
             retStr += indentationLevel + self.char + "\n"
         else:
+            retStr += indentationLevel + "COL" + str(self.splitCol) + "|ENT:" + str(round(self.entropy, 3)) + "|D" + str(self.depth) + "\n"
             # LEFT
-            retStr += indentationLevel + str(self.splitCol) + ":[<=" + str(self.splitK) + "]\n"
+            retStr += indentationLevel + "[<=" + str(self.splitK) + "]\n"
             retStr += self.left.__repr__(indentationLevel + "\t")
             # RIGHT
-            retStr += indentationLevel + str(self.splitCol) + ":[> " + str(self.splitK) + "]\n"
+            retStr += indentationLevel + "[> " + str(self.splitK) + "]\n"
             retStr += self.right.__repr__(indentationLevel + "\t")
         return retStr
 
