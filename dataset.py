@@ -311,14 +311,14 @@ class Dataset:
     '''
     Get the best column and split
     '''
-    def getBestColumnAndSplit(self, unusedCols, rows):
+    def getBestColumnAndSplit(self, validCols, rows):
         minEntropy = float('inf')
         splitCol = None
         splitK = None
         LHSSplitRows = None
         RHSSplitRows = None
 
-        for tryCol in unusedCols:
+        for tryCol in validCols:
 
             entropy, trySplitK, tryLHSSplit, tryRHSSplit = self.getSplitPointForColumn(tryCol, rows)
 
@@ -335,26 +335,29 @@ class Dataset:
         return splitCol, splitK, LHSSplitRows, RHSSplitRows    
 
     '''
-    get number of attribs in the given rows for a col
+    get total number of attrs in a col for given rows
     '''
-    def getAttrNumForRowsCol(self, rows, col):
+    def getNumberOfAttrs(self, rows, col):
         attrDict = {}
+
         for row in rows:
             attr = self.attrib[row][col]
+
             if not attr in attrDict:
                 attrDict[attr] = True
-        return len(attrDict)
-        
-    '''
-    get unused and valid (>1 attrib) columns in the rows 
-    '''
-    def getUnusedCols(self, usedCols, rows): 
-        allUnused = [x for x in range(self.attribCount) if x not in usedCols] 
-        
-        unused = []
-        
-        for col in allUnused:
-            if self.getAttrNumForRowsCol(rows, col) != 1:
-                unused.append(col)
 
-        return unused
+        return len(attrDict)
+
+    '''
+    get all valid cols that cabe split on (more than 1 label)
+    '''
+    def getValidCols(self, rows):
+        allCols = range(self.attribCount)
+        validCols = []
+
+        for col in allCols:
+            if (self.getNumberOfAttrs(rows, col) != 1):
+                validCols.append(col)
+
+        return validCols
+        
