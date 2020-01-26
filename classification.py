@@ -25,11 +25,10 @@ class ClassifierTree:
         self.splitK = None
         self.next = self.buildTree() # maps to the next tree if not a leaf Node. They key is "0,4" for example . The values are the subsequent trees
 
-    # second method
     def buildTree(self):
         currentOverallEntropy, majorityElem = self.dataset.getOverallEntropyAndMajorityElem(self.leftRows)
 
-        unusedCols = self.dataset.getUnusedCols(self.usedCols, self.leftRows) # unusedCols that are valid,we can continue splitting
+        unusedCols = self.dataset.getUnusedCols(self.usedCols, self.leftRows) # unusedCols that are valid, we can continue splitting
 
         # if all samples have same label (currentOverallEntropy == 0) or dataset cannot be split further, set self.char with majority label, return None
         if currentOverallEntropy == 0 or len(unusedCols) == 0:
@@ -56,17 +55,19 @@ class ClassifierTree:
             return self.char
         
         attr = attrib[self.splitCol]
+
         if (attr <= self.splitK):
             return self.next["<=" + str(self.splitK)].predict(attrib)
+
         return self.next["> "+ str(self.splitK)].predict(attrib)            
 
     def __repr__(self, indentationLevel = ""):
         retStr = ""
         if not self.char is None:
-            retStr += indentationLevel + "\"" + self.char + "\"\n"
+            retStr += indentationLevel + self.char + "\n"
         else:
             for key, val in self.next.items():
-                retStr += (indentationLevel + str(self.splitCol) + ":" + "[" + key + "]" + "\n")
+                retStr += (indentationLevel + str(self.splitCol) + "[" + key + "]" + "\n")
                 retStr += val.__repr__(indentationLevel + "\t")
         return retStr
 

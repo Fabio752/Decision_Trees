@@ -12,13 +12,17 @@ def calculateEntropy(probs):
 
 class Dataset:
     def __init__(self):
-        self.nCol = 0
-        self.attrib = np.array([])
-        self.labels = np.array([])
-        self.totalInstances = 0
-        self.pathToFile = ''
-        self.attribCount = 0
+        self.nCol = 0 # number of columns including label
+        self.attrib = np.array([]) # 2D array, each element is a row of attributes
+        self.labels = np.array([]) # 1D array, all attributes
+        self.totalInstances = 0 # number of lines
+        self.pathToFile = '' # path to file if initFromFile
+        self.attribCount = 0 # total number of attributes (nCol - 1)
 
+
+    '''
+    initialize from file
+    '''
     def initFromFile(self, pathToFile):
         self.pathToFile = pathToFile
         self.nCol = self.getNCol()
@@ -30,12 +34,14 @@ class Dataset:
         self.attrib = self.loadAttributes()
         self.labels = self.loadLabels()
 
-
         assert len(self.attrib) == len(self.labels), \
             "File must have same number of attributes and labels"
 
         self.totalInstances = len(self.attrib)
 
+    '''
+    initialize from given data
+    '''
     def initFromData(self, attrib, labels):
         assert len(attrib) == len(labels), \
             "Data must have same number of attributes and labels"
@@ -50,21 +56,31 @@ class Dataset:
 
         self.totalInstances = len(self.attrib)
 
-    # get number of cols in one line
+    '''
+    get number of columns in one line (including label column)
+    '''
     def getNCol(self):
         with open(self.pathToFile, 'r') as file:
             first_line = file.readline()
         return(first_line.count(',') + 1)
 
+    '''
+    get attributes (from file)
+    '''
     def loadAttributes(self):
         ret = np.array([])
         attrib = np.genfromtxt(self.pathToFile, delimiter=',', dtype=np.int32, usecols=range(0,self.nCol-1))
+
+        # if only one column for attributes, make into 2D array
         if self.nCol == 2:
             ret = np.reshape(attrib, (-1, 1))
         else:
             ret = attrib
         return ret
 
+    '''
+    get labels (from file)
+    '''
     def loadLabels(self):
         return np.genfromtxt(self.pathToFile, delimiter=',', dtype=np.unicode_, usecols=(self.nCol-1))
 
@@ -169,11 +185,12 @@ class Dataset:
     {
         1: { 'A': [1, 3, 5] },
         2: { 'A': [2, 4], 'C': [6, 7] },
+        3: { 'A': [9, 10]}
         ...
     }
     to 
     {
-        A: [1, 3, 5, 2, 4],
+        A: [1, 3, 5, 2, 4, 9, 10],
         C: [6, 7]
     }
     the order of row numbers in the output list is ascending according to the input list's attributes
@@ -345,9 +362,3 @@ class Dataset:
                 unused.append(col)
 
         return unused
-
-
-
-
-        
-
