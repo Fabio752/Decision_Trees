@@ -60,13 +60,4 @@ print("Macro avg precision:" + str(macro_p))
 print("Macro avg f1:" + str(macro_f1))
 
 
-
-
-
-
-
-
-
-
-
 e = Evaluator()
