@@ -286,7 +286,7 @@ class Dataset:
 
     '''
     Get the best split point in the column in the given rows.
-    Return entropy and dictionary of key range (e.g. "0,5") and values rows
+    Return entropy and resulting rows in LHS and RHS after split
     '''
     def getSplitPointForColumn(self, col, rows):
         attribLabelDict = self.getAttribRowDict(col, rows)
@@ -303,40 +303,36 @@ class Dataset:
 
         entropy, splitK, LHSSplitDict, RHSSplitDict = self.getMinEntropyForColumn(attribLabelDict, attribRange)
 
-        LHSSplit = "<=" + str(splitK) # e.g. 0,5 for splitK = 5
-        RHSSplit = "> " + str(splitK) # e.g. 6,15
+        LHSSplitRows = self.splitDictToRows(LHSSplitDict)
+        RHSSplitRows = self.splitDictToRows(RHSSplitDict)
 
-        splitDict = {
-            LHSSplit: self.splitDictToRows(LHSSplitDict),
-            RHSSplit: self.splitDictToRows(RHSSplitDict),
-        }
-
-        return entropy, splitDict, splitK
+        return entropy, splitK, LHSSplitRows, RHSSplitRows
 
     '''
     Get the best column and split
-    return splitCol, entropy, splitDict
     '''
     def getBestColumnAndSplit(self, unusedCols, rows):
         minEntropy = float('inf')
         splitCol = None
-        splitDict = {}
         splitK = None
+        LHSSplitRows = None
+        RHSSplitRows = None
 
         for tryCol in unusedCols:
 
-            entropy, trySplitDict, trySplitK = self.getSplitPointForColumn(tryCol, rows)
+            entropy, trySplitK, tryLHSSplit, tryRHSSplit = self.getSplitPointForColumn(tryCol, rows)
 
             if entropy < minEntropy:
                 minEntropy = entropy
                 splitCol = tryCol
-                splitDict = trySplitDict
                 splitK = trySplitK
+                LHSSplitRows = tryLHSSplit
+                RHSSplitRows = tryRHSSplit
 
         assert not splitCol is None, \
             "Can't split anymore"
 
-        return splitCol, splitDict, splitK        
+        return splitCol, splitK, LHSSplitRows, RHSSplitRows    
 
     '''
     get number of attribs in the given rows for a col

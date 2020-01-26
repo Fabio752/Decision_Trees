@@ -6,13 +6,13 @@ import q1 as q1
 pathToFull = './data/train_full.txt'
 pathToNoisy = './data/train_noisy.txt'
 pathToSub = './data/train_sub.txt'
-pathToTest = './data/simple1.txt'
+pathToSimple1 = './data/simple1.txt'
 pathToToy = './data/toy.txt'
 pathToToy2 = './data/toy2.txt'
 
 
 dataset = ds.Dataset()
-dataset.initFromFile(pathToFull)
+dataset.initFromFile(pathToSimple1)
 
 dtc = cs.DecisionTreeClassifier()
 dtc.train(dataset.attrib, dataset.labels)

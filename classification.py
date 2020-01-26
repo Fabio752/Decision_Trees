@@ -23,7 +23,7 @@ class ClassifierTree:
         self.leftRows = leftRows
         self.splitCol = None # which col do we use to split next
         self.splitK = None
-        self.next = self.buildTree() # maps to the next tree if not a leaf Node. They key is "0,4" for example . The values are the subsequent trees
+        self.left, self.right = self.buildTree()
 
     def buildTree(self):
         currentOverallEntropy, majorityElem = self.dataset.getOverallEntropyAndMajorityElem(self.leftRows)
@@ -33,22 +33,21 @@ class ClassifierTree:
         # if all samples have same label (currentOverallEntropy == 0) or dataset cannot be split further, set self.char with majority label, return None
         if currentOverallEntropy == 0 or len(unusedCols) == 0:
             self.char = majorityElem
-            return None
+            return None, None
 
         self.entropy = currentOverallEntropy
 
-        splitCol, splitDict, splitK = self.dataset.getBestColumnAndSplit(unusedCols, self.leftRows)
+        splitCol, splitK, LHSSplitRows, RHSSplitRows = self.dataset.getBestColumnAndSplit(unusedCols, self.leftRows)
+
         self.splitCol = splitCol
         self.splitK = splitK
 
-        next = {}
-        
         nextUsedCols = [splitCol] + self.usedCols
 
-        for splitRange, splitRows in splitDict.items():
-            next[splitRange] = ClassifierTree(self.dataset, nextUsedCols, splitRows) 
+        left = ClassifierTree(self.dataset, nextUsedCols, LHSSplitRows)
+        right = ClassifierTree(self.dataset, nextUsedCols, RHSSplitRows)
 
-        return next
+        return left, right
 
     def predict(self, attrib): 
         if not self.char is None:
@@ -57,18 +56,21 @@ class ClassifierTree:
         attr = attrib[self.splitCol]
 
         if (attr <= self.splitK):
-            return self.next["<=" + str(self.splitK)].predict(attrib)
+            return self.left.predict(attrib)
 
-        return self.next["> "+ str(self.splitK)].predict(attrib)            
+        return self.right.predict(attrib)            
 
     def __repr__(self, indentationLevel = ""):
         retStr = ""
         if not self.char is None:
             retStr += indentationLevel + self.char + "\n"
         else:
-            for key, val in self.next.items():
-                retStr += (indentationLevel + str(self.splitCol) + "[" + key + "]" + "\n")
-                retStr += val.__repr__(indentationLevel + "\t")
+            # LEFT
+            retStr += indentationLevel + str(self.splitCol) + ":[<=" + str(self.splitK) + "]\n"
+            retStr += self.left.__repr__(indentationLevel + "\t")
+            # RIGHT
+            retStr += indentationLevel + str(self.splitCol) + ":[> " + str(self.splitK) + "]\n"
+            retStr += self.right.__repr__(indentationLevel + "\t")
         return retStr
 
 class DecisionTreeClassifier(object):
