@@ -13,7 +13,7 @@
 ##############################################################################
 
 import numpy as np
-
+debug = False
 
 class Evaluator(object):
     """ Class to perform evaluation
@@ -43,9 +43,11 @@ class Evaluator(object):
             Rows are ground truth per class, columns are predictions.
         """
 
+        '''
         print("Predicted: " + str(prediction))
         print("Annotated: " + str(annotation))
         print("-------")
+        '''
 
         if not class_labels:
             class_labels = np.unique(annotation)
@@ -66,17 +68,8 @@ class Evaluator(object):
             p_character = prediction[i]
             confusion[elements_dict[a_character]][elements_dict[p_character]] +=1
 
+        print("Confusion matrix: ")
         print(confusion)
-
-
-
-
-
-
-        #######################################################################
-        #                 ** TASK 3.1: COMPLETE THIS METHOD **
-        #######################################################################
-
 
         return confusion
 
@@ -130,7 +123,7 @@ class Evaluator(object):
         for i in range(len(p)):
             numerator=confusion[i][i]
             denominator = np.sum(confusion, axis = 0)[i]
-            print(numerator, denominator)
+            if debug: print(numerator, denominator)
             p[i] = numerator/denominator
 
 
@@ -166,7 +159,7 @@ class Evaluator(object):
         for i in range(len(r)):
             numerator=confusion[i][i]
             denominator = np.sum(confusion, axis = 1)[i]
-            print(numerator, denominator)
+            if debug: print(numerator, denominator)
             r[i] = numerator/denominator
 
         macro_r = float(str(np.average(r))[0:5])
