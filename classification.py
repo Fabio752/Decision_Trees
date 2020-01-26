@@ -10,15 +10,19 @@
 import numpy as np
 import dataset as ds
 import pickle
+from copy import deepcopy
 
 class ClassifierTree:
     '''
-    usedCols: Column already used, don't use again
     leftRows: after splitting, the rows left
     '''
-    def __init__(self, dataset, usedCols, leftRows, depth = 1):
+    def __init__(self, dataset, leftRows, depth = 1):
+
+        # make sure there are leftRows
+        assert len(leftRows) > 0, \
+            "No rows left. Please check buildTree recursive stop algorithm"
+        
         self.dataset = dataset
-        self.usedCols = usedCols
         self.leftRows = leftRows
         self.depth = depth
         self.char = None # if not None, then we have reached a leaf Node
@@ -36,21 +40,19 @@ class ClassifierTree:
         self.entropy = currentOverallEntropy
         self.majorityElem = majorityElem
 
-        unusedCols = self.dataset.getUnusedCols(self.usedCols, self.leftRows) # unusedCols that are valid, we can continue splitting
+        validCols = self.dataset.getValidCols(self.leftRows)
 
         # if all samples have same label (currentOverallEntropy == 0) or dataset cannot be split further, set self.char with majority label, return None
-        if currentOverallEntropy == 0 or len(unusedCols) == 0:
+        if currentOverallEntropy == 0 or len(validCols) == 0:
             self.char = majorityElem
         else:
-            splitCol, splitK, LHSSplitRows, RHSSplitRows = self.dataset.getBestColumnAndSplit(unusedCols, self.leftRows)
+            splitCol, splitK, LHSSplitRows, RHSSplitRows = self.dataset.getBestColumnAndSplit(validCols, self.leftRows)
 
             self.splitCol = splitCol
             self.splitK = splitK
 
-            nextUsedCols = [splitCol] + self.usedCols
-
-            self.left = ClassifierTree(self.dataset, nextUsedCols, LHSSplitRows, self.depth + 1)
-            self.right = ClassifierTree(self.dataset, nextUsedCols, RHSSplitRows, self.depth + 1)
+            self.left = ClassifierTree(self.dataset, LHSSplitRows, self.depth + 1)
+            self.right = ClassifierTree(self.dataset, RHSSplitRows, self.depth + 1)
 
 
     def predict(self, attrib): 
@@ -132,7 +134,7 @@ class DecisionTreeClassifier(object):
         dataset = ds.Dataset()
         dataset.initFromData(x, y)
 
-        self.classifierTree = ClassifierTree(dataset, [], range(dataset.totalInstances))
+        self.classifierTree = ClassifierTree(dataset, range(dataset.totalInstances))
 
         # set a flag so that we know that the classifier has been trained
         self.is_trained = True
