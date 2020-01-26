@@ -109,11 +109,11 @@ class Dataset:
     # calculate overall entropy, majority elem in given rows
     def getOverallEntropyAndMajorityElem(self, rows):
         elem_counts = {} # map of elem to number of occurences
-
+        
         for i in rows:
             label = self.labels[i]
             
-            if (label not in elem_counts):
+            if not label in elem_counts:
                 elem_counts[label] = 0
 
             elem_counts[label] += 1
@@ -313,10 +313,10 @@ class Dataset:
     '''
     def getBestColumnAndSplit(self, validCols, rows):
         minEntropy = float('inf')
-        splitCol = None
-        splitK = None
-        LHSSplitRows = None
-        RHSSplitRows = None
+        splitCol = None # which column to split
+        splitK = None # which K to split
+        LHSSplitRows = None # what rows left after splitting (LHS)
+        RHSSplitRows = None # what rows left after splitting (RHS)
 
         for tryCol in validCols:
 
@@ -332,7 +332,7 @@ class Dataset:
         assert not splitCol is None, \
             "Can't split anymore"
 
-        return splitCol, splitK, LHSSplitRows, RHSSplitRows    
+        return splitCol, splitK, LHSSplitRows, RHSSplitRows
 
     '''
     get total number of attrs in a col for given rows

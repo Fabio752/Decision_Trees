@@ -2,6 +2,7 @@ from eval import Evaluator
 import numpy as np
 from dataset import Dataset
 from classification import DecisionTreeClassifier
+from prune import Prune
 
 full_dataset_path = "./data/train_full.txt"
 subset_path = "./data/train_sub.txt"
@@ -23,8 +24,19 @@ class q3_1:
         test_labels = ds_test.labels
 
         #train and predict
+        print("TRAINING")
         tree = DecisionTreeClassifier()
         tree.train(attribs, labels)
+
+        print("FINISHED TRAINING")
+        print("PRUNING")
+        # prune
+        validationDataset = Dataset()
+        validationDataset.initFromFile(val_path)
+
+        Prune(tree, validationDataset.attrib, validationDataset.labels)
+        
+        print("FINISHED PRUNING")
         predictions = tree.predict(test_attribs)
 
         evaluator = Evaluator()

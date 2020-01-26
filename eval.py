@@ -68,12 +68,12 @@ class Evaluator(object):
             p_character = prediction[i]
             confusion[elements_dict[a_character]][elements_dict[p_character]]+=1
 
-        print("Confusion matrix: ")
+        # print("Confusion matrix: ")
 
         '''classes_transposed = np.transpose(class_labels)
         print(classes_transposed)
         full_confusion_matrix = np.hstack((classes_transposed, confusion))'''
-        print(confusion)
+        # print(confusion)
 
         return confusion
 
@@ -93,10 +93,8 @@ class Evaluator(object):
             The accuracy (between 0.0 to 1.0 inclusive)
         """
         accurate = confusion.trace()
-        '''for i in range(len(confusion)):
-            accurate += confusion[i][i]'''
 
-        accuracy = float(str(float(accurate/np.sum(confusion)))[0:5])
+        accuracy = float(accurate/np.sum(confusion))
 
         return accuracy
 

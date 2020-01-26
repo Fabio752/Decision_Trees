@@ -16,7 +16,7 @@ class ClassifierTree:
     '''
     leftRows: after splitting, the rows left
     '''
-    def __init__(self, dataset, leftRows, depth = 1):
+    def __init__(self, dataset, leftRows, depth=0, parent=None):
 
         # make sure there are leftRows
         assert len(leftRows) > 0, \
@@ -25,10 +25,10 @@ class ClassifierTree:
         self.dataset = dataset
         self.leftRows = leftRows
         self.depth = depth
+        self.parent = parent
         self.char = None # if not None, then we have reached a leaf Node
         self.splitCol = None # which col do we use to split next
-        self.splitK = None
-        self.pruned = False # whether this is tried to pruned
+        self.splitK = None # K at which we split (<=K to left, >K to right)
         self.majorityElem = None # majority elem
         self.left = None
         self.right = None 
@@ -51,8 +51,8 @@ class ClassifierTree:
             self.splitCol = splitCol
             self.splitK = splitK
 
-            self.left = ClassifierTree(self.dataset, LHSSplitRows, self.depth + 1)
-            self.right = ClassifierTree(self.dataset, RHSSplitRows, self.depth + 1)
+            self.left = ClassifierTree(self.dataset, LHSSplitRows, self.depth + 1, self)
+            self.right = ClassifierTree(self.dataset, RHSSplitRows, self.depth + 1, self)
 
 
     def predict(self, attrib): 
@@ -73,10 +73,10 @@ class ClassifierTree:
         else:
             retStr += indentationLevel + "COL" + str(self.splitCol) + "|ENT:" + str(round(self.entropy, 3)) + "|D" + str(self.depth) + "\n"
             # LEFT
-            retStr += indentationLevel + "[<=" + str(self.splitK) + "]\n"
+            retStr += indentationLevel + "{<=" + str(self.splitK) + "}\n"
             retStr += self.left.__repr__(indentationLevel + "\t")
             # RIGHT
-            retStr += indentationLevel + "[> " + str(self.splitK) + "]\n"
+            retStr += indentationLevel + "{> " + str(self.splitK) + "}\n"
             retStr += self.right.__repr__(indentationLevel + "\t")
         return retStr
 
@@ -189,3 +189,6 @@ class DecisionTreeClassifier(object):
         with open(infilepath, 'rb') as file:
             self = pickle.load(file)
         print("Read from file: " + infilepath)
+
+    def __repr__(self):
+        return self.classifierTree.__repr__()
