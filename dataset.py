@@ -29,7 +29,7 @@ class SplitObject:
 ClassiferDataset containing dataset
 Can be initialized from
 1. file
-2. existing dataset
+2. existing attrib and labels arrays
 
 Has member functions to calculate best split for a given dataset and range
 '''
@@ -219,7 +219,7 @@ class ClassifierDataset:
             
 
     '''
-    get cumulative dict
+    get cumulative dict from attribLabelDict
     e.g. 
     {
         1: { 'A': [1, 3, 5] },
@@ -244,10 +244,8 @@ class ClassifierDataset:
             innerDict = attribLabelDict[key]
 
             for label, lstRows in innerDict.items():
-
                 if not label in ret:
                     ret[label] = []
-
                 ret[label] = ret[label] + lstRows
 
         return ret

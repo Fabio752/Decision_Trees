@@ -2,7 +2,6 @@ import numpy as np
 import dataset as ds
 import classification as cs
 import prune
-import q1 as q1
 
 pathToSimple1 = './data/simple1.txt'
 pathToSimple2 = './data/simple2.txt'

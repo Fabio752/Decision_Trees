@@ -12,11 +12,29 @@ import dataset as ds
 import pickle
 import math
 
+class ClassifierTreeStats:
+    '''
+    ClassifierTreeStats class storing statistics of the ClassifierTree
+    '''
+    def __init__(self):
+        self.nodes = 0
+        self.leaves = 0
+        self.maxDepth = 0
+    
+    def __repr__(self):
+        retStr = "----------------------------------\n"
+        retStr += "Nodes     :{}\n".format(self.nodes)
+        retStr += "Leaves    :{}\n".format(self.leaves)
+        retStr += "Max Depth :{}\n".format(self.maxDepth)
+        retStr += "----------------------------------\n\n"
+        return retStr
+    
+
 class ClassifierTree:
     '''
-    leftRows: after splitting, the rows left
+    ClassifierTree structure storing the decision tree
     '''
-    def __init__(self, dataset, splitObject, depth=0, parent=None):
+    def __init__(self, dataset, splitObject, treeStats, depth=0, parent=None):
 
         # make sure there are leftRows
         assert len(splitObject.rows) > 0, \
@@ -27,6 +45,7 @@ class ClassifierTree:
         self.leftRows = splitObject.rows # rows left in the current node
         self.entropy = splitObject.entropy # current entropy
         self.majorityElem = splitObject.majorityElem # most frequent label
+        self.treeStats = treeStats # ClassifierTreeStatistics
         self.depth = depth # depth of tree
         self.parent = parent # parent of tree
 
@@ -44,17 +63,23 @@ class ClassifierTree:
     def buildTree(self):
         validCols = self.dataset.getValidCols(self.leftRows)
 
+        # update treeStats
+        self.treeStats.nodes += 1
+        self.treeStats.maxDepth = max(self.treeStats.maxDepth, self.depth)
+
         # if all samples have same label (currentOverallEntropy == 0) or dataset cannot be split further, set self.char with majority label
         if math.isclose(0.0, self.entropy) or len(validCols) == 0:
+            self.treeStats.leaves += 1
             self.char = self.majorityElem
+            
         else:
             splitCol, splitK, LHSSplit, RHSSplit = self.dataset.getBestColumnAndSplit(validCols, self.leftRows)
 
             self.splitCol = splitCol
             self.splitK = splitK
 
-            self.left = ClassifierTree(self.dataset, LHSSplit, self.depth + 1, self)
-            self.right = ClassifierTree(self.dataset, RHSSplit, self.depth + 1, self)
+            self.left = ClassifierTree(self.dataset, LHSSplit, self.treeStats, self.depth + 1, self)
+            self.right = ClassifierTree(self.dataset, RHSSplit, self.treeStats, self.depth + 1, self)
 
     '''
     predict given attributes 
@@ -77,12 +102,15 @@ class ClassifierTree:
             retStr += indentationLevel + self.char + "\n"
         else:
             retStr += indentationLevel + "COL" + str(self.splitCol) + "|ENT:" + str(round(self.entropy, 4)) + "|D" + str(self.depth) + "\n"
+
             # LEFT
             retStr += indentationLevel + "{<=" + str(self.splitK) + "}\n"
             retStr += self.left.__repr__(indentationLevel + "\t")
+
             # RIGHT
             retStr += indentationLevel + "{> " + str(self.splitK) + "}\n"
             retStr += self.right.__repr__(indentationLevel + "\t")
+
         return retStr
 
 class DecisionTreeClassifier(object):
@@ -140,8 +168,9 @@ class DecisionTreeClassifier(object):
         dataset.initFromData(x, y)
 
         rootSplitObject = dataset.getSplitObjectForRoot()
+        treeStats = ClassifierTreeStats()
 
-        self.classifierTree = ClassifierTree(dataset, rootSplitObject)
+        self.classifierTree = ClassifierTree(dataset, rootSplitObject, treeStats)
 
         # set a flag so that we know that the classifier has been trained
         self.is_trained = True
@@ -173,16 +202,14 @@ class DecisionTreeClassifier(object):
 
         # set up empty N-dimensional vector to store predicted labels
         # feel free to change this if needed
-        predictions = np.zeros((x.shape[0],), dtype=np.object)
+        # predictions = np.zeros((x.shape[0],), dtype=np.object)
 
 
         #######################################################################
         #                 ** TASK 2.2: COMPLETE THIS METHOD **
         #######################################################################
-        for i in range(len(x)):
-            predictions[i] = self.classifierTree.predict(x[i])
+        predictions = [self.classifierTree.predict(attrib) for attrib in x]
 
-        # remember to change this if you rename the variable
         return predictions
 
     # write object (model) to a file
@@ -202,5 +229,6 @@ class DecisionTreeClassifier(object):
         ret += "Trained: {}\n".format(self.is_trained)
         ret += "----------------------------------\n\n"
         if self.is_trained:
+            ret += self.classifierTree.treeStats.__repr__()
             ret += self.classifierTree.__repr__()
         return ret
