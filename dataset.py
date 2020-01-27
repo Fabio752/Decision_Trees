@@ -1,6 +1,5 @@
 import numpy as np
 import math
-import classification
 
 # take in an array of probabilities, calculate entropy
 def calculateEntropy(probs):
@@ -323,7 +322,7 @@ class ClassifierDataset:
         # sorted range of attributes in the row range, e.g. 0..15
         attribRange = list(attribLabelDict.keys())
         attribRange.sort()
-
+        
         attribRange.pop() # we do not need the last element as this means the RHS is empty
 
         # don't split at this column if attrib are all the same

@@ -13,7 +13,6 @@
 ##############################################################################
 
 import numpy as np
-debug = False
 
 class Evaluator(object):
     """ Class to perform evaluation
@@ -125,7 +124,7 @@ class Evaluator(object):
         for i in range(len(p)):
             numerator=confusion[i][i]
             denominator = np.sum(confusion, axis = 0)[i]
-            if debug: print(numerator, denominator)
+            # if debug: print(numerator, denominator)
             p[i] = float(str(numerator/denominator)[0:5]) if denominator != 0 else 0
 
 
@@ -161,7 +160,7 @@ class Evaluator(object):
         for i in range(len(r)):
             numerator=confusion[i][i]
             denominator = np.sum(confusion, axis = 1)[i]
-            if debug: print(numerator, denominator)
+            # if debug: print(numerator, denominator)
             r[i] = float(str(numerator/denominator)[0:5]) if denominator != 0 else 0
 
         macro_r = float(str(np.average(r))[0:5])

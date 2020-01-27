@@ -1,0 +1,509 @@
+FULL
+         785985 function calls (784889 primitive calls) in 3.202 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    20150    1.930    0.000    1.930    0.000 {method 'acquire' of '_thread.lock' objects}
+     8784    0.440    0.000    0.532    0.000 dataset.py:377(getNumberOfAttrs)
+     4030    0.363    0.000    0.363    0.000 {built-in method _thread.start_new_thread}
+   602494    0.094    0.000    0.094    0.000 {method 'add' of 'set' objects}
+     4030    0.040    0.000    0.134    0.000 threading.py:758(__init__)
+      549    0.039    0.000    0.042    0.000 dataset.py:113(getOverallEntropyAndMajorityElem)
+     4030    0.036    0.000    0.036    0.000 threading.py:216(__init__)
+     8060    0.030    0.000    0.030    0.000 {built-in method _thread.allocate_lock}
+     4030    0.028    0.000    2.013    0.000 threading.py:534(wait)
+      274    0.028    0.000    2.594    0.009 dataset.py:323(getBestColumnAndSplit)
+     4030    0.022    0.000    2.399    0.001 threading.py:829(start)
+     4030    0.022    0.000    1.973    0.000 threading.py:264(wait)
+    549/1    0.017    0.000    3.202    3.202 classification.py:37(buildTree)
+     4030    0.014    0.000    0.033    0.000 threading.py:1000(join)
+     4030    0.012    0.000    0.012    0.000 threading.py:728(_newname)
+      549    0.009    0.000    0.541    0.001 dataset.py:392(<listcomp>)
+     4030    0.009    0.000    0.012    0.000 _weakrefset.py:81(add)
+     4030    0.009    0.000    0.061    0.000 threading.py:499(__init__)
+     8060    0.007    0.000    0.010    0.000 threading.py:1206(current_thread)
+     4030    0.006    0.000    0.014    0.000 threading.py:1038(_wait_for_tstate_lock)
+     4030    0.004    0.000    0.007    0.000 threading.py:240(__enter__)
+     4030    0.004    0.000    0.007    0.000 threading.py:252(_acquire_restore)
+     4030    0.004    0.000    0.004    0.000 threading.py:968(_stop)
+     4030    0.004    0.000    0.005    0.000 threading.py:243(__exit__)
+     4030    0.003    0.000    0.004    0.000 _weakrefset.py:38(_remove)
+     4030    0.003    0.000    0.003    0.000 {method '__enter__' of '_thread.lock' objects}
+     4030    0.003    0.000    0.006    0.000 threading.py:255(_is_owned)
+     4030    0.003    0.000    0.003    0.000 threading.py:1096(daemon)
+     4030    0.003    0.000    0.003    0.000 threading.py:249(_release_save)
+     8060    0.002    0.000    0.002    0.000 {built-in method _thread.get_ident}
+     8060    0.002    0.000    0.002    0.000 threading.py:507(is_set)
+    549/1    0.002    0.000    3.202    3.202 classification.py:19(__init__)
+     8060    0.002    0.000    0.002    0.000 {method 'release' of '_thread.lock' objects}
+      549    0.002    0.000    0.543    0.001 dataset.py:389(getValidCols)
+    10163    0.001    0.000    0.001    0.000 {built-in method builtins.len}
+     4030    0.001    0.000    0.001    0.000 {method 'append' of 'collections.deque' objects}
+     4030    0.001    0.000    0.001    0.000 {method '__exit__' of '_thread.lock' objects}
+      549    0.001    0.000    0.002    0.000 dataset.py:7(calculateEntropy)
+     4030    0.001    0.000    0.001    0.000 {method 'discard' of 'set' objects}
+     1077    0.001    0.000    0.001    0.000 {built-in method math.log2}
+     4030    0.001    0.000    0.001    0.000 {method 'locked' of '_thread.lock' objects}
+     1646    0.001    0.000    0.001    0.000 {method 'items' of 'dict' objects}
+     1077    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    3.202    3.202 {built-in method builtins.exec}
+        1    0.000    0.000    3.202    3.202 classification.py:106(train)
+        1    0.000    0.000    0.000    0.000 dataset.py:46(initFromData)
+        1    0.000    0.000    3.202    3.202 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 dataset.py:15(__init__)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+
+         785985 function calls (784889 primitive calls) in 3.330 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    20150    2.036    0.000    2.036    0.000 {method 'acquire' of '_thread.lock' objects}
+     8784    0.473    0.000    0.572    0.000 dataset.py:377(getNumberOfAttrs)
+     4030    0.352    0.000    0.352    0.000 {built-in method _thread.start_new_thread}
+   602494    0.100    0.000    0.100    0.000 {method 'add' of 'set' objects}
+     4030    0.039    0.000    0.130    0.000 threading.py:758(__init__)
+      549    0.038    0.000    0.040    0.000 dataset.py:113(getOverallEntropyAndMajorityElem)
+     4030    0.036    0.000    0.036    0.000 threading.py:216(__init__)
+      274    0.028    0.000    2.683    0.010 dataset.py:323(getBestColumnAndSplit)
+     8060    0.028    0.000    0.028    0.000 {built-in method _thread.allocate_lock}
+     4030    0.027    0.000    2.113    0.001 threading.py:534(wait)
+     4030    0.022    0.000    2.488    0.001 threading.py:829(start)
+     4030    0.021    0.000    2.074    0.001 threading.py:264(wait)
+    549/1    0.018    0.000    3.330    3.330 classification.py:37(buildTree)
+     4030    0.014    0.000    0.036    0.000 threading.py:1000(join)
+     4030    0.012    0.000    0.012    0.000 threading.py:728(_newname)
+      549    0.010    0.000    0.581    0.001 dataset.py:392(<listcomp>)
+     4030    0.009    0.000    0.060    0.000 threading.py:499(__init__)
+     4030    0.009    0.000    0.012    0.000 _weakrefset.py:81(add)
+     8060    0.007    0.000    0.010    0.000 threading.py:1206(current_thread)
+     4030    0.006    0.000    0.017    0.000 threading.py:1038(_wait_for_tstate_lock)
+     4030    0.004    0.000    0.007    0.000 threading.py:252(_acquire_restore)
+     4030    0.004    0.000    0.007    0.000 threading.py:240(__enter__)
+     4030    0.003    0.000    0.004    0.000 threading.py:968(_stop)
+     4030    0.003    0.000    0.004    0.000 threading.py:243(__exit__)
+     4030    0.003    0.000    0.004    0.000 _weakrefset.py:38(_remove)
+     4030    0.003    0.000    0.003    0.000 {method '__enter__' of '_thread.lock' objects}
+     4030    0.003    0.000    0.006    0.000 threading.py:255(_is_owned)
+     4030    0.002    0.000    0.002    0.000 threading.py:1096(daemon)
+     4030    0.002    0.000    0.003    0.000 threading.py:249(_release_save)
+     8060    0.002    0.000    0.002    0.000 {built-in method _thread.get_ident}
+     8060    0.002    0.000    0.002    0.000 threading.py:507(is_set)
+    549/1    0.002    0.000    3.330    3.330 classification.py:19(__init__)
+     8060    0.002    0.000    0.002    0.000 {method 'release' of '_thread.lock' objects}
+      549    0.002    0.000    0.583    0.001 dataset.py:389(getValidCols)
+    10163    0.001    0.000    0.001    0.000 {built-in method builtins.len}
+     4030    0.001    0.000    0.001    0.000 {method 'append' of 'collections.deque' objects}
+     4030    0.001    0.000    0.001    0.000 {method '__exit__' of '_thread.lock' objects}
+      549    0.001    0.000    0.002    0.000 dataset.py:7(calculateEntropy)
+     4030    0.001    0.000    0.001    0.000 {method 'discard' of 'set' objects}
+     1077    0.001    0.000    0.001    0.000 {built-in method math.log2}
+     4030    0.001    0.000    0.001    0.000 {method 'locked' of '_thread.lock' objects}
+     1646    0.000    0.000    0.000    0.000 {method 'items' of 'dict' objects}
+     1077    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    3.330    3.330 {built-in method builtins.exec}
+        1    0.000    0.000    3.330    3.330 classification.py:106(train)
+        1    0.000    0.000    0.000    0.000 dataset.py:46(initFromData)
+        1    0.000    0.000    3.330    3.330 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 dataset.py:15(__init__)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+
+         785985 function calls (784889 primitive calls) in 2.774 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    20150    1.596    0.000    1.596    0.000 {method 'acquire' of '_thread.lock' objects}
+     8784    0.434    0.000    0.525    0.000 dataset.py:377(getNumberOfAttrs)
+     4030    0.335    0.000    0.335    0.000 {built-in method _thread.start_new_thread}
+   602494    0.091    0.000    0.091    0.000 {method 'add' of 'set' objects}
+      549    0.036    0.000    0.038    0.000 dataset.py:113(getOverallEntropyAndMajorityElem)
+     4030    0.031    0.000    0.109    0.000 threading.py:758(__init__)
+     4030    0.030    0.000    0.030    0.000 threading.py:216(__init__)
+     8060    0.026    0.000    0.026    0.000 {built-in method _thread.allocate_lock}
+      274    0.023    0.000    2.181    0.008 dataset.py:323(getBestColumnAndSplit)
+     4030    0.023    0.000    1.665    0.000 threading.py:534(wait)
+     4030    0.019    0.000    2.020    0.001 threading.py:829(start)
+     4030    0.018    0.000    1.632    0.000 threading.py:264(wait)
+    549/1    0.015    0.000    2.774    2.774 classification.py:37(buildTree)
+     4030    0.012    0.000    0.028    0.000 threading.py:1000(join)
+     4030    0.009    0.000    0.009    0.000 threading.py:728(_newname)
+      549    0.008    0.000    0.532    0.001 dataset.py:392(<listcomp>)
+     4030    0.007    0.000    0.052    0.000 threading.py:499(__init__)
+     4030    0.007    0.000    0.009    0.000 _weakrefset.py:81(add)
+     8060    0.006    0.000    0.008    0.000 threading.py:1206(current_thread)
+     4030    0.005    0.000    0.012    0.000 threading.py:1038(_wait_for_tstate_lock)
+     4030    0.003    0.000    0.006    0.000 threading.py:252(_acquire_restore)
+     4030    0.003    0.000    0.006    0.000 threading.py:240(__enter__)
+     4030    0.003    0.000    0.004    0.000 threading.py:968(_stop)
+     4030    0.003    0.000    0.004    0.000 threading.py:243(__exit__)
+     4030    0.003    0.000    0.003    0.000 {method '__enter__' of '_thread.lock' objects}
+     4030    0.003    0.000    0.003    0.000 _weakrefset.py:38(_remove)
+     4030    0.002    0.000    0.005    0.000 threading.py:255(_is_owned)
+     4030    0.002    0.000    0.002    0.000 threading.py:1096(daemon)
+     8060    0.002    0.000    0.002    0.000 {built-in method _thread.get_ident}
+     4030    0.002    0.000    0.003    0.000 threading.py:249(_release_save)
+     8060    0.002    0.000    0.002    0.000 threading.py:507(is_set)
+    549/1    0.001    0.000    2.774    2.774 classification.py:19(__init__)
+     8060    0.001    0.000    0.001    0.000 {method 'release' of '_thread.lock' objects}
+      549    0.001    0.000    0.534    0.001 dataset.py:389(getValidCols)
+    10163    0.001    0.000    0.001    0.000 {built-in method builtins.len}
+     4030    0.001    0.000    0.001    0.000 {method 'append' of 'collections.deque' objects}
+     4030    0.001    0.000    0.001    0.000 {method '__exit__' of '_thread.lock' objects}
+      549    0.001    0.000    0.001    0.000 dataset.py:7(calculateEntropy)
+     4030    0.001    0.000    0.001    0.000 {method 'discard' of 'set' objects}
+     1077    0.001    0.000    0.001    0.000 {built-in method math.log2}
+     4030    0.001    0.000    0.001    0.000 {method 'locked' of '_thread.lock' objects}
+     1646    0.000    0.000    0.000    0.000 {method 'items' of 'dict' objects}
+     1077    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    2.774    2.774 {built-in method builtins.exec}
+        1    0.000    0.000    2.774    2.774 classification.py:106(train)
+        1    0.000    0.000    0.000    0.000 dataset.py:46(initFromData)
+        1    0.000    0.000    2.774    2.774 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 dataset.py:15(__init__)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+
+=====
+SUB
+         115169 function calls (114905 primitive calls) in 0.432 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     5020    0.256    0.000    0.256    0.000 {method 'acquire' of '_thread.lock' objects}
+     1004    0.075    0.000    0.075    0.000 {built-in method _thread.start_new_thread}
+     2128    0.034    0.000    0.041    0.000 dataset.py:377(getNumberOfAttrs)
+    69612    0.008    0.000    0.008    0.000 {method 'add' of 'set' objects}
+     2008    0.006    0.000    0.006    0.000 {built-in method _thread.allocate_lock}
+     1004    0.006    0.000    0.022    0.000 threading.py:758(__init__)
+     1004    0.006    0.000    0.006    0.000 threading.py:216(__init__)
+     1004    0.005    0.000    0.271    0.000 threading.py:534(wait)
+       66    0.004    0.000    0.383    0.006 dataset.py:323(getBestColumnAndSplit)
+     1004    0.004    0.000    0.350    0.000 threading.py:829(start)
+     1004    0.004    0.000    0.264    0.000 threading.py:264(wait)
+    133/1    0.003    0.000    0.432    0.432 classification.py:37(buildTree)
+      133    0.003    0.000    0.003    0.000 dataset.py:113(getOverallEntropyAndMajorityElem)
+     1004    0.003    0.000    0.006    0.000 threading.py:1000(join)
+     1004    0.002    0.000    0.002    0.000 threading.py:728(_newname)
+     1004    0.002    0.000    0.011    0.000 threading.py:499(__init__)
+      133    0.001    0.000    0.042    0.000 dataset.py:392(<listcomp>)
+     1004    0.001    0.000    0.002    0.000 _weakrefset.py:81(add)
+     2008    0.001    0.000    0.002    0.000 threading.py:1206(current_thread)
+     1004    0.001    0.000    0.002    0.000 threading.py:1038(_wait_for_tstate_lock)
+     1004    0.001    0.000    0.001    0.000 threading.py:252(_acquire_restore)
+     1004    0.001    0.000    0.001    0.000 threading.py:243(__exit__)
+     1004    0.001    0.000    0.001    0.000 threading.py:240(__enter__)
+     1004    0.001    0.000    0.001    0.000 threading.py:968(_stop)
+     1004    0.001    0.000    0.001    0.000 {method '__enter__' of '_thread.lock' objects}
+     1004    0.001    0.000    0.001    0.000 _weakrefset.py:38(_remove)
+     1004    0.000    0.000    0.001    0.000 threading.py:255(_is_owned)
+     2008    0.000    0.000    0.000    0.000 {built-in method _thread.get_ident}
+     1004    0.000    0.000    0.001    0.000 threading.py:249(_release_save)
+     1004    0.000    0.000    0.000    0.000 threading.py:1096(daemon)
+     2008    0.000    0.000    0.000    0.000 threading.py:507(is_set)
+     2008    0.000    0.000    0.000    0.000 {method 'release' of '_thread.lock' objects}
+    133/1    0.000    0.000    0.432    0.432 classification.py:19(__init__)
+      133    0.000    0.000    0.043    0.000 dataset.py:389(getValidCols)
+     2467    0.000    0.000    0.000    0.000 {built-in method builtins.len}
+     1004    0.000    0.000    0.000    0.000 {method 'append' of 'collections.deque' objects}
+     1004    0.000    0.000    0.000    0.000 {method '__exit__' of '_thread.lock' objects}
+      133    0.000    0.000    0.000    0.000 dataset.py:7(calculateEntropy)
+     1004    0.000    0.000    0.000    0.000 {method 'discard' of 'set' objects}
+     1004    0.000    0.000    0.000    0.000 {method 'locked' of '_thread.lock' objects}
+      269    0.000    0.000    0.000    0.000 {built-in method math.log2}
+      398    0.000    0.000    0.000    0.000 {method 'items' of 'dict' objects}
+        1    0.000    0.000    0.432    0.432 {built-in method builtins.exec}
+      269    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    0.432    0.432 classification.py:106(train)
+        1    0.000    0.000    0.000    0.000 dataset.py:46(initFromData)
+        1    0.000    0.000    0.432    0.432 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 dataset.py:15(__init__)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+
+         115169 function calls (114905 primitive calls) in 0.432 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     5020    0.256    0.000    0.256    0.000 {method 'acquire' of '_thread.lock' objects}
+     1004    0.074    0.000    0.074    0.000 {built-in method _thread.start_new_thread}
+     2128    0.033    0.000    0.041    0.000 dataset.py:377(getNumberOfAttrs)
+    69612    0.008    0.000    0.008    0.000 {method 'add' of 'set' objects}
+     2008    0.006    0.000    0.006    0.000 {built-in method _thread.allocate_lock}
+     1004    0.006    0.000    0.022    0.000 threading.py:758(__init__)
+     1004    0.006    0.000    0.006    0.000 threading.py:216(__init__)
+     1004    0.005    0.000    0.271    0.000 threading.py:534(wait)
+       66    0.005    0.000    0.382    0.006 dataset.py:323(getBestColumnAndSplit)
+     1004    0.004    0.000    0.349    0.000 threading.py:829(start)
+     1004    0.004    0.000    0.263    0.000 threading.py:264(wait)
+      133    0.003    0.000    0.003    0.000 dataset.py:113(getOverallEntropyAndMajorityElem)
+    133/1    0.003    0.000    0.431    0.431 classification.py:37(buildTree)
+     1004    0.003    0.000    0.006    0.000 threading.py:1000(join)
+     1004    0.002    0.000    0.002    0.000 threading.py:728(_newname)
+     1004    0.002    0.000    0.011    0.000 threading.py:499(__init__)
+      133    0.001    0.000    0.042    0.000 dataset.py:392(<listcomp>)
+     1004    0.001    0.000    0.002    0.000 _weakrefset.py:81(add)
+     2008    0.001    0.000    0.002    0.000 threading.py:1206(current_thread)
+     1004    0.001    0.000    0.003    0.000 threading.py:1038(_wait_for_tstate_lock)
+     1004    0.001    0.000    0.001    0.000 threading.py:252(_acquire_restore)
+     1004    0.001    0.000    0.001    0.000 threading.py:240(__enter__)
+     1004    0.001    0.000    0.001    0.000 threading.py:243(__exit__)
+     1004    0.001    0.000    0.001    0.000 threading.py:968(_stop)
+     1004    0.001    0.000    0.001    0.000 {method '__enter__' of '_thread.lock' objects}
+     1004    0.001    0.000    0.001    0.000 _weakrefset.py:38(_remove)
+     1004    0.000    0.000    0.001    0.000 threading.py:255(_is_owned)
+     2008    0.000    0.000    0.000    0.000 {built-in method _thread.get_ident}
+     1004    0.000    0.000    0.001    0.000 threading.py:249(_release_save)
+     1004    0.000    0.000    0.000    0.000 threading.py:1096(daemon)
+     2008    0.000    0.000    0.000    0.000 threading.py:507(is_set)
+     2008    0.000    0.000    0.000    0.000 {method 'release' of '_thread.lock' objects}
+    133/1    0.000    0.000    0.431    0.431 classification.py:19(__init__)
+      133    0.000    0.000    0.042    0.000 dataset.py:389(getValidCols)
+     2467    0.000    0.000    0.000    0.000 {built-in method builtins.len}
+     1004    0.000    0.000    0.000    0.000 {method 'append' of 'collections.deque' objects}
+     1004    0.000    0.000    0.000    0.000 {method '__exit__' of '_thread.lock' objects}
+      133    0.000    0.000    0.000    0.000 dataset.py:7(calculateEntropy)
+     1004    0.000    0.000    0.000    0.000 {method 'discard' of 'set' objects}
+     1004    0.000    0.000    0.000    0.000 {method 'locked' of '_thread.lock' objects}
+      269    0.000    0.000    0.000    0.000 {built-in method math.log2}
+        1    0.000    0.000    0.432    0.432 {built-in method builtins.exec}
+      398    0.000    0.000    0.000    0.000 {method 'items' of 'dict' objects}
+      269    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    0.431    0.431 classification.py:106(train)
+        1    0.000    0.000    0.000    0.000 dataset.py:46(initFromData)
+        1    0.000    0.000    0.431    0.431 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 dataset.py:15(__init__)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+
+         115169 function calls (114905 primitive calls) in 0.418 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     5020    0.247    0.000    0.247    0.000 {method 'acquire' of '_thread.lock' objects}
+     1004    0.073    0.000    0.073    0.000 {built-in method _thread.start_new_thread}
+     2128    0.032    0.000    0.039    0.000 dataset.py:377(getNumberOfAttrs)
+    69612    0.007    0.000    0.007    0.000 {method 'add' of 'set' objects}
+     2008    0.006    0.000    0.006    0.000 {built-in method _thread.allocate_lock}
+     1004    0.006    0.000    0.021    0.000 threading.py:758(__init__)
+     1004    0.005    0.000    0.005    0.000 threading.py:216(__init__)
+     1004    0.005    0.000    0.262    0.000 threading.py:534(wait)
+       66    0.004    0.000    0.370    0.006 dataset.py:323(getBestColumnAndSplit)
+     1004    0.004    0.000    0.338    0.000 threading.py:829(start)
+     1004    0.004    0.000    0.255    0.000 threading.py:264(wait)
+      133    0.003    0.000    0.003    0.000 dataset.py:113(getOverallEntropyAndMajorityElem)
+    133/1    0.003    0.000    0.418    0.418 classification.py:37(buildTree)
+     1004    0.003    0.000    0.006    0.000 threading.py:1000(join)
+     1004    0.002    0.000    0.002    0.000 threading.py:728(_newname)
+     1004    0.001    0.000    0.010    0.000 threading.py:499(__init__)
+      133    0.001    0.000    0.041    0.000 dataset.py:392(<listcomp>)
+     2008    0.001    0.000    0.002    0.000 threading.py:1206(current_thread)
+     1004    0.001    0.000    0.002    0.000 _weakrefset.py:81(add)
+     1004    0.001    0.000    0.003    0.000 threading.py:1038(_wait_for_tstate_lock)
+     1004    0.001    0.000    0.001    0.000 threading.py:240(__enter__)
+     1004    0.001    0.000    0.001    0.000 threading.py:252(_acquire_restore)
+     1004    0.001    0.000    0.001    0.000 threading.py:243(__exit__)
+     1004    0.001    0.000    0.001    0.000 threading.py:968(_stop)
+     1004    0.001    0.000    0.001    0.000 {method '__enter__' of '_thread.lock' objects}
+     1004    0.001    0.000    0.001    0.000 _weakrefset.py:38(_remove)
+     1004    0.000    0.000    0.001    0.000 threading.py:255(_is_owned)
+     2008    0.000    0.000    0.000    0.000 {built-in method _thread.get_ident}
+     1004    0.000    0.000    0.000    0.000 threading.py:1096(daemon)
+     1004    0.000    0.000    0.001    0.000 threading.py:249(_release_save)
+     2008    0.000    0.000    0.000    0.000 threading.py:507(is_set)
+    133/1    0.000    0.000    0.418    0.418 classification.py:19(__init__)
+     2008    0.000    0.000    0.000    0.000 {method 'release' of '_thread.lock' objects}
+      133    0.000    0.000    0.041    0.000 dataset.py:389(getValidCols)
+     2467    0.000    0.000    0.000    0.000 {built-in method builtins.len}
+     1004    0.000    0.000    0.000    0.000 {method 'append' of 'collections.deque' objects}
+     1004    0.000    0.000    0.000    0.000 {method '__exit__' of '_thread.lock' objects}
+      133    0.000    0.000    0.000    0.000 dataset.py:7(calculateEntropy)
+     1004    0.000    0.000    0.000    0.000 {method 'discard' of 'set' objects}
+     1004    0.000    0.000    0.000    0.000 {method 'locked' of '_thread.lock' objects}
+      269    0.000    0.000    0.000    0.000 {built-in method math.log2}
+      398    0.000    0.000    0.000    0.000 {method 'items' of 'dict' objects}
+      269    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    0.418    0.418 {built-in method builtins.exec}
+        1    0.000    0.000    0.418    0.418 classification.py:106(train)
+        1    0.000    0.000    0.000    0.000 dataset.py:46(initFromData)
+        1    0.000    0.000    0.418    0.418 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 dataset.py:15(__init__)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+
+=====
+NOISY
+         907203 function calls (905415 primitive calls) in 2.936 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    31205    1.748    0.000    1.748    0.000 {method 'acquire' of '_thread.lock' objects}
+     6241    0.451    0.000    0.451    0.000 {built-in method _thread.start_new_thread}
+    14320    0.296    0.000    0.360    0.000 dataset.py:377(getNumberOfAttrs)
+   621137    0.065    0.000    0.065    0.000 {method 'add' of 'set' objects}
+    12482    0.039    0.000    0.039    0.000 {built-in method _thread.allocate_lock}
+     6241    0.038    0.000    0.134    0.000 threading.py:758(__init__)
+     6241    0.033    0.000    0.033    0.000 threading.py:216(__init__)
+     6241    0.031    0.000    1.838    0.000 threading.py:534(wait)
+      447    0.027    0.000    2.513    0.006 dataset.py:323(getBestColumnAndSplit)
+      895    0.027    0.000    0.029    0.000 dataset.py:113(getOverallEntropyAndMajorityElem)
+     6241    0.024    0.000    2.314    0.000 threading.py:829(start)
+     6241    0.023    0.000    1.794    0.000 threading.py:264(wait)
+    895/1    0.018    0.000    2.936    2.936 classification.py:37(buildTree)
+     6241    0.016    0.000    0.037    0.000 threading.py:1000(join)
+     6241    0.010    0.000    0.010    0.000 threading.py:728(_newname)
+     6241    0.009    0.000    0.065    0.000 threading.py:499(__init__)
+      895    0.009    0.000    0.369    0.000 dataset.py:392(<listcomp>)
+     6241    0.008    0.000    0.011    0.000 _weakrefset.py:81(add)
+    12482    0.008    0.000    0.011    0.000 threading.py:1206(current_thread)
+     6241    0.007    0.000    0.017    0.000 threading.py:1038(_wait_for_tstate_lock)
+     6241    0.004    0.000    0.008    0.000 threading.py:252(_acquire_restore)
+     6241    0.004    0.000    0.005    0.000 threading.py:968(_stop)
+     6241    0.004    0.000    0.007    0.000 threading.py:240(__enter__)
+     6241    0.004    0.000    0.005    0.000 threading.py:243(__exit__)
+     6241    0.003    0.000    0.003    0.000 {method '__enter__' of '_thread.lock' objects}
+     6241    0.003    0.000    0.004    0.000 _weakrefset.py:38(_remove)
+    12482    0.003    0.000    0.003    0.000 {built-in method _thread.get_ident}
+     6241    0.003    0.000    0.006    0.000 threading.py:255(_is_owned)
+     6241    0.003    0.000    0.003    0.000 threading.py:1096(daemon)
+     6241    0.003    0.000    0.003    0.000 threading.py:249(_release_save)
+    12482    0.002    0.000    0.002    0.000 threading.py:507(is_set)
+    895/1    0.002    0.000    2.936    2.936 classification.py:19(__init__)
+    12482    0.002    0.000    0.002    0.000 {method 'release' of '_thread.lock' objects}
+      895    0.002    0.000    0.371    0.000 dataset.py:389(getValidCols)
+    16564    0.002    0.000    0.002    0.000 {built-in method builtins.len}
+     6241    0.001    0.000    0.001    0.000 {method 'append' of 'collections.deque' objects}
+     6241    0.001    0.000    0.001    0.000 {method '__exit__' of '_thread.lock' objects}
+      895    0.001    0.000    0.002    0.000 dataset.py:7(calculateEntropy)
+     6241    0.001    0.000    0.001    0.000 {method 'discard' of 'set' objects}
+     6241    0.001    0.000    0.001    0.000 {method 'locked' of '_thread.lock' objects}
+     1638    0.001    0.000    0.001    0.000 {built-in method math.log2}
+     2684    0.000    0.000    0.000    0.000 {method 'items' of 'dict' objects}
+     1638    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    2.936    2.936 {built-in method builtins.exec}
+        1    0.000    0.000    2.936    2.936 classification.py:106(train)
+        1    0.000    0.000    0.000    0.000 dataset.py:46(initFromData)
+        1    0.000    0.000    2.936    2.936 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 dataset.py:15(__init__)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+
+         907203 function calls (905415 primitive calls) in 3.276 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    31205    1.954    0.000    1.954    0.000 {method 'acquire' of '_thread.lock' objects}
+     6241    0.502    0.000    0.502    0.000 {built-in method _thread.start_new_thread}
+    14320    0.324    0.000    0.395    0.000 dataset.py:377(getNumberOfAttrs)
+   621137    0.072    0.000    0.072    0.000 {method 'add' of 'set' objects}
+    12482    0.044    0.000    0.044    0.000 {built-in method _thread.allocate_lock}
+     6241    0.044    0.000    0.153    0.000 threading.py:758(__init__)
+     6241    0.038    0.000    0.038    0.000 threading.py:216(__init__)
+     6241    0.035    0.000    2.054    0.000 threading.py:534(wait)
+      447    0.031    0.000    2.814    0.006 dataset.py:323(getBestColumnAndSplit)
+     6241    0.027    0.000    2.005    0.000 threading.py:264(wait)
+     6241    0.027    0.000    2.584    0.000 threading.py:829(start)
+      895    0.027    0.000    0.029    0.000 dataset.py:113(getOverallEntropyAndMajorityElem)
+    895/1    0.020    0.000    3.276    3.276 classification.py:37(buildTree)
+     6241    0.018    0.000    0.046    0.000 threading.py:1000(join)
+     6241    0.012    0.000    0.012    0.000 threading.py:728(_newname)
+     6241    0.010    0.000    0.074    0.000 threading.py:499(__init__)
+     6241    0.010    0.000    0.013    0.000 _weakrefset.py:81(add)
+    12482    0.010    0.000    0.013    0.000 threading.py:1206(current_thread)
+      895    0.009    0.000    0.404    0.000 dataset.py:392(<listcomp>)
+     6241    0.007    0.000    0.022    0.000 threading.py:1038(_wait_for_tstate_lock)
+     6241    0.005    0.000    0.009    0.000 threading.py:252(_acquire_restore)
+     6241    0.004    0.000    0.006    0.000 threading.py:243(__exit__)
+     6241    0.004    0.000    0.005    0.000 threading.py:968(_stop)
+     6241    0.004    0.000    0.008    0.000 threading.py:240(__enter__)
+     6241    0.004    0.000    0.004    0.000 {method '__enter__' of '_thread.lock' objects}
+     6241    0.003    0.000    0.005    0.000 _weakrefset.py:38(_remove)
+     6241    0.003    0.000    0.007    0.000 threading.py:255(_is_owned)
+    12482    0.003    0.000    0.003    0.000 {built-in method _thread.get_ident}
+     6241    0.003    0.000    0.003    0.000 threading.py:1096(daemon)
+     6241    0.003    0.000    0.004    0.000 threading.py:249(_release_save)
+    12482    0.003    0.000    0.003    0.000 threading.py:507(is_set)
+    895/1    0.002    0.000    3.276    3.276 classification.py:19(__init__)
+    12482    0.002    0.000    0.002    0.000 {method 'release' of '_thread.lock' objects}
+      895    0.002    0.000    0.406    0.000 dataset.py:389(getValidCols)
+    16564    0.002    0.000    0.002    0.000 {built-in method builtins.len}
+     6241    0.001    0.000    0.001    0.000 {method '__exit__' of '_thread.lock' objects}
+     6241    0.001    0.000    0.001    0.000 {method 'append' of 'collections.deque' objects}
+      895    0.001    0.000    0.002    0.000 dataset.py:7(calculateEntropy)
+     6241    0.001    0.000    0.001    0.000 {method 'discard' of 'set' objects}
+     6241    0.001    0.000    0.001    0.000 {method 'locked' of '_thread.lock' objects}
+     1638    0.001    0.000    0.001    0.000 {built-in method math.log2}
+     2684    0.001    0.000    0.001    0.000 {method 'items' of 'dict' objects}
+     1638    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    3.276    3.276 {built-in method builtins.exec}
+        1    0.000    0.000    3.276    3.276 classification.py:106(train)
+        1    0.000    0.000    0.000    0.000 dataset.py:46(initFromData)
+        1    0.000    0.000    3.276    3.276 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 dataset.py:15(__init__)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+
+         907203 function calls (905415 primitive calls) in 3.706 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    31205    2.239    0.000    2.239    0.000 {method 'acquire' of '_thread.lock' objects}
+     6241    0.546    0.000    0.546    0.000 {built-in method _thread.start_new_thread}
+    14320    0.363    0.000    0.440    0.000 dataset.py:377(getNumberOfAttrs)
+   621137    0.080    0.000    0.080    0.000 {method 'add' of 'set' objects}
+     6241    0.050    0.000    0.175    0.000 threading.py:758(__init__)
+    12482    0.048    0.000    0.048    0.000 {built-in method _thread.allocate_lock}
+     6241    0.044    0.000    0.044    0.000 threading.py:216(__init__)
+     6241    0.040    0.000    2.349    0.000 threading.py:534(wait)
+      447    0.036    0.000    3.189    0.007 dataset.py:323(getBestColumnAndSplit)
+     6241    0.031    0.000    2.927    0.000 threading.py:829(start)
+     6241    0.030    0.000    2.294    0.000 threading.py:264(wait)
+      895    0.030    0.000    0.033    0.000 dataset.py:113(getOverallEntropyAndMajorityElem)
+    895/1    0.023    0.000    3.706    3.706 classification.py:37(buildTree)
+     6241    0.020    0.000    0.051    0.000 threading.py:1000(join)
+     6241    0.014    0.000    0.014    0.000 threading.py:728(_newname)
+     6241    0.011    0.000    0.083    0.000 threading.py:499(__init__)
+     6241    0.011    0.000    0.015    0.000 _weakrefset.py:81(add)
+      895    0.011    0.000    0.451    0.001 dataset.py:392(<listcomp>)
+    12482    0.011    0.000    0.014    0.000 threading.py:1206(current_thread)
+     6241    0.008    0.000    0.026    0.000 threading.py:1038(_wait_for_tstate_lock)
+     6241    0.006    0.000    0.011    0.000 threading.py:252(_acquire_restore)
+     6241    0.005    0.000    0.007    0.000 threading.py:243(__exit__)
+     6241    0.005    0.000    0.006    0.000 threading.py:968(_stop)
+     6241    0.005    0.000    0.009    0.000 threading.py:240(__enter__)
+     6241    0.004    0.000    0.004    0.000 {method '__enter__' of '_thread.lock' objects}
+     6241    0.004    0.000    0.005    0.000 _weakrefset.py:38(_remove)
+     6241    0.004    0.000    0.007    0.000 threading.py:255(_is_owned)
+    12482    0.004    0.000    0.004    0.000 {built-in method _thread.get_ident}
+     6241    0.003    0.000    0.003    0.000 threading.py:1096(daemon)
+     6241    0.003    0.000    0.004    0.000 threading.py:249(_release_save)
+    12482    0.003    0.000    0.003    0.000 threading.py:507(is_set)
+    895/1    0.002    0.000    3.706    3.706 classification.py:19(__init__)
+      895    0.002    0.000    0.453    0.001 dataset.py:389(getValidCols)
+    12482    0.002    0.000    0.002    0.000 {method 'release' of '_thread.lock' objects}
+    16564    0.002    0.000    0.002    0.000 {built-in method builtins.len}
+     6241    0.002    0.000    0.002    0.000 {method 'append' of 'collections.deque' objects}
+     6241    0.001    0.000    0.001    0.000 {method '__exit__' of '_thread.lock' objects}
+      895    0.001    0.000    0.002    0.000 dataset.py:7(calculateEntropy)
+     6241    0.001    0.000    0.001    0.000 {method 'discard' of 'set' objects}
+     1638    0.001    0.000    0.001    0.000 {built-in method math.log2}
+     6241    0.001    0.000    0.001    0.000 {method 'locked' of '_thread.lock' objects}
+     2684    0.001    0.000    0.001    0.000 {method 'items' of 'dict' objects}
+     1638    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    3.706    3.706 {built-in method builtins.exec}
+        1    0.000    0.000    3.706    3.706 classification.py:106(train)
+        1    0.000    0.000    0.000    0.000 dataset.py:46(initFromData)
+        1    0.000    0.000    3.706    3.706 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 dataset.py:15(__init__)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+
