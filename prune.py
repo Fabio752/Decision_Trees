@@ -61,7 +61,7 @@ class Prune:
                 and not nodeToPrune.parent.left.char is None \
                 and not nodeToPrune.parent.right is None \
                 and not nodeToPrune.parent.right.char is None:
-
+                # print("PARENT")
                 newDepth = maxDepth - 1
                 if not newDepth in self.leaves:
                     self.leaves[newDepth] = []

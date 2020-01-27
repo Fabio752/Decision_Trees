@@ -16,14 +16,14 @@ pathToValid = './data/validation.txt'
 
 
 dataset = ds.Dataset()
-dataset.initFromFile(pathToFull)
+dataset.initFromFile(pathToToy2)
 
 dtc = cs.DecisionTreeClassifier()
 dtc.train(dataset.attrib, dataset.labels)
+print(dtc)
 
 
-
-print(dtc.classifierTree)
+# print(dtc.classifierTree)
 # print("predicted: ")
 
 # print(dtc.predict(np.array([

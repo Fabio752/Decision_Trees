@@ -26,7 +26,7 @@ class ClassifierTree:
         self.leftRows = leftRows
         self.depth = depth
         self.parent = parent
-        self.char = None # if not None, then we have reached a leaf Node
+        self.char = None # if not None, then we have reached a leaf Node (i.e. char is the label)
         self.splitCol = None # which col do we use to split next
         self.splitK = None # K at which we split (<=K to left, >K to right)
         self.majorityElem = None # majority elem
@@ -134,6 +134,7 @@ class DecisionTreeClassifier(object):
         dataset = ds.Dataset()
         dataset.initFromData(x, y)
 
+        # print(dataset.totalInstances)
         self.classifierTree = ClassifierTree(dataset, range(dataset.totalInstances))
 
         # set a flag so that we know that the classifier has been trained

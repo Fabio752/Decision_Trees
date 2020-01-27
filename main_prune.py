@@ -21,7 +21,6 @@ dataset.initFromFile(pathToFull)
 dtc = cs.DecisionTreeClassifier()
 dtc.train(dataset.attrib, dataset.labels)
 
-print(dtc)
 
 validationDataset = ds.Dataset()
 validationDataset.initFromFile(pathToValid)
