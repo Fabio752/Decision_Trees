@@ -56,7 +56,6 @@ class q3_1:
         header_row = np.array([" ", "Prec.", "Recall", "F1"])
         final_table = np.vstack((header_row, total))
 
-        # print(final_table)
 
         '''
         print("Precision: " + str(precision))
