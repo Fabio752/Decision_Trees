@@ -209,7 +209,8 @@ class DecisionTreeClassifier(object):
         #######################################################################
         #                 ** TASK 2.2: COMPLETE THIS METHOD **
         #######################################################################
-        predictions = [self.classifierTree.predict(x[i]) for i in range(len(x))]
+        for i in range(len(x)):
+            predictions[i] = self.classifierTree.predict(x[i])
 
         return predictions
 

@@ -169,13 +169,21 @@ class Evaluator(object):
         float
             The macro-averaged f1 score across C classes.
         """
+        # Initialise array to store recall for C classes
+        f = np.zeros((len(confusion), ))
+        
+        #######################################################################
+        #                 ** YOUR TASK: COMPLETE THIS METHOD **
+        #######################################################################
 
         # precision
         prec, _ = self.precision(confusion)
         # recall
         rec, _ = self.recall(confusion)
 
-        f = [2 * rec[i] * prec[i] / (rec[i] + prec[i]) for i in range(len(confusion))]
+        for i in range(len(confusion)):
+            f[i] = 2 * rec[i] * prec[i] / (rec[i] + prec[i])
+
         macro_f = np.average(f)
 
         return (f, macro_f)
