@@ -2,7 +2,6 @@ import numpy as np
 import dataset as ds
 from prune import Prune
 import classification as cs
-import q1 as q1
 
 pathToSimple1 = './data/simple1.txt'
 pathToSimple2 = './data/simple2.txt'
@@ -16,7 +15,7 @@ pathToValid = './data/validation.txt'
 pathToToyValid = "./data/toyvalid.txt"
 
 dataset = ds.ClassifierDataset()
-dataset.initFromFile(pathToFull)
+dataset.initFromFile(pathToNoisy)
 
 dtc = cs.DecisionTreeClassifier()
 dtc.train(dataset.attrib, dataset.labels)
@@ -28,4 +27,4 @@ validationDataset.initFromFile(pathToValid)
 Prune(dtc, validationDataset.attrib, validationDataset.labels)
 
 
-print(dtc)
+# print(dtc)

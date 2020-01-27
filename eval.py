@@ -42,37 +42,21 @@ class Evaluator(object):
             Rows are ground truth per class, columns are predictions.
         """
 
-        '''
-        print("Predicted: " + str(prediction))
-        print("Annotated: " + str(annotation))
-        print("-------")
-        '''
-
         if not class_labels:
             class_labels = np.unique(annotation)
             class_labels = np.sort(class_labels)
 
-
         confusion = np.zeros((len(class_labels), len(class_labels)), dtype=np.int)
 
-        elements_dict = {}
+        elementsDict = {}
 
         for i in range(len(class_labels)):
-            elements_dict[class_labels[i]] = i
-
-        #print(elements_dict)
+            elementsDict[class_labels[i]] = i
 
         for i in range(len(annotation)):
-            a_character = annotation[i]
-            p_character = prediction[i]
-            confusion[elements_dict[a_character]][elements_dict[p_character]]+=1
-
-        # print("Confusion matrix: ")
-
-        '''classes_transposed = np.transpose(class_labels)
-        print(classes_transposed)
-        full_confusion_matrix = np.hstack((classes_transposed, confusion))'''
-        # print(confusion)
+            aChar = annotation[i]
+            pChar = prediction[i]
+            confusion[elementsDict[aChar]][elementsDict[pChar]] += 1
 
         return confusion
 
@@ -124,11 +108,9 @@ class Evaluator(object):
         for i in range(len(p)):
             numerator=confusion[i][i]
             denominator = np.sum(confusion, axis = 0)[i]
-            # if debug: print(numerator, denominator)
-            p[i] = float(str(numerator/denominator)[0:5]) if denominator != 0 else 0
+            p[i] = float(numerator/denominator) if denominator != 0 else 0
 
-
-        macro_p = float(str(np.average(p))[0:5])
+        macro_p = np.average(p)
 
         return (p, macro_p)
 
@@ -160,10 +142,9 @@ class Evaluator(object):
         for i in range(len(r)):
             numerator=confusion[i][i]
             denominator = np.sum(confusion, axis = 1)[i]
-            # if debug: print(numerator, denominator)
-            r[i] = float(str(numerator/denominator)[0:5]) if denominator != 0 else 0
+            r[i] = float(numerator/denominator) if denominator != 0 else 0
 
-        macro_r = float(str(np.average(r))[0:5])
+        macro_r = np.average(r)
 
         return (r, macro_r)
 
@@ -189,15 +170,12 @@ class Evaluator(object):
             The macro-averaged f1 score across C classes.
         """
 
-        # Initialise array to store recall for C classes
-        f = np.zeros(len(confusion), dtype=np.float)
+        # precision
+        prec, _ = self.precision(confusion)
+        # recall
+        rec, _ = self.recall(confusion)
 
-        precision, _ = self.precision(confusion)
-        recall, _ = self.recall(confusion)
-
-        for i in range(len(f)):
-            f[i] = float(str(2*recall[i]*precision[i]/(recall[i]+precision[i]))[0:5]) if (recall[i]+precision[i]) != 0 else 0
-
-        macro_f = float(str(np.average(f))[0:5])
+        f = [2 * rec[i] * prec[i] / (rec[i] + prec[i]) for i in range(len(confusion))]
+        macro_f = np.average(f)
 
         return (f, macro_f)

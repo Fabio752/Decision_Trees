@@ -11,7 +11,7 @@ test_path = "./data/test.txt"
 val_path = "./data/validation.txt"
 
 class q3_1:
-    def calc_stats(self, test_path, path_to_data):
+    def calc_stats(self, test_path, path_to_data, prune):
         #load dataset, atttribs, labels
         d_subset = ClassifierDataset()
         d_subset.initFromFile(path_to_data)
@@ -29,14 +29,14 @@ class q3_1:
         tree.train(attribs, labels)
 
         print("FINISHED TRAINING")
-        # print("PRUNING")
-        # # prune
-        # validationDataset = ClassifierDataset()
-        # validationDataset.initFromFile(val_path)
+        if prune == True:
+            print("PRUNING")
+            validationDataset = ClassifierDataset()
+            validationDataset.initFromFile(val_path)
 
-        # Prune(tree, validationDataset.attrib, validationDataset.labels)
-        
-        # print("FINISHED PRUNING")
+            Prune(tree, validationDataset.attrib, validationDataset.labels)
+            
+            print("FINISHED PRUNING")
         predictions = tree.predict(test_attribs)
 
         evaluator = Evaluator()
@@ -56,7 +56,7 @@ class q3_1:
         header_row = np.array([" ", "Prec.", "Recall", "F1"])
         final_table = np.vstack((header_row, total))
 
-        print(final_table)
+        # print(final_table)
 
         '''
         print("Precision: " + str(precision))
@@ -72,12 +72,15 @@ class q3_1:
 
 print("FULL DATASET: ")
 full_3_1 = q3_1()
-full_3_1.calc_stats(test_path, full_dataset_path)
+full_3_1.calc_stats(test_path, full_dataset_path, False)
+full_3_1.calc_stats(test_path, full_dataset_path, True)
 
 print("SUBSET: ")
 sub_3_1 = q3_1()
-sub_3_1.calc_stats(test_path, subset_path)
+sub_3_1.calc_stats(test_path, subset_path, False)
+sub_3_1.calc_stats(test_path, subset_path, True)
 
 print("NOISY: ")
 noisy_3_1 = q3_1()
-noisy_3_1.calc_stats(test_path, noisy_path)
+noisy_3_1.calc_stats(test_path, noisy_path, False)
+noisy_3_1.calc_stats(test_path, noisy_path, True)
