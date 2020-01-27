@@ -39,3 +39,6 @@ Thumbs.db
 __pycache__
 
 profiling_logs
+logs
+output
+graphs
