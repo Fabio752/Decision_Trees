@@ -15,7 +15,7 @@ pathToSub = './data/train_sub.txt'
 pathToValid = './data/validation.txt'
 pathToToyValid = "./data/toyvalid.txt"
 
-dataset = ds.Dataset()
+dataset = ds.ClassifierDataset()
 dataset.initFromFile(pathToFull)
 
 dtc = cs.DecisionTreeClassifier()

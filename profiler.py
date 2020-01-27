@@ -5,7 +5,7 @@ import prune
 import cProfile
 import re
 import pstats
-from pstats import SortKey
+# from pstats import SortKey
 
 pathToSimple1 = './data/simple1.txt'
 pathToSimple2 = './data/simple2.txt'
@@ -17,25 +17,25 @@ pathToNoisy = './data/train_noisy.txt'
 pathToSub = './data/train_sub.txt'
 pathToValid = './data/validation.txt'
 
-dataset = ds.Dataset()
+dataset = ds.ClassifierDataset()
 dataset.initFromFile(pathToFull)
 
 dtc = cs.DecisionTreeClassifier()
 print("FULL")
-cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, SortKey.TIME)
-cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, SortKey.TIME)
-cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, SortKey.TIME)
+cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, 'time')
+cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, 'time')
+cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, 'time')
 
 dataset.initFromFile(pathToSub)
 print("=====")
 print("SUB")
-cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, SortKey.TIME)
-cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, SortKey.TIME)
-cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, SortKey.TIME)
+cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, 'time')
+cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, 'time')
+cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, 'time')
 
 dataset.initFromFile(pathToNoisy)
 print("=====")
 print("NOISY")
-cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, SortKey.TIME)
-cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, SortKey.TIME)
-cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, SortKey.TIME)
+cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, 'time')
+cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, 'time')
+cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, 'time')

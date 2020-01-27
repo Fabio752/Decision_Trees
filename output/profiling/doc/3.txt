@@ -1,0 +1,365 @@
+FULL
+         1695166 function calls (1694070 primitive calls) in 0.842 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     4030    0.363    0.000    0.389    0.000 dataset.py:193(getAttribRowDict)
+     8784    0.164    0.000    0.201    0.000 dataset.py:434(getNumberOfAttrs)
+     4030    0.063    0.000    0.225    0.000 dataset.py:294(getMinEntropyForColumn)
+    32236    0.055    0.000    0.110    0.000 dataset.py:229(getSplitObjectForSplitDict)
+   598464    0.036    0.000    0.036    0.000 {method 'add' of 'set' objects}
+   530880    0.027    0.000    0.027    0.000 {method 'append' of 'list' objects}
+    17446    0.023    0.000    0.024    0.000 dataset.py:19(addRowsFromSplitDict)
+     4030    0.021    0.000    0.024    0.000 dataset.py:272(getCumulativeDict)
+    32237    0.018    0.000    0.025    0.000 dataset.py:6(calculateEntropy)
+    32236    0.015    0.000    0.015    0.000 dataset.py:249(<listcomp>)
+     4030    0.009    0.000    0.628    0.000 dataset.py:381(getSplitPointForColumn)
+   167251    0.009    0.000    0.009    0.000 {built-in method builtins.len}
+    32237    0.008    0.000    0.008    0.000 dataset.py:13(__init__)
+   118186    0.007    0.000    0.007    0.000 {method 'items' of 'dict' objects}
+    85911    0.007    0.000    0.007    0.000 {built-in method math.log2}
+      274    0.007    0.000    0.635    0.002 dataset.py:401(getBestColumnAndSplit)
+     8060    0.004    0.000    0.004    0.000 {method 'sort' of 'list' objects}
+      549    0.002    0.000    0.203    0.000 dataset.py:449(<listcomp>)
+    549/1    0.001    0.000    0.841    0.841 classification.py:41(buildTree)
+        1    0.001    0.001    0.001    0.001 dataset.py:127(getSplitObjectForRoot)
+     8060    0.001    0.000    0.001    0.000 {method 'keys' of 'dict' objects}
+    549/1    0.001    0.000    0.841    0.841 classification.py:20(__init__)
+     4030    0.001    0.000    0.001    0.000 {method 'pop' of 'list' objects}
+      549    0.000    0.000    0.204    0.000 dataset.py:446(getValidCols)
+      549    0.000    0.000    0.000    0.000 {built-in method math.isclose}
+        1    0.000    0.000    0.842    0.842 {built-in method builtins.exec}
+        1    0.000    0.000    0.842    0.842 classification.py:110(train)
+        1    0.000    0.000    0.000    0.000 dataset.py:58(initFromData)
+        1    0.000    0.000    0.842    0.842 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 dataset.py:148(<listcomp>)
+        1    0.000    0.000    0.000    0.000 dataset.py:23(addRowsFromRange)
+        1    0.000    0.000    0.000    0.000 dataset.py:27(__init__)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+
+         1695166 function calls (1694070 primitive calls) in 0.904 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     4030    0.391    0.000    0.419    0.000 dataset.py:193(getAttribRowDict)
+     8784    0.176    0.000    0.214    0.000 dataset.py:434(getNumberOfAttrs)
+     4030    0.068    0.000    0.243    0.000 dataset.py:294(getMinEntropyForColumn)
+    32236    0.058    0.000    0.118    0.000 dataset.py:229(getSplitObjectForSplitDict)
+   598464    0.038    0.000    0.038    0.000 {method 'add' of 'set' objects}
+   530880    0.028    0.000    0.028    0.000 {method 'append' of 'list' objects}
+    17446    0.026    0.000    0.027    0.000 dataset.py:19(addRowsFromSplitDict)
+     4030    0.023    0.000    0.026    0.000 dataset.py:272(getCumulativeDict)
+    32237    0.020    0.000    0.027    0.000 dataset.py:6(calculateEntropy)
+    32236    0.016    0.000    0.016    0.000 dataset.py:249(<listcomp>)
+     4030    0.010    0.000    0.676    0.000 dataset.py:381(getSplitPointForColumn)
+   167251    0.009    0.000    0.009    0.000 {built-in method builtins.len}
+    32237    0.008    0.000    0.008    0.000 dataset.py:13(__init__)
+      274    0.008    0.000    0.683    0.002 dataset.py:401(getBestColumnAndSplit)
+   118186    0.008    0.000    0.008    0.000 {method 'items' of 'dict' objects}
+    85911    0.008    0.000    0.008    0.000 {built-in method math.log2}
+     8060    0.004    0.000    0.004    0.000 {method 'sort' of 'list' objects}
+      549    0.003    0.000    0.216    0.000 dataset.py:449(<listcomp>)
+    549/1    0.002    0.000    0.903    0.903 classification.py:41(buildTree)
+        1    0.001    0.001    0.001    0.001 dataset.py:127(getSplitObjectForRoot)
+    549/1    0.001    0.000    0.903    0.903 classification.py:20(__init__)
+     8060    0.001    0.000    0.001    0.000 {method 'keys' of 'dict' objects}
+     4030    0.001    0.000    0.001    0.000 {method 'pop' of 'list' objects}
+      549    0.001    0.000    0.217    0.000 dataset.py:446(getValidCols)
+      549    0.000    0.000    0.000    0.000 {built-in method math.isclose}
+        1    0.000    0.000    0.904    0.904 {built-in method builtins.exec}
+        1    0.000    0.000    0.904    0.904 classification.py:110(train)
+        1    0.000    0.000    0.904    0.904 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 dataset.py:58(initFromData)
+        1    0.000    0.000    0.000    0.000 dataset.py:148(<listcomp>)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        1    0.000    0.000    0.000    0.000 dataset.py:27(__init__)
+        1    0.000    0.000    0.000    0.000 dataset.py:23(addRowsFromRange)
+
+
+         1695166 function calls (1694070 primitive calls) in 0.891 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     4030    0.385    0.000    0.413    0.000 dataset.py:193(getAttribRowDict)
+     8784    0.172    0.000    0.210    0.000 dataset.py:434(getNumberOfAttrs)
+     4030    0.067    0.000    0.240    0.000 dataset.py:294(getMinEntropyForColumn)
+    32236    0.059    0.000    0.118    0.000 dataset.py:229(getSplitObjectForSplitDict)
+   598464    0.037    0.000    0.037    0.000 {method 'add' of 'set' objects}
+   530880    0.028    0.000    0.028    0.000 {method 'append' of 'list' objects}
+    17446    0.025    0.000    0.026    0.000 dataset.py:19(addRowsFromSplitDict)
+     4030    0.022    0.000    0.025    0.000 dataset.py:272(getCumulativeDict)
+    32237    0.019    0.000    0.027    0.000 dataset.py:6(calculateEntropy)
+    32236    0.016    0.000    0.016    0.000 dataset.py:249(<listcomp>)
+     4030    0.010    0.000    0.667    0.000 dataset.py:381(getSplitPointForColumn)
+   167251    0.009    0.000    0.009    0.000 {built-in method builtins.len}
+    32237    0.008    0.000    0.008    0.000 dataset.py:13(__init__)
+      274    0.008    0.000    0.675    0.002 dataset.py:401(getBestColumnAndSplit)
+    85911    0.007    0.000    0.007    0.000 {built-in method math.log2}
+   118186    0.007    0.000    0.007    0.000 {method 'items' of 'dict' objects}
+     8060    0.004    0.000    0.004    0.000 {method 'sort' of 'list' objects}
+      549    0.002    0.000    0.212    0.000 dataset.py:449(<listcomp>)
+    549/1    0.001    0.000    0.890    0.890 classification.py:41(buildTree)
+        1    0.001    0.001    0.001    0.001 dataset.py:127(getSplitObjectForRoot)
+    549/1    0.001    0.000    0.890    0.890 classification.py:20(__init__)
+     8060    0.001    0.000    0.001    0.000 {method 'keys' of 'dict' objects}
+     4030    0.001    0.000    0.001    0.000 {method 'pop' of 'list' objects}
+      549    0.001    0.000    0.213    0.000 dataset.py:446(getValidCols)
+      549    0.000    0.000    0.000    0.000 {built-in method math.isclose}
+        1    0.000    0.000    0.891    0.891 {built-in method builtins.exec}
+        1    0.000    0.000    0.891    0.891 classification.py:110(train)
+        1    0.000    0.000    0.000    0.000 dataset.py:58(initFromData)
+        1    0.000    0.000    0.000    0.000 dataset.py:148(<listcomp>)
+        1    0.000    0.000    0.891    0.891 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        1    0.000    0.000    0.000    0.000 dataset.py:27(__init__)
+        1    0.000    0.000    0.000    0.000 dataset.py:23(addRowsFromRange)
+
+
+=====
+SUB
+         282984 function calls (282720 primitive calls) in 0.140 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     1004    0.045    0.000    0.049    0.000 dataset.py:193(getAttribRowDict)
+     2128    0.021    0.000    0.025    0.000 dataset.py:434(getNumberOfAttrs)
+     8832    0.016    0.000    0.032    0.000 dataset.py:229(getSplitObjectForSplitDict)
+     1004    0.016    0.000    0.059    0.000 dataset.py:294(getMinEntropyForColumn)
+     8833    0.005    0.000    0.007    0.000 dataset.py:6(calculateEntropy)
+     1004    0.005    0.000    0.006    0.000 dataset.py:272(getCumulativeDict)
+    68608    0.004    0.000    0.004    0.000 {method 'add' of 'set' objects}
+     8832    0.004    0.000    0.004    0.000 dataset.py:249(<listcomp>)
+     4722    0.004    0.000    0.005    0.000 dataset.py:19(addRowsFromSplitDict)
+    58768    0.003    0.000    0.003    0.000 {method 'append' of 'list' objects}
+     1004    0.002    0.000    0.112    0.000 dataset.py:381(getSplitPointForColumn)
+    46610    0.002    0.000    0.002    0.000 {built-in method builtins.len}
+    24818    0.002    0.000    0.002    0.000 {built-in method math.log2}
+    32224    0.002    0.000    0.002    0.000 {method 'items' of 'dict' objects}
+     8833    0.002    0.000    0.002    0.000 dataset.py:13(__init__)
+       66    0.002    0.000    0.113    0.002 dataset.py:401(getBestColumnAndSplit)
+     2008    0.001    0.000    0.001    0.000 {method 'sort' of 'list' objects}
+      133    0.001    0.000    0.026    0.000 dataset.py:449(<listcomp>)
+    133/1    0.000    0.000    0.140    0.140 classification.py:41(buildTree)
+     2008    0.000    0.000    0.000    0.000 {method 'keys' of 'dict' objects}
+    133/1    0.000    0.000    0.140    0.140 classification.py:20(__init__)
+        1    0.000    0.000    0.000    0.000 dataset.py:127(getSplitObjectForRoot)
+     1004    0.000    0.000    0.000    0.000 {method 'pop' of 'list' objects}
+      133    0.000    0.000    0.026    0.000 dataset.py:446(getValidCols)
+      133    0.000    0.000    0.000    0.000 {built-in method math.isclose}
+        1    0.000    0.000    0.140    0.140 {built-in method builtins.exec}
+        1    0.000    0.000    0.140    0.140 classification.py:110(train)
+        1    0.000    0.000    0.000    0.000 dataset.py:58(initFromData)
+        1    0.000    0.000    0.140    0.140 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 dataset.py:148(<listcomp>)
+        1    0.000    0.000    0.000    0.000 dataset.py:27(__init__)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        1    0.000    0.000    0.000    0.000 dataset.py:23(addRowsFromRange)
+
+
+         282984 function calls (282720 primitive calls) in 0.130 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     1004    0.041    0.000    0.044    0.000 dataset.py:193(getAttribRowDict)
+     2128    0.020    0.000    0.024    0.000 dataset.py:434(getNumberOfAttrs)
+     8832    0.015    0.000    0.030    0.000 dataset.py:229(getSplitObjectForSplitDict)
+     1004    0.015    0.000    0.055    0.000 dataset.py:294(getMinEntropyForColumn)
+     8833    0.005    0.000    0.007    0.000 dataset.py:6(calculateEntropy)
+     1004    0.004    0.000    0.005    0.000 dataset.py:272(getCumulativeDict)
+    68608    0.004    0.000    0.004    0.000 {method 'add' of 'set' objects}
+     8832    0.004    0.000    0.004    0.000 dataset.py:249(<listcomp>)
+     4722    0.004    0.000    0.004    0.000 dataset.py:19(addRowsFromSplitDict)
+    58768    0.003    0.000    0.003    0.000 {method 'append' of 'list' objects}
+    46610    0.002    0.000    0.002    0.000 {built-in method builtins.len}
+     1004    0.002    0.000    0.102    0.000 dataset.py:381(getSplitPointForColumn)
+     8833    0.002    0.000    0.002    0.000 dataset.py:13(__init__)
+    24818    0.002    0.000    0.002    0.000 {built-in method math.log2}
+    32224    0.002    0.000    0.002    0.000 {method 'items' of 'dict' objects}
+       66    0.002    0.000    0.104    0.002 dataset.py:401(getBestColumnAndSplit)
+     2008    0.001    0.000    0.001    0.000 {method 'sort' of 'list' objects}
+      133    0.001    0.000    0.025    0.000 dataset.py:449(<listcomp>)
+    133/1    0.000    0.000    0.130    0.130 classification.py:41(buildTree)
+    133/1    0.000    0.000    0.130    0.130 classification.py:20(__init__)
+     2008    0.000    0.000    0.000    0.000 {method 'keys' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 dataset.py:127(getSplitObjectForRoot)
+      133    0.000    0.000    0.025    0.000 dataset.py:446(getValidCols)
+     1004    0.000    0.000    0.000    0.000 {method 'pop' of 'list' objects}
+      133    0.000    0.000    0.000    0.000 {built-in method math.isclose}
+        1    0.000    0.000    0.130    0.130 {built-in method builtins.exec}
+        1    0.000    0.000    0.130    0.130 classification.py:110(train)
+        1    0.000    0.000    0.000    0.000 dataset.py:58(initFromData)
+        1    0.000    0.000    0.130    0.130 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 dataset.py:148(<listcomp>)
+        1    0.000    0.000    0.000    0.000 dataset.py:27(__init__)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        1    0.000    0.000    0.000    0.000 dataset.py:23(addRowsFromRange)
+
+
+         282984 function calls (282720 primitive calls) in 0.127 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     1004    0.041    0.000    0.044    0.000 dataset.py:193(getAttribRowDict)
+     2128    0.019    0.000    0.023    0.000 dataset.py:434(getNumberOfAttrs)
+     1004    0.014    0.000    0.054    0.000 dataset.py:294(getMinEntropyForColumn)
+     8832    0.014    0.000    0.029    0.000 dataset.py:229(getSplitObjectForSplitDict)
+     8833    0.005    0.000    0.007    0.000 dataset.py:6(calculateEntropy)
+     1004    0.004    0.000    0.005    0.000 dataset.py:272(getCumulativeDict)
+    68608    0.004    0.000    0.004    0.000 {method 'add' of 'set' objects}
+     8832    0.004    0.000    0.004    0.000 dataset.py:249(<listcomp>)
+     4722    0.004    0.000    0.004    0.000 dataset.py:19(addRowsFromSplitDict)
+    58768    0.003    0.000    0.003    0.000 {method 'append' of 'list' objects}
+    46610    0.002    0.000    0.002    0.000 {built-in method builtins.len}
+     1004    0.002    0.000    0.101    0.000 dataset.py:381(getSplitPointForColumn)
+    24818    0.002    0.000    0.002    0.000 {built-in method math.log2}
+     8833    0.002    0.000    0.002    0.000 dataset.py:13(__init__)
+    32224    0.002    0.000    0.002    0.000 {method 'items' of 'dict' objects}
+       66    0.001    0.000    0.103    0.002 dataset.py:401(getBestColumnAndSplit)
+     2008    0.001    0.000    0.001    0.000 {method 'sort' of 'list' objects}
+      133    0.001    0.000    0.024    0.000 dataset.py:449(<listcomp>)
+    133/1    0.000    0.000    0.127    0.127 classification.py:41(buildTree)
+     2008    0.000    0.000    0.000    0.000 {method 'keys' of 'dict' objects}
+    133/1    0.000    0.000    0.127    0.127 classification.py:20(__init__)
+        1    0.000    0.000    0.000    0.000 dataset.py:127(getSplitObjectForRoot)
+     1004    0.000    0.000    0.000    0.000 {method 'pop' of 'list' objects}
+      133    0.000    0.000    0.024    0.000 dataset.py:446(getValidCols)
+      133    0.000    0.000    0.000    0.000 {built-in method math.isclose}
+        1    0.000    0.000    0.127    0.127 {built-in method builtins.exec}
+        1    0.000    0.000    0.000    0.000 dataset.py:58(initFromData)
+        1    0.000    0.000    0.127    0.127 classification.py:110(train)
+        1    0.000    0.000    0.127    0.127 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 dataset.py:148(<listcomp>)
+        1    0.000    0.000    0.000    0.000 dataset.py:23(addRowsFromRange)
+        1    0.000    0.000    0.000    0.000 dataset.py:27(__init__)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+
+=====
+NOISY
+         1921591 function calls (1919803 primitive calls) in 0.939 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     6241    0.380    0.000    0.407    0.000 dataset.py:193(getAttribRowDict)
+    14320    0.170    0.000    0.208    0.000 dataset.py:434(getNumberOfAttrs)
+     6241    0.079    0.000    0.287    0.000 dataset.py:294(getMinEntropyForColumn)
+    42988    0.071    0.000    0.143    0.000 dataset.py:229(getSplitObjectForSplitDict)
+   614896    0.037    0.000    0.037    0.000 {method 'add' of 'set' objects}
+   545298    0.027    0.000    0.027    0.000 {method 'append' of 'list' objects}
+    24418    0.027    0.000    0.029    0.000 dataset.py:19(addRowsFromSplitDict)
+     6241    0.027    0.000    0.031    0.000 dataset.py:272(getCumulativeDict)
+    42989    0.023    0.000    0.032    0.000 dataset.py:6(calculateEntropy)
+    42988    0.019    0.000    0.019    0.000 dataset.py:249(<listcomp>)
+     6241    0.014    0.000    0.713    0.000 dataset.py:381(getSplitPointForColumn)
+   219869    0.011    0.000    0.011    0.000 {built-in method builtins.len}
+    42989    0.010    0.000    0.010    0.000 dataset.py:13(__init__)
+   159625    0.010    0.000    0.010    0.000 {method 'items' of 'dict' objects}
+      447    0.009    0.000    0.722    0.002 dataset.py:401(getBestColumnAndSplit)
+   110111    0.009    0.000    0.009    0.000 {built-in method math.log2}
+    12482    0.005    0.000    0.005    0.000 {method 'sort' of 'list' objects}
+      895    0.004    0.000    0.212    0.000 dataset.py:449(<listcomp>)
+    895/1    0.002    0.000    0.938    0.938 classification.py:41(buildTree)
+    895/1    0.001    0.000    0.938    0.938 classification.py:20(__init__)
+    12482    0.001    0.000    0.001    0.000 {method 'keys' of 'dict' objects}
+        1    0.001    0.001    0.001    0.001 dataset.py:127(getSplitObjectForRoot)
+     6241    0.001    0.000    0.001    0.000 {method 'pop' of 'list' objects}
+      895    0.001    0.000    0.213    0.000 dataset.py:446(getValidCols)
+      895    0.000    0.000    0.000    0.000 {built-in method math.isclose}
+        1    0.000    0.000    0.939    0.939 {built-in method builtins.exec}
+        1    0.000    0.000    0.939    0.939 classification.py:110(train)
+        1    0.000    0.000    0.000    0.000 dataset.py:58(initFromData)
+        1    0.000    0.000    0.939    0.939 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 dataset.py:148(<listcomp>)
+        1    0.000    0.000    0.000    0.000 dataset.py:27(__init__)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        1    0.000    0.000    0.000    0.000 dataset.py:23(addRowsFromRange)
+
+
+         1921591 function calls (1919803 primitive calls) in 0.928 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     6241    0.374    0.000    0.401    0.000 dataset.py:193(getAttribRowDict)
+    14320    0.170    0.000    0.208    0.000 dataset.py:434(getNumberOfAttrs)
+     6241    0.078    0.000    0.283    0.000 dataset.py:294(getMinEntropyForColumn)
+    42988    0.070    0.000    0.141    0.000 dataset.py:229(getSplitObjectForSplitDict)
+   614896    0.037    0.000    0.037    0.000 {method 'add' of 'set' objects}
+   545298    0.027    0.000    0.027    0.000 {method 'append' of 'list' objects}
+    24418    0.027    0.000    0.028    0.000 dataset.py:19(addRowsFromSplitDict)
+     6241    0.026    0.000    0.030    0.000 dataset.py:272(getCumulativeDict)
+    42989    0.023    0.000    0.032    0.000 dataset.py:6(calculateEntropy)
+    42988    0.018    0.000    0.018    0.000 dataset.py:249(<listcomp>)
+     6241    0.014    0.000    0.702    0.000 dataset.py:381(getSplitPointForColumn)
+   219869    0.011    0.000    0.011    0.000 {built-in method builtins.len}
+    42989    0.010    0.000    0.010    0.000 dataset.py:13(__init__)
+   159625    0.010    0.000    0.010    0.000 {method 'items' of 'dict' objects}
+      447    0.009    0.000    0.711    0.002 dataset.py:401(getBestColumnAndSplit)
+   110111    0.009    0.000    0.009    0.000 {built-in method math.log2}
+    12482    0.005    0.000    0.005    0.000 {method 'sort' of 'list' objects}
+      895    0.004    0.000    0.211    0.000 dataset.py:449(<listcomp>)
+    895/1    0.002    0.000    0.927    0.927 classification.py:41(buildTree)
+    12482    0.001    0.000    0.001    0.000 {method 'keys' of 'dict' objects}
+    895/1    0.001    0.000    0.927    0.927 classification.py:20(__init__)
+        1    0.001    0.001    0.001    0.001 dataset.py:127(getSplitObjectForRoot)
+     6241    0.001    0.000    0.001    0.000 {method 'pop' of 'list' objects}
+      895    0.001    0.000    0.212    0.000 dataset.py:446(getValidCols)
+      895    0.000    0.000    0.000    0.000 {built-in method math.isclose}
+        1    0.000    0.000    0.928    0.928 {built-in method builtins.exec}
+        1    0.000    0.000    0.928    0.928 classification.py:110(train)
+        1    0.000    0.000    0.928    0.928 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 dataset.py:58(initFromData)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        1    0.000    0.000    0.000    0.000 dataset.py:148(<listcomp>)
+        1    0.000    0.000    0.000    0.000 dataset.py:23(addRowsFromRange)
+        1    0.000    0.000    0.000    0.000 dataset.py:27(__init__)
+
+
+         1921591 function calls (1919803 primitive calls) in 0.952 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     6241    0.381    0.000    0.409    0.000 dataset.py:193(getAttribRowDict)
+    14320    0.174    0.000    0.213    0.000 dataset.py:434(getNumberOfAttrs)
+     6241    0.081    0.000    0.292    0.000 dataset.py:294(getMinEntropyForColumn)
+    42988    0.073    0.000    0.146    0.000 dataset.py:229(getSplitObjectForSplitDict)
+   614896    0.037    0.000    0.037    0.000 {method 'add' of 'set' objects}
+   545298    0.028    0.000    0.028    0.000 {method 'append' of 'list' objects}
+    24418    0.027    0.000    0.029    0.000 dataset.py:19(addRowsFromSplitDict)
+     6241    0.027    0.000    0.031    0.000 dataset.py:272(getCumulativeDict)
+    42989    0.024    0.000    0.033    0.000 dataset.py:6(calculateEntropy)
+    42988    0.019    0.000    0.019    0.000 dataset.py:249(<listcomp>)
+     6241    0.014    0.000    0.720    0.000 dataset.py:381(getSplitPointForColumn)
+   219869    0.012    0.000    0.012    0.000 {built-in method builtins.len}
+    42989    0.010    0.000    0.010    0.000 dataset.py:13(__init__)
+   159625    0.010    0.000    0.010    0.000 {method 'items' of 'dict' objects}
+      447    0.010    0.000    0.729    0.002 dataset.py:401(getBestColumnAndSplit)
+   110111    0.009    0.000    0.009    0.000 {built-in method math.log2}
+    12482    0.005    0.000    0.005    0.000 {method 'sort' of 'list' objects}
+      895    0.004    0.000    0.217    0.000 dataset.py:449(<listcomp>)
+    895/1    0.002    0.000    0.951    0.951 classification.py:41(buildTree)
+    895/1    0.001    0.000    0.951    0.951 classification.py:20(__init__)
+    12482    0.001    0.000    0.001    0.000 {method 'keys' of 'dict' objects}
+        1    0.001    0.001    0.001    0.001 dataset.py:127(getSplitObjectForRoot)
+      895    0.001    0.000    0.218    0.000 dataset.py:446(getValidCols)
+     6241    0.001    0.000    0.001    0.000 {method 'pop' of 'list' objects}
+      895    0.000    0.000    0.000    0.000 {built-in method math.isclose}
+        1    0.000    0.000    0.952    0.952 {built-in method builtins.exec}
+        1    0.000    0.000    0.952    0.952 classification.py:110(train)
+        1    0.000    0.000    0.000    0.000 dataset.py:58(initFromData)
+        1    0.000    0.000    0.952    0.952 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 dataset.py:148(<listcomp>)
+        1    0.000    0.000    0.000    0.000 dataset.py:23(addRowsFromRange)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        1    0.000    0.000    0.000    0.000 dataset.py:27(__init__)
+
+

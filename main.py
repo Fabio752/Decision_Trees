@@ -15,15 +15,13 @@ pathToSub = './data/train_sub.txt'
 pathToValid = './data/validation.txt'
 
 
-dataset = ds.Dataset()
-dataset.initFromFile(pathToToy2)
+dataset = ds.ClassifierDataset()
+dataset.initFromFile(pathToToy)
 
 dtc = cs.DecisionTreeClassifier()
 dtc.train(dataset.attrib, dataset.labels)
+
 print(dtc)
-
-
-# print(dtc.classifierTree)
 # print("predicted: ")
 
 # print(dtc.predict(np.array([
