@@ -1,7 +1,8 @@
 from eval import Evaluator
 import numpy as np
-from dataset import Dataset
+from dataset import ClassifierDataset
 from classification import DecisionTreeClassifier
+from prune import Prune
 
 full_dataset_path = "./data/train_full.txt"
 subset_path = "./data/train_sub.txt"
@@ -12,19 +13,30 @@ val_path = "./data/validation.txt"
 class q3_1:
     def calc_stats(self, test_path, path_to_data):
         #load dataset, atttribs, labels
-        d_subset = Dataset()
+        d_subset = ClassifierDataset()
         d_subset.initFromFile(path_to_data)
         attribs = d_subset.attrib
         labels = d_subset.labels
 
-        ds_test = Dataset()
+        ds_test = ClassifierDataset()
         ds_test.initFromFile(test_path)
         test_attribs = ds_test.attrib
         test_labels = ds_test.labels
 
         #train and predict
+        print("TRAINING")
         tree = DecisionTreeClassifier()
         tree.train(attribs, labels)
+
+        print("FINISHED TRAINING")
+        # print("PRUNING")
+        # # prune
+        # validationDataset = ClassifierDataset()
+        # validationDataset.initFromFile(val_path)
+
+        # Prune(tree, validationDataset.attrib, validationDataset.labels)
+        
+        # print("FINISHED PRUNING")
         predictions = tree.predict(test_attribs)
 
         evaluator = Evaluator()

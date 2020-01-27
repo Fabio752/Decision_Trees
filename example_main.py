@@ -10,7 +10,7 @@ from classification import DecisionTreeClassifier
 from eval import Evaluator
 
 if __name__ == "__main__":
-    print("Loading the training dataset...");
+    print("Loading the training dataset...")
     x = np.array([
             [5,7,1],
             [4,6,2],

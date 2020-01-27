@@ -1,0 +1,57 @@
+FULL DATASET: 
+TRAINING
+3900
+FINISHED TRAINING
+ 
+Accuracy: 0.915
+ 
+[[' ' 'Prec.' 'Recall' 'F1']
+ ['A' '1.0' '0.97' '0.984']
+ ['C' '0.918' '0.918' '0.918']
+ ['E' '0.862' '0.961' '0.908']
+ ['G' '0.958' '0.851' '0.901']
+ ['O' '0.882' '0.882' '0.882']
+ ['Q' '0.883' '0.904' '0.893']]
+ 
+Macro avg recall:0.914
+Macro avg precision:0.917
+Macro avg f1:0.914
+ 
+SUBSET: 
+TRAINING
+600
+FINISHED TRAINING
+ 
+Accuracy: 0.755
+ 
+[[' ' 'Prec.' 'Recall' 'F1']
+ ['A' '0.9' '0.794' '0.843']
+ ['C' '0.782' '0.972' '0.866']
+ ['E' '0.657' '0.884' '0.753']
+ ['G' '0.578' '0.407' '0.477']
+ ['O' '0.777' '0.617' '0.687']
+ ['Q' '0.767' '0.785' '0.775']]
+ 
+Macro avg recall:0.743
+Macro avg precision:0.743
+Macro avg f1:0.733
+ 
+NOISY: 
+TRAINING
+3900
+FINISHED TRAINING
+ 
+Accuracy: 0.795
+ 
+[[' ' 'Prec.' 'Recall' 'F1']
+ ['A' '0.882' '0.882' '0.882']
+ ['C' '0.888' '0.864' '0.875']
+ ['E' '0.857' '0.923' '0.888']
+ ['G' '0.695' '0.592' '0.639']
+ ['O' '0.8' '0.823' '0.811']
+ ['Q' '0.659' '0.69' '0.674']]
+ 
+Macro avg recall:0.795
+Macro avg precision:0.796
+Macro avg f1:0.794
+ 

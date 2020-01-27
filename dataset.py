@@ -1,23 +1,47 @@
 import numpy as np
 import math
 import classification
-from copy import deepcopy
 
 # take in an array of probabilities, calculate entropy
 def calculateEntropy(probs):
     ret = 0.
     for p in probs:
-        ret -= (p * math.log2(p))
-    return ret
+        ret += (p * math.log2(p))
+    return -ret
 
-class Dataset:
+'''
+Split Object sent to initiate a new node in the ClassifierTree
+'''
+class SplitObject:
+    def __init__(self, majorityElem, entropy, totalCount):
+        self.majorityElem = majorityElem # majority element
+        self.entropy = entropy # current entropy
+        self.totalCount = totalCount # total number of elements
+        self.rows = [] # rows (left unsplit) in the current node
+
+    def addRowsFromSplitDict(self, splitDict):
+        for _, lstRow in splitDict.items():
+            self.rows = self.rows + lstRow
+
+    def addRowsFromRange(self, rows):
+        self.rows = rows
+
+'''
+ClassiferDataset containing dataset
+Can be initialized from
+1. file
+2. existing dataset
+
+Has member functions to calculate best split for a given dataset and range
+'''
+class ClassifierDataset:
     def __init__(self):
-        self.nCol = 0 # number of columns including label
-        self.attrib = np.array([]) # 2D array, each element is a row of attributes
-        self.labels = np.array([]) # 1D array, all attributes
-        self.totalInstances = 0 # number of lines
-        self.pathToFile = '' # path to file if initFromFile
-        self.attribCount = 0 # total number of attributes (nCol - 1)
+        self.nCol = None # number of columns including label
+        self.attrib = None # 2D array, each element is a row of attributes
+        self.labels = None # 1D array, all attributes
+        self.totalInstances = None # number of lines
+        self.pathToFile = None # path to file if initFromFile
+        self.attribCount = None # total number of attributes (nCol - 1)
 
 
     '''
@@ -45,11 +69,13 @@ class Dataset:
     def initFromData(self, attrib, labels):
         assert len(attrib) == len(labels), \
             "Data must have same number of attributes and labels"
+        assert len(attrib) > 0, \
+            "Attributes are empty"
         self.attrib = attrib
         self.labels = labels
 
         self.nCol = len(self.attrib[0]) + 1
-        self.attribCount = self.nCol - 1
+        self.attribCount = len(self.attrib[0])
 
         assert self.attribCount > 0, \
             "File must have more than 1 attributes"
@@ -68,7 +94,7 @@ class Dataset:
     get attributes (from file)
     '''
     def loadAttributes(self):
-        ret = np.array([])
+        ret = None
         attrib = np.genfromtxt(self.pathToFile, delimiter=',', dtype=np.int32, usecols=range(0,self.nCol-1))
 
         # if only one column for attributes, make into 2D array
@@ -106,39 +132,41 @@ class Dataset:
             dict[key] = str(self.labels[i])
         return(dict)
 
-    # calculate overall entropy, majority elem in given rows
-    def getOverallEntropyAndMajorityElem(self, rows):
-        elem_counts = {} # map of elem to number of occurences
+    '''
+    get the initial SplitObject for the root of the tree
+    '''
+    def getSplitObjectForRoot(self):
+        # dict of elem to frequency
+        elemCounts = {}
 
-        for i in rows:
-            label = self.labels[i]
-            
-            if (label not in elem_counts):
-                elem_counts[label] = 0
+        # most frequent element
+        maxElem = None 
+        maxElemFreq = 0
+        
+        # total number of elements
+        totalCount = self.totalInstances
 
-            elem_counts[label] += 1
+        for label in self.labels:
+            if not label in elemCounts:
+                elemCounts[label] = 0
+            elemCounts[label] += 1
 
-        totalRows = len(rows)
+        for label, counts in elemCounts.items():
+            if counts > maxElemFreq:
+                maxElemFreq = counts
+                maxElem = label
 
-        probabilities = []
+        probs = [float(cnt) / totalCount for _, cnt in elemCounts.items()]
+        entropy = calculateEntropy(probs)
 
-        for elem, count in elem_counts.items():
-            probabilities.append(float(count) / totalRows)
+        rootSplitObject = SplitObject(maxElem, entropy, totalCount)
+        rootSplitObject.addRowsFromRange(range(self.totalInstances))
 
-        overallEntropy = calculateEntropy(probabilities)
-
-        # get majority element, if duplicate, return the earlier one
-        max_elem = None
-        max_elem_count = 0
-
-        for elem, count in elem_counts.items():
-            if (count > max_elem_count):
-                max_elem_count = count
-                max_elem = elem
-        return overallEntropy, max_elem
+        return rootSplitObject
 
     '''
     Return a dictionary of attrib to dictionary of label to list of row numbers
+    in the given rows
         e.g. 
         {
             1: { 'A': [1, 3, 5] },
@@ -163,21 +191,33 @@ class Dataset:
         return attribLabelDict
 
     '''
-    get entropy for a particular dictionary containing keys labels and values list of row numbers
-    also get the total_count of elements in the split
+    get SplitObject for a particular dictionary containing keys labels and values list of row numbers
     '''
-    def getEntropyForSplit(self, splitDict):
-        elem_counts = [] # frequency of elements
-        total_count = 0
-        for _, lstRow in splitDict.items():
-            rowLen = len(lstRow)
-            if (rowLen > 0):
-                elem_counts.append(rowLen)
-                total_count += rowLen
-        probs = [] # probabilities
-        for elemCount in elem_counts:
-            probs.append(float(elemCount) / total_count)
-        return calculateEntropy(probs), total_count
+    def getSplitObjectFromSplitDict(self, splitDict):
+        # dict of elem to frequency
+        elemCounts = {}
+
+        # most frequent element
+        maxElem = None 
+        maxElemFreq = 0
+        
+        # total number of elements
+        totalCount = 0
+
+        for label, lstRow in splitDict.items():
+            freq = len(lstRow)
+            elemCounts[label] = freq
+            
+            if freq >= maxElemFreq:
+                maxElem = label
+            
+            totalCount += freq
+
+        probs = [float(cnt) / totalCount for _, cnt in elemCounts.items()]
+        entropy = calculateEntropy(probs)
+
+        return SplitObject(maxElem, entropy, totalCount)
+            
 
     '''
     get cumulative dict
@@ -193,7 +233,7 @@ class Dataset:
         A: [1, 3, 5, 2, 4, 9, 10],
         C: [6, 7]
     }
-    the order of row numbers in the output list is ascending according to the input list's attributes
+    the order of row numbers in the output list is ascending according to the input dict's keys
     '''
     def getCumulativeDict(self, attribLabelDict):
         ret = {}   
@@ -215,17 +255,19 @@ class Dataset:
         
 
     '''
-    get them min entropy, splitK, LHSSplitDict, RHSSplitDict for all K in attribRange
+    try every split point in a column to determine the best split
+    get the resulting entropy, K, LHS SplitObject, RHS SplitObject for the best split 
     '''
     def getMinEntropyForColumn(self, attribLabelDict, attribRange):
         minEntropy = float('inf')
         splitK = None # K to use
-        LHSSplitDict = {}
-        RHSSplitDict = {}
 
         # initial
         LHSDict = {} # LHS node
         RHSDict = self.getCumulativeDict(attribLabelDict) # RHS node
+
+        LHSSplit = None
+        RHSSplit = None
 
         # for every split point k in attrib range, we
         # calculate the entropy after splitting at x <= k (LHS) and x > k (RHS)
@@ -245,48 +287,35 @@ class Dataset:
                 if len(RHSDict[label]) == 0:
                     del RHSDict[label]
 
-            # Now calculate the entropy 
-            LHSEntropy, LHSCount = self.getEntropyForSplit(LHSDict)
-            RHSEntropy, RHSCount = self.getEntropyForSplit(RHSDict)
+            LHSSplitObject = self.getSplitObjectFromSplitDict(LHSDict)
+            RHSSplitObject = self.getSplitObjectFromSplitDict(RHSDict)
+
+            LHSEntropy, LHSCount = LHSSplitObject.entropy, LHSSplitObject.totalCount
+            RHSEntropy, RHSCount = RHSSplitObject.entropy, RHSSplitObject.totalCount
 
             # get the weighted entropy
             totalCount = LHSCount + RHSCount
             weightedEntropy = LHSEntropy * LHSCount / totalCount + RHSEntropy * RHSCount / totalCount
 
             # check if lower than minEntropy
-            if weightedEntropy < minEntropy:
+            if weightedEntropy <= minEntropy:
                 minEntropy = weightedEntropy
                 splitK = K
-                LHSSplitDict = deepcopy(LHSDict)
-                RHSSplitDict = deepcopy(RHSDict)
+
+                LHSSplitObject.addRowsFromSplitDict(LHSDict)
+                RHSSplitObject.addRowsFromSplitDict(RHSDict)
+
+                LHSSplit = LHSSplitObject
+                RHSSplit = RHSSplitObject
 
         assert not splitK is None, \
             "can't get split range K"
 
-        return minEntropy, splitK, LHSSplitDict, RHSSplitDict 
-
-    '''
-    From 
-    {
-        'A': [1,2,3],
-        'B': [4,5]
-    }
-    get
-    {
-        [1,2,3,4,5]
-    }
-    '''
-    def splitDictToRows(self, splitDict):
-        ret = []
-        
-        for _, lstRow in splitDict.items():
-            ret = ret + lstRow
-
-        return ret
+        return minEntropy, splitK, LHSSplit, RHSSplit 
 
     '''
     Get the best split point in the column in the given rows.
-    Return entropy and resulting rows in LHS and RHS after split
+    Return LHS and RHS split objects
     '''
     def getSplitPointForColumn(self, col, rows):
         attribLabelDict = self.getAttribRowDict(col, rows)
@@ -301,63 +330,57 @@ class Dataset:
         assert len(attribRange) > 0, \
             "attrib are all same, shouldn't try this col"
 
-        entropy, splitK, LHSSplitDict, RHSSplitDict = self.getMinEntropyForColumn(attribLabelDict, attribRange)
+        entropy, splitK, LHSSplit, RHSSplit = self.getMinEntropyForColumn(attribLabelDict, attribRange)
 
-        LHSSplitRows = self.splitDictToRows(LHSSplitDict)
-        RHSSplitRows = self.splitDictToRows(RHSSplitDict)
-
-        return entropy, splitK, LHSSplitRows, RHSSplitRows
+        return entropy, splitK, LHSSplit, RHSSplit
 
     '''
     Get the best column and split
     '''
     def getBestColumnAndSplit(self, validCols, rows):
         minEntropy = float('inf')
-        splitCol = None
-        splitK = None
-        LHSSplitRows = None
-        RHSSplitRows = None
+        splitCol = None # which column to split
+        splitK = None # which K to split
+
+        LHSSplit = None # SplitObject for LHS node
+        RHSSplit = None # SplitObject for RHS node
 
         for tryCol in validCols:
 
             entropy, trySplitK, tryLHSSplit, tryRHSSplit = self.getSplitPointForColumn(tryCol, rows)
 
-            if entropy < minEntropy:
+            # current split is better (entropy smaller)
+            if entropy <= minEntropy:
                 minEntropy = entropy
                 splitCol = tryCol
                 splitK = trySplitK
-                LHSSplitRows = deepcopy(tryLHSSplit)
-                RHSSplitRows = deepcopy(tryRHSSplit)
+                LHSSplit = tryLHSSplit
+                RHSSplit = tryRHSSplit
 
         assert not splitCol is None, \
             "Can't split anymore"
 
-        return splitCol, splitK, LHSSplitRows, RHSSplitRows    
+        return splitCol, splitK, LHSSplit, RHSSplit
 
     '''
-    get total number of attrs in a col for given rows
+    get total number of unique attrs in a col for given rows
     '''
     def getNumberOfAttrs(self, rows, col):
-        attrDict = {}
+        attrSet = set()
 
         for row in rows:
             attr = self.attrib[row][col]
-
-            if not attr in attrDict:
-                attrDict[attr] = True
-
-        return len(attrDict)
+            attrSet.add(attr)
+            
+        return len(attrSet)
 
     '''
-    get all valid cols that cabe split on (more than 1 label)
+    get all valid cols that can be split on (more than 1 label) in the given rows
     '''
     def getValidCols(self, rows):
         allCols = range(self.attribCount)
-        validCols = []
 
-        for col in allCols:
-            if (self.getNumberOfAttrs(rows, col) != 1):
-                validCols.append(col)
+        validCols = [col for col in allCols if self.getNumberOfAttrs(rows, col) > 1]
 
         return validCols
         
