@@ -22,7 +22,7 @@ dtc = cs.DecisionTreeClassifier()
 dtc.train(dataset.attrib, dataset.labels)
 
 
-validationDataset = ds.Dataset()
+validationDataset = ds.ClassifierDataset()
 validationDataset.initFromFile(pathToValid)
 
 Prune(dtc, validationDataset.attrib, validationDataset.labels)
