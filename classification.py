@@ -11,7 +11,6 @@ import numpy as np
 import dataset as ds
 import pickle
 import math
-from copy import deepcopy
 
 class ClassifierTree:
     '''
