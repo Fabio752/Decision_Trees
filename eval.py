@@ -128,7 +128,7 @@ class Evaluator(object):
             p[i] = float(str(numerator/denominator)[0:5]) if denominator != 0 else 0
 
 
-        macro_p = float(str(np.average(p))[0:5])
+        macro_p = round(np.average(p),3)
 
         return (p, macro_p)
 
@@ -163,7 +163,7 @@ class Evaluator(object):
             # if debug: print(numerator, denominator)
             r[i] = float(str(numerator/denominator)[0:5]) if denominator != 0 else 0
 
-        macro_r = float(str(np.average(r))[0:5])
+        macro_r = round(np.average(r),3)
 
         return (r, macro_r)
 
@@ -198,6 +198,6 @@ class Evaluator(object):
         for i in range(len(f)):
             f[i] = float(str(2*recall[i]*precision[i]/(recall[i]+precision[i]))[0:5]) if (recall[i]+precision[i]) != 0 else 0
 
-        macro_f = float(str(np.average(f))[0:5])
+        macro_f = round(np.average(f),3)
 
         return (f, macro_f)
