@@ -146,9 +146,7 @@ class ClassifierDataset:
         totalCount = self.totalInstances
 
         for label in self.labels:
-            if not label in elemCounts:
-                elemCounts[label] = 0
-            elemCounts[label] += 1
+            elemCounts[label] = elemCounts.get(label, 0) + 1
 
         for label, counts in elemCounts.items():
             if counts > maxElemFreq:
@@ -244,9 +242,7 @@ class ClassifierDataset:
             innerDict = attribLabelDict[key]
 
             for label, lstRows in innerDict.items():
-                if not label in ret:
-                    ret[label] = []
-                ret[label] = ret[label] + lstRows
+                ret[label] = ret.get(label, []) + lstRows
 
         return ret
         
@@ -273,9 +269,7 @@ class ClassifierDataset:
 
             # add to LHSDict
             for label, lstRows in splitDict.items():
-                if not label in LHSDict:
-                    LHSDict[label] = []
-                LHSDict[label] = LHSDict[label] + lstRows
+                LHSDict[label] = LHSDict.get(label, []) + lstRows
 
                 # remove first len(lstRows) elements from RHS dict
                 # this works because rows are added sequentially
