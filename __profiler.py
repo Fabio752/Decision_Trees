@@ -3,9 +3,6 @@ import dataset as ds
 import classification as cs
 import prune
 import cProfile
-import re
-import pstats
-# from pstats import SortKey
 
 pathToSimple1 = './data/simple1.txt'
 pathToSimple2 = './data/simple2.txt'
