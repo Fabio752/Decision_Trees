@@ -1,0 +1,11 @@
+Data from corona50, 30 samples each
+Intel Core i7-8700; Ubuntu 18.04.3 LTS
+
+===== train_full =====
+0.739 +- 0.007 seconds
+
+===== train_sub =====
+0.115 +- 0.002 seconds
+
+===== train_noisy =====
+0.822 +- 0.005 seconds
