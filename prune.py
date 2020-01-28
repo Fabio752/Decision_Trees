@@ -18,8 +18,11 @@ class Prune:
         self.endAccuracy = self.initialAccuracy
         self.pruneCount = 0 # how many nodes pruned
 
+        beginNodes = self.decisionTreeClassifier.classifierTree.treeStats.nodes
         self.startPruning() # begin pruning
-        print("========= Pruned {} out of {} nodes. =========".format(self.pruneCount, self.decisionTreeClassifier.classifierTree.treeStats.nodes))
+        endNodes = self.decisionTreeClassifier.classifierTree.treeStats.nodes
+        prunedNodes = beginNodes - endNodes
+        print("Pruned {} out of {} nodes. ({} ParentLeaves pruned)".format(prunedNodes, beginNodes, self.pruneCount))
         
 
     def findLeafParents(self, classifierTree):
@@ -70,7 +73,10 @@ class Prune:
             nodeToPrune.char = None
         else:
             # pruning improves accuracy
+            self.decisionTreeClassifier.classifierTree.treeStats.leaves -= 1
+            self.decisionTreeClassifier.classifierTree.treeStats.nodes -= 2
             self.pruneCount += 1
+            self.endAccuracy = pruneAccuracy
             if not nodeToPrune.parent is None \
                 and not nodeToPrune.parent.left is None \
                 and not nodeToPrune.parent.left.char is None \

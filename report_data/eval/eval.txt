@@ -1,0 +1,132 @@
+FULL DATASET: 
+TRAINING
+FINISHED TRAINING
+ 
+Accuracy: 0.915
+ 
+ 
+Macro avg recall:0.915002052257
+Macro avg precision:0.917565848196
+Macro avg f1:0.915252637904
+ 
+TRAINING
+FINISHED TRAINING
+PRUNING
+========= PRUNING =========
+Unpruned accuracy: 0.94
+Pruned accuracy: 0.94
+Pruned 0 out of 549 nodes. (0 ParentLeaves pruned)
+FINISHED PRUNING
+ 
+Accuracy: 0.915
+ 
+ 
+Macro avg recall:0.915002052257
+Macro avg precision:0.917565848196
+Macro avg f1:0.915252637904
+ 
+TRAINING
+FINISHED TRAINING
+PRUNING
+========= PRUNING =========
+Pruning aggressively
+Unpruned accuracy: 0.94
+Pruned accuracy: 0.95
+Pruned 330 out of 549 nodes. (165 ParentLeaves pruned)
+FINISHED PRUNING
+ 
+Accuracy: 0.72
+ 
+ 
+Macro avg recall:0.724867886633
+Macro avg precision:0.733735652776
+Macro avg f1:0.717887026525
+ 
+SUBSET: 
+TRAINING
+FINISHED TRAINING
+ 
+Accuracy: 0.755
+ 
+ 
+Macro avg recall:0.743745792765
+Macro avg precision:0.743986426576
+Macro avg f1:0.734762381356
+ 
+TRAINING
+FINISHED TRAINING
+PRUNING
+========= PRUNING =========
+Unpruned accuracy: 0.81
+Pruned accuracy: 0.84
+Pruned 6 out of 133 nodes. (3 ParentLeaves pruned)
+FINISHED PRUNING
+ 
+Accuracy: 0.765
+ 
+ 
+Macro avg recall:0.75331229743
+Macro avg precision:0.75271560534
+Macro avg f1:0.746784137024
+ 
+TRAINING
+FINISHED TRAINING
+PRUNING
+========= PRUNING =========
+Pruning aggressively
+Unpruned accuracy: 0.81
+Pruned accuracy: 0.85
+Pruned 50 out of 133 nodes. (25 ParentLeaves pruned)
+FINISHED PRUNING
+ 
+Accuracy: 0.725
+ 
+ 
+Macro avg recall:0.713542836092
+Macro avg precision:0.712525601639
+Macro avg f1:0.702271303762
+ 
+NOISY: 
+TRAINING
+FINISHED TRAINING
+ 
+Accuracy: 0.795
+ 
+ 
+Macro avg recall:0.796148820659
+Macro avg precision:0.797187961702
+Macro avg f1:0.795661161064
+ 
+TRAINING
+FINISHED TRAINING
+PRUNING
+========= PRUNING =========
+Unpruned accuracy: 0.82
+Pruned accuracy: 0.83
+Pruned 2 out of 895 nodes. (1 ParentLeaves pruned)
+FINISHED PRUNING
+ 
+Accuracy: 0.795
+ 
+ 
+Macro avg recall:0.796148820659
+Macro avg precision:0.797187961702
+Macro avg f1:0.795661161064
+ 
+TRAINING
+FINISHED TRAINING
+PRUNING
+========= PRUNING =========
+Pruning aggressively
+Unpruned accuracy: 0.82
+Pruned accuracy: 0.89
+Pruned 614 out of 895 nodes. (307 ParentLeaves pruned)
+FINISHED PRUNING
+ 
+Accuracy: 0.76
+ 
+ 
+Macro avg recall:0.767139634787
+Macro avg precision:0.762192672969
+Macro avg f1:0.762216099628
+ 

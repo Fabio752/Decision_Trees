@@ -1,0 +1,18 @@
+<ACCURACY on test.txt>
+
+            unpruned        pruned          pruned(aggresively)
+full        0.915           0.915           0.720
+sub         0.755           0.765           0.725
+noisy       0.795           0.795           0.760
+
+<ACCURACY on validation.txt (used for pruning)>
+            unpruned        pruned          pruned(aggresively)
+full        0.94            0.94            0.95
+sub         0.81            0.84            0.85
+noisy       0.82            0.83            0.89
+
+<NODE Count>
+            unpruned        pruned          pruned(aggresively)
+full        549             549             549-330
+sub         133             133-6           133-50
+noisy       895             895-2           895-614

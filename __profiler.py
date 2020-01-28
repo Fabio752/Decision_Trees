@@ -4,6 +4,8 @@ import classification as cs
 import prune
 import cProfile
 
+repeats = 30
+
 pathToSimple1 = './data/simple1.txt'
 pathToSimple2 = './data/simple2.txt'
 pathToTest = './data/test.txt'
@@ -19,20 +21,14 @@ dataset.initFromFile(pathToFull)
 
 dtc = cs.DecisionTreeClassifier()
 print("FULL")
-cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, 'time')
-cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, 'time')
-cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, 'time')
+for i in range(repeats): cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, 'time')
 
 dataset.initFromFile(pathToSub)
-print("=====")
+print("\n\n\n=====\n\n\n\n")
 print("SUB")
-cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, 'time')
-cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, 'time')
-cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, 'time')
+for i in range(repeats): cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, 'time')
 
 dataset.initFromFile(pathToNoisy)
-print("=====")
+print("\n\n\n=====\n\n\n\n")
 print("NOISY")
-cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, 'time')
-cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, 'time')
-cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, 'time')
+for i in range(repeats): cProfile.run('dtc.train(dataset.attrib, dataset.labels)', None, 'time')
