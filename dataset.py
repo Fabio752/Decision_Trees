@@ -328,9 +328,9 @@ class ClassifierDataset:
     '''
     Get the best column and split
     '''
-    def getBestColumnAndSplit(self, validCols, rows):
+    def getOptimalSplit(self, validCols, rows):
         minEntropy = float('inf')
-        splitCol = None # which column to split
+        splitC = None # which column to split
         splitK = None # which K to split
 
         LHSSplit = None # SplitObject for LHS node
@@ -343,15 +343,15 @@ class ClassifierDataset:
             # current split is better (entropy smaller)
             if entropy <= minEntropy:
                 minEntropy = entropy
-                splitCol = tryCol
+                splitC = tryCol
                 splitK = trySplitK
                 LHSSplit = tryLHSSplit
                 RHSSplit = tryRHSSplit
 
-        assert not splitCol is None, \
+        assert not splitC is None, \
             "Can't split anymore"
 
-        return splitCol, splitK, LHSSplit, RHSSplit
+        return splitC, splitK, LHSSplit, RHSSplit, entropy
 
     '''
     get total number of unique attrs in a col for given rows

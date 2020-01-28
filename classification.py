@@ -49,11 +49,12 @@ class ClassifierTree:
         self.depth = depth # depth of tree
         self.parent = parent # parent of tree
 
-        self.char = None # if not None, then we have reached a leaf Node (i.e. char is the label)
-        self.splitCol = None # which col do we use to split next
+        self.label = None # if not None, then we have reached a leaf Node (i.e. char is the label)
+        self.splitC = None # which col do we use to split next
         self.splitK = None # K at which we split (<=K to left, >K to right)
         self.left = None # left subtree (<= splitK)
         self.right = None # right subtree (> splitK)
+        self.informationGain = None # information gain on split
 
         self.buildTree()
 
@@ -67,16 +68,18 @@ class ClassifierTree:
         self.treeStats.nodes += 1
         self.treeStats.maxDepth = max(self.treeStats.maxDepth, self.depth)
 
-        # if all samples have same label (currentOverallEntropy == 0) or dataset cannot be split further, set self.char with majority label
+        # if all samples have same label (currentOverallEntropy == 0) or dataset cannot be split further, set self.label with majority label
         if math.isclose(0.0, self.entropy) or len(validCols) == 0:
             self.treeStats.leaves += 1
-            self.char = self.majorityElem
+            self.label = self.majorityElem
             
         else:
-            splitCol, splitK, LHSSplit, RHSSplit = self.dataset.getBestColumnAndSplit(validCols, self.leftRows)
+            splitC, splitK, LHSSplit, RHSSplit, weightedEntropy = self.dataset.getOptimalSplit(validCols, self.leftRows)
 
-            self.splitCol = splitCol
+            self.splitC = splitC
             self.splitK = splitK
+
+            self.informationGain = self.entropy - weightedEntropy
 
             self.left = ClassifierTree(self.dataset, LHSSplit, self.treeStats, self.depth + 1, self)
             self.right = ClassifierTree(self.dataset, RHSSplit, self.treeStats, self.depth + 1, self)
@@ -85,10 +88,10 @@ class ClassifierTree:
     predict given attributes 
     '''
     def predict(self, attrib): 
-        if not self.char is None:
-            return self.char
+        if not self.label is None:
+            return self.label
         
-        attr = attrib[self.splitCol]
+        attr = attrib[self.splitC]
 
         if (attr <= self.splitK):
             return self.left.predict(attrib)
@@ -98,10 +101,10 @@ class ClassifierTree:
 
     def __repr__(self, indentationLevel = ""):
         retStr = ""
-        if not self.char is None:
-            retStr += indentationLevel + self.char + "\n"
+        if not self.label is None:
+            retStr += indentationLevel + self.label + " (LD:{})\n".format(self.depth)
         else:
-            retStr += indentationLevel + "COL" + str(self.splitCol) + "|ENT:" + str(round(self.entropy, 4)) + "|D" + str(self.depth) + "\n"
+            retStr += indentationLevel + "COL" + str(self.splitC) + "|ENT:" + str(round(self.entropy, 4)) + "|IG:" + str(round(self.informationGain, 4)) + "|D" + str(self.depth) + "\n"
 
             # LEFT
             retStr += indentationLevel + "{<=" + str(self.splitK) + "}\n"

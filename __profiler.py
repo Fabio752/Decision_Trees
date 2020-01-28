@@ -4,7 +4,7 @@ import classification as cs
 import prune
 import cProfile
 
-repeats = 30
+repeats = 3
 
 pathToSimple1 = './data/simple1.txt'
 pathToSimple2 = './data/simple2.txt'

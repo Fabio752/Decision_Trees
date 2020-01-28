@@ -12,6 +12,7 @@ pathToFull = './data/train_full.txt'
 pathToNoisy = './data/train_noisy.txt'
 pathToSub = './data/train_sub.txt'
 pathToValid = './data/validation.txt'
+pathToExample = './data/example.txt'
 
 
 dataset = ds.ClassifierDataset()

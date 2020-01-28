@@ -31,7 +31,7 @@ class Prune:
             and not classifierTree.right is None:
             
             # a parent with two leaf nodes
-            if not classifierTree.left.char is None and not classifierTree.right.char is None:
+            if not classifierTree.left.label is None and not classifierTree.right.label is None:
                 depth = classifierTree.depth
 
                 if not depth in self.leafParents:
@@ -63,14 +63,14 @@ class Prune:
         if (len(self.leafParents[maxDepth]) == 0):
             del self.leafParents[maxDepth]
 
-        nodeToPrune.char = nodeToPrune.majorityElem
+        nodeToPrune.label = nodeToPrune.majorityElem
 
         pruneAccuracy = self.getAccuracy()
 
         if pruneAccuracy < startAccuracy \
             or (pruneAccuracy == startAccuracy and not self.aggressive): # aggressive flag
             # pruning doesn't improve accuracy
-            nodeToPrune.char = None
+            nodeToPrune.label = None
         else:
             # pruning improves accuracy
             self.decisionTreeClassifier.classifierTree.treeStats.leaves -= 1
@@ -79,9 +79,9 @@ class Prune:
             self.endAccuracy = pruneAccuracy
             if not nodeToPrune.parent is None \
                 and not nodeToPrune.parent.left is None \
-                and not nodeToPrune.parent.left.char is None \
+                and not nodeToPrune.parent.left.label is None \
                 and not nodeToPrune.parent.right is None \
-                and not nodeToPrune.parent.right.char is None:
+                and not nodeToPrune.parent.right.label is None:
 
                 newDepth = maxDepth - 1
                 if not newDepth in self.leafParents:

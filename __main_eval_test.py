@@ -44,6 +44,8 @@ class q3_1:
         evaluator = Evaluator()
         c_matrix = evaluator.confusion_matrix(predictions, test_labels)
 
+        print(c_matrix)
+
         print(" ")
         print("Accuracy: " + str(evaluator.accuracy(c_matrix)))
         print(" ")
