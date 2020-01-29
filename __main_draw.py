@@ -15,11 +15,10 @@ pathToValid = './data/validation.txt'
 pathToExample = './data/example.txt'
 
 dataset = ClassifierDataset()
-dataset.initFromFile(pathToToy)
+dataset.initFromFile(pathToFull)
 
 dtc = DecisionTreeClassifier()
 dtc.train(dataset.attrib, dataset.labels)
 
 print(dtc)
-tv = TreeVisualiser(dtc)
-plt.show()
+tv = TreeVisualiser(dtc, 6)
