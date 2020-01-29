@@ -16,7 +16,7 @@ pathToExample = './data/example.txt'
 
 
 dataset = ds.ClassifierDataset()
-dataset.initFromFile(pathToFull)
+dataset.initFromFile(pathToNoisy)
 
 dtc = cs.DecisionTreeClassifier()
 dtc.train(dataset.attrib, dataset.labels)

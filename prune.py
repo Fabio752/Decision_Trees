@@ -21,9 +21,15 @@ class Prune:
         beginNodes = self.decisionTreeClassifier.classifierTree.treeStats.nodes
         self.startPruning() # begin pruning
         endNodes = self.decisionTreeClassifier.classifierTree.treeStats.nodes
+    
+        beginMaxDepth = self.decisionTreeClassifier.classifierTree.treeStats.maxDepth
+        self.decisionTreeClassifier.classifierTree.treeStats.maxDepth = 0
+        self.updateMaxDepth(self.decisionTreeClassifier.classifierTree) # update max depth of tree
+        endMaxDepth = self.decisionTreeClassifier.classifierTree.treeStats.maxDepth
+
         prunedNodes = beginNodes - endNodes
         print("Pruned {} out of {} nodes. ({} ParentLeaves pruned)".format(prunedNodes, beginNodes, self.pruneCount))
-        
+        print("Max depth decreased from {} to {}.".format(beginMaxDepth, endMaxDepth))
 
     def findLeafParents(self, classifierTree):
         if not classifierTree is None \
@@ -96,6 +102,16 @@ class Prune:
 
         print("Pruned accuracy: {}".format(self.endAccuracy))
         
+    # Update maximum depth of tree
+    def updateMaxDepth(self, node):
+        if not node.label is None:
+            self.decisionTreeClassifier.classifierTree.treeStats.maxDepth = \
+                max(node.depth, self.decisionTreeClassifier.classifierTree.treeStats.maxDepth)
+        else:
+            self.updateMaxDepth(node.left)
+            self.updateMaxDepth(node.right)
+            
+
 
 
 
