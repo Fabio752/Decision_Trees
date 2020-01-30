@@ -4,11 +4,66 @@ from dataset import ClassifierDataset
 from classification import DecisionTreeClassifier
 from prune import Prune
 
+
 full_dataset_path = "./data/train_full.txt"
 subset_path = "./data/train_sub.txt"
 noisy_path = "./data/train_noisy.txt"
 test_path = "./data/test.txt"
 val_path = "./data/validation.txt"
+
+
+
+
+def plot_confusion_matrix(cm,
+                          target_names,
+                          name,
+                          title='Confusion matrix',
+                          cmap=None,
+                          normalize=True):
+
+
+    import matplotlib.pyplot as plt
+    import itertools
+
+    accuracy = np.trace(cm) / np.sum(cm).astype('float')
+    misclass = 1 - accuracy
+
+
+    if cmap is None:
+        cmap = plt.get_cmap('Blues')
+
+    if target_names is not None:
+        tick_marks = np.arange(len(target_names))
+        plt.xticks(tick_marks, target_names, rotation=45)
+        plt.yticks(tick_marks, target_names)
+
+    if normalize:
+        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+
+    plt.figure(figsize=(8, 6))
+    plt.imshow(cm, interpolation='nearest', cmap=cmap)
+    plt.title(title)
+    plt.colorbar()
+    
+    thresh = cm.max() / 1.5 if normalize else cm.max() / 2
+    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+        if normalize:
+            plt.text(j, i, "{:0.4f}".format(cm[i, j]),
+                     horizontalalignment="center",
+                     color="white" if cm[i, j] > thresh else "black")
+        else:
+            plt.text(j, i, "{:,}".format(cm[i, j]),
+                     horizontalalignment="center",
+                     color="white" if cm[i, j] > thresh else "black")
+
+
+
+    plt.tight_layout()
+    plt.ylabel('Predicted label')
+    plt.xlabel('True label\naccuracy={:0.4f}; misclass={:0.4f}'.format(accuracy, misclass))
+    plt.savefig(name + '.pdf')
+    return
+
 
 class q3_1:
     def calc_stats(self, test_path, path_to_data, prune, pruneAggressively):
@@ -43,9 +98,19 @@ class q3_1:
 
         evaluator = Evaluator()
         c_matrix = evaluator.confusion_matrix(predictions, test_labels)
+        
+        a = ["A", "C", "E", "G", "O", "Q"]
+        b = path_to_data[7:-4]
+        if prune :
+            if pruneAggressively:
+                b = b + "_aggressively_pruned"            
+            else :
+                b += "_pruned"
 
-        print(c_matrix)
-
+        else :
+            b += "_not_pruned"
+        
+        plot_confusion_matrix(c_matrix, a, b)
         print(" ")
         print("Accuracy: " + str(evaluator.accuracy(c_matrix)))
         print(" ")
@@ -90,3 +155,4 @@ noisy_3_1 = q3_1()
 noisy_3_1.calc_stats(test_path, noisy_path, False, False)
 noisy_3_1.calc_stats(test_path, noisy_path, True, False)
 noisy_3_1.calc_stats(test_path, noisy_path, True, True)
+
