@@ -25,7 +25,10 @@ validationDataset = ClassifierDataset()
 validationDataset.initFromFile(pathToValid)
 
 # Uncomment the below line to Prune
-# Prune(dtc, validationDataset.attrib, validationDataset.labels, True)
-
 # first arg: Decision Tree Classifier object; second arg: max tree depth, third arg: compact mode
-tv = TreeVisualiser(dtc, None, True)
+# fourth arg: filename, fifth arg: format
+# tv = TreeVisualiser(dtc, None, True, 'noisy_compact', 'pdf')
+
+
+Prune(dtc, validationDataset.attrib, validationDataset.labels, True)
+tv = TreeVisualiser(dtc, 3, False, 'full_3_prune', 'pdf')

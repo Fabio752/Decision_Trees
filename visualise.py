@@ -3,17 +3,34 @@ from matplotlib.patches import Rectangle
 from matplotlib.textpath import TextPath
 from matplotlib.patches import PathPatch
 
+'''
+=====
+TWEAK LINES MARKED WITH *** IF THERE EXISTS MEMORY ERRORS
+====
+'''
+
 class TreeVisualiser:
-    def __init__(self, decisionTreeClassifier, maxPlotDepth=None, compact=False): 
+    '''
+    Initialise and plot
+    
+    ===== PARAMETERS =====
+    decisionTreeClassifier: DecisionTreeClassifier Object
+    maxPlotDepth: maximum plot depth (integer)
+    compact: enable compact mode (boolean)
+    filename: file name to output
+    format: format, either 'svg', 'jpg', 'png' or 'pdf'
+    ======================
+    '''
+    def __init__(self, decisionTreeClassifier, maxPlotDepth=None, compact=False, filename='visualiser_output', format='svg'): 
         plt.clf()       
         self.parentProps = dict(boxstyle='round', facecolor='wheat', alpha=1)
         self.leafProps = dict(boxstyle='round', facecolor='palegreen', alpha=1)
         self.prunedProps = dict(boxstyle='round', facecolor='plum', alpha=1)
 
-        self.constBoxWidth = 90
-        self.constBoxHeight = 80
-        self.constBoxMargin = 5
-        self.constBoxMarginVertical = 5
+        self.constBoxWidth = 90 # ***
+        self.constBoxHeight = 80 # ***
+        self.constBoxMargin = 5 # ***
+        self.constBoxMarginVertical = 5 # ***
         self.constWidthSplitMultiple = self.constBoxWidth / 2 + self.constBoxMargin
 
         self.totalWidth = None
@@ -36,16 +53,17 @@ class TreeVisualiser:
         self.nodeCoordMap = None
     
         if self.compact:
-            self.constBoxMarginVertical = 200
-            self.constBoxMargin = 20
+            self.constBoxMarginVertical = 200 # ***
+            self.constBoxMargin = 20 # ***
             self.depthTreeMap = []
             for _ in range(self.maxDepth + 1): self.depthTreeMap.append([])
             self.nodeCoordMap = {} # node to coord (x, y)
             self.drawTreeCompact()
         else:
             self.drawTree()        
-        
-        plt.savefig('visualisation_output.svg', dpi=100, transparent=True)
+        outfilename = filename + "." + format
+        plt.axis('off')
+        plt.savefig(outfilename, dpi=100, transparent=True)
 
     '''
     =====================================
