@@ -55,6 +55,7 @@ class ClassifierTree:
         self.treeStats = treeStats # ClassifierTreeStatistics
         self.depth = depth # depth of tree
         self.parent = parent # parent of tree
+        self.pruned = False
 
         self.label = None # if not None, then we have reached a leaf Node (i.e. char is the label)
         self.splitC = None # which col do we use to split next

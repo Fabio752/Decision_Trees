@@ -8,6 +8,7 @@ class TreeVisualiser:
         plt.clf()       
         self.parentProps = dict(boxstyle='round', facecolor='wheat', alpha=1)
         self.leafProps = dict(boxstyle='round', facecolor='palegreen', alpha=1)
+        self.prunedProps = dict(boxstyle='round', facecolor='plum', alpha=1)
 
         self.constBoxWidth = 90
         self.constBoxHeight = 80
@@ -101,8 +102,14 @@ class TreeVisualiser:
             # Leaf
             textstr = node.label + "\nD{}".format(node.depth)
 
+            props = None
+            if node.pruned:
+                props = self.prunedProps
+            else:
+                props = self.leafProps
+
             self.ax.text(centreX / self.totalWidth, centreY / self.totalHeight, textstr, transform=self.ax.transAxes, fontsize=12, 
-            horizontalalignment='center', verticalalignment='center', bbox=self.leafProps)
+            horizontalalignment='center', verticalalignment='center', bbox=props)
 
 
     '''
@@ -115,11 +122,12 @@ class TreeVisualiser:
         if not node is None and node.depth <= self.maxDepth:
             self.depthTreeMap[node.depth].append(node)
 
-            if not node.left is None:
-                self.processTreeCompact(node.left)
+            if not node.pruned:
+                if not node.left is None:
+                    self.processTreeCompact(node.left)
 
-            if not node.right is None:
-                self.processTreeCompact(node.right)
+                if not node.right is None:
+                    self.processTreeCompact(node.right)
 
     def getBlankFigureCompact(self):
         self.totalHeight = (self.maxDepth + 1) * (self.constBoxHeight + 2 * self.constBoxMarginVertical)
@@ -166,8 +174,14 @@ class TreeVisualiser:
             # Leaf
             textstr = node.label + "\nD{}".format(node.depth)
 
+            props = None
+            if node.pruned:
+                props = self.prunedProps
+            else:
+                props = self.leafProps
+
             self.ax.text(centreX / self.totalWidth, centreY / self.totalHeight, textstr, transform=self.ax.transAxes, fontsize=12, 
-            horizontalalignment='center', verticalalignment='center', bbox=self.leafProps)
+            horizontalalignment='center', verticalalignment='center', bbox=props)
 
     def drawTreeForDepth(self, nodes, nextY):   
         # xDistanceMultiplier = self.constBoxWidth + 2 *
@@ -178,7 +192,7 @@ class TreeVisualiser:
         for node in nodes:
             # draw line to parent
             if not node.parent is None:
-                parentX, parentY = self.nodeCoordMap[node.parent]
+                parentX, parentY = self.nodeCoordMap.get(node.parent, (0, 0))
                 self.ax.plot([parentX, nextX], [parentY, nextY], color='black')
             
             self.drawNodeCompact(node, nextX, nextY)

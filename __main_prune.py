@@ -20,9 +20,6 @@ dataset.initFromFile(pathToNoisy)
 dtc = cs.DecisionTreeClassifier()
 dtc.train(dataset.attrib, dataset.labels)
 
-print(dtc)
-exit()
-
 validationDataset = ds.ClassifierDataset()
 validationDataset.initFromFile(pathToValid)
 

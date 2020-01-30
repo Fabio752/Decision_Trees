@@ -83,12 +83,12 @@ class Prune:
             self.decisionTreeClassifier.classifierTree.treeStats.nodes -= 2
             self.pruneCount += 1
             self.endAccuracy = pruneAccuracy
+            nodeToPrune.pruned = True
             if not nodeToPrune.parent is None \
                 and not nodeToPrune.parent.left is None \
                 and not nodeToPrune.parent.left.label is None \
                 and not nodeToPrune.parent.right is None \
                 and not nodeToPrune.parent.right.label is None:
-
                 newDepth = maxDepth - 1
                 if not newDepth in self.leafParents:
                     self.leafParents[newDepth] = []

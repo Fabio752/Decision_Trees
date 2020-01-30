@@ -1,7 +1,8 @@
 import numpy as np
-import dataset as ds
-import classification as cs
-import prune
+
+from dataset import ClassifierDataset
+from classification import DecisionTreeClassifier
+from prune import Prune
 
 pathToSimple1 = './data/simple1.txt'
 pathToSimple2 = './data/simple2.txt'
@@ -15,10 +16,15 @@ pathToValid = './data/validation.txt'
 pathToExample = './data/example.txt'
 
 
-dataset = ds.ClassifierDataset()
+dataset = ClassifierDataset()
 dataset.initFromFile(pathToNoisy)
 
-dtc = cs.DecisionTreeClassifier()
+dtc = DecisionTreeClassifier()
 dtc.train(dataset.attrib, dataset.labels)
+
+validationDataset = ClassifierDataset()
+validationDataset.initFromFile(pathToValid)
+
+Prune(dtc, validationDataset.attrib, validationDataset.labels)
 
 print(dtc.__repr__(10))
