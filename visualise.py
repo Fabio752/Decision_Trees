@@ -44,7 +44,7 @@ class TreeVisualiser:
         else:
             self.drawTree()        
         
-        plt.savefig('visualisation_output.png', dpi=100, transparent=True)
+        plt.savefig('visualisation_output.svg', dpi=100, transparent=True)
 
     '''
     =====================================
