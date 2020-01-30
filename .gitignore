@@ -42,3 +42,5 @@ profiling_logs
 logs
 output
 graphs
+
+*.png

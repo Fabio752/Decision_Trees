@@ -21,25 +21,4 @@ dataset.initFromFile(pathToNoisy)
 dtc = cs.DecisionTreeClassifier()
 dtc.train(dataset.attrib, dataset.labels)
 
-print(dtc)
-# print("predicted: ")
-
-# print(dtc.predict(np.array([
-# [8,12,7,8],
-# [5,11,6,7],
-# [1,8,7,6],
-# [0,8,7,4],
-# [2,11,11,2],
-# [0,8,7,4],
-# [7,14,8,8],
-# [2,9,9,3],
-# [3,8,7,7],
-# [5,11,7,6],
-# [3,7,4,3],
-# [3,8,8,2],
-# [6,11,8,8],
-# [5,10,12,8],
-# [1,12,11,0],
-# [1,8,7,5],
-# [3,14,12,0],
-# ])))
+print(dtc.__repr__(10))

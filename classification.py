@@ -22,7 +22,14 @@ class ClassifierTreeStats:
         self.maxDepth = 0
     
     def __repr__(self):
-        retStr = "----------------------------------\n"
+        retStr = "------------- LEGEND --------------\n"
+        retStr += "C: column of attributes chosen to split on\n"
+        retStr += "K: split boundary of column; {<=K} branch is taken if attribute A[C] <= K\n"
+        retStr += "D: current depth of tree\n"
+        retStr += "EN: entropy of current node\n"
+        retStr += "IG: Information gain on this split\n"
+        retStr += "----------------------------------\n"
+        retStr += "-------------- STATS --------------\n"
         retStr += "Nodes     :{}\n".format(self.nodes)
         retStr += "Leaves    :{}\n".format(self.leaves)
         retStr += "Max Depth :{}\n".format(self.maxDepth)
@@ -99,20 +106,24 @@ class ClassifierTree:
         return self.right.predict(attrib)            
 
 
-    def __repr__(self, indentationLevel = ""):
+    def __repr__(self, maxDepth=None, pre = ""):
         retStr = ""
         if not self.label is None:
-            retStr += indentationLevel + self.label + " (LD:{})\n".format(self.depth)
-        else:
-            retStr += indentationLevel + "COL" + str(self.splitC) + "|ENT:" + str(round(self.entropy, 4)) + "|IG:" + str(round(self.informationGain, 4)) + "|D" + str(self.depth) + "\n"
+            # LEAF
+            if len(pre) > 4:
+                pre = pre[:-4]
+            retStr += pre + "+---" + self.label + " (D:{})\n".format(self.depth)
+        elif maxDepth is None or (not maxDepth is None and self.depth < maxDepth):
+            retStr += pre + "C:{}|K:{}|D:{}|EN:{:.3f}|IG:{:.3f}\n" \
+                .format(self.splitC, self.splitK, self.depth, self.entropy, self.informationGain)
 
             # LEFT
-            retStr += indentationLevel + "{<=" + str(self.splitK) + "}\n"
-            retStr += self.left.__repr__(indentationLevel + "\t")
+            retStr += pre + "{<=" + str(self.splitK) + "}\n"
+            retStr += self.left.__repr__(maxDepth, pre + "|   ")
 
             # RIGHT
-            retStr += indentationLevel + "{> " + str(self.splitK) + "}\n"
-            retStr += self.right.__repr__(indentationLevel + "\t")
+            retStr += pre + "{> " + str(self.splitK) + "}\n"
+            retStr += self.right.__repr__(maxDepth, pre + "    ")
 
         return retStr
 
@@ -229,11 +240,12 @@ class DecisionTreeClassifier(object):
             self = pickle.load(file)
         print("Read from file: " + infilepath)
 
-    def __repr__(self):
-        ret = "----------------------------------\n"
-        ret += "Trained: {}\n".format(self.is_trained)
-        ret += "----------------------------------\n\n"
-        if self.is_trained:
-            ret += self.classifierTree.treeStats.__repr__()
-            ret += self.classifierTree.__repr__()
+    def __repr__(self, maxDepth=None):
+        if not self.is_trained:
+            raise Exception("Decision Tree classifier has not yet been trained.")
+        ret = ""
+        if not maxDepth is None:
+            ret += "Printing depth is limited to {}.\n".format(maxDepth)
+        ret += self.classifierTree.treeStats.__repr__()
+        ret += self.classifierTree.__repr__(maxDepth)
         return ret
