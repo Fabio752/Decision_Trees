@@ -153,7 +153,14 @@ class TreeVisualiser:
 
             self.nodeCoordMap[node] = (centreX, centreY)
 
-            # draw a line to the end of page
+            # draw a line to the end of page for truncated nodes
+            if node.depth == self.maxDepth:
+                endX = centreX - self.constBoxWidth / 2
+                endY = centreY - (self.constBoxMarginVertical * 2)
+                self.ax.plot([centreX, endX], [centreY, endY], color='black')
+                endX = centreX + self.constBoxWidth / 2
+                self.ax.plot([centreX, endX], [centreY, endY], color='black')
+
 
         else:
             # Leaf
