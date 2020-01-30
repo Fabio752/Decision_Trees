@@ -1,8 +1,8 @@
-import numpy as np
-
-from dataset import ClassifierDataset
+from visualise import TreeVisualiser
 from classification import DecisionTreeClassifier
+from dataset import ClassifierDataset
 from prune import Prune
+import matplotlib.pyplot as plt
 
 pathToSimple1 = './data/simple1.txt'
 pathToSimple2 = './data/simple2.txt'
@@ -15,9 +15,8 @@ pathToSub = './data/train_sub.txt'
 pathToValid = './data/validation.txt'
 pathToExample = './data/example.txt'
 
-
 dataset = ClassifierDataset()
-dataset.initFromFile(pathToNoisy)
+dataset.initFromFile(pathToFull) # CHANGE PATH HERE
 
 dtc = DecisionTreeClassifier()
 dtc.train(dataset.attrib, dataset.labels)
@@ -25,6 +24,11 @@ dtc.train(dataset.attrib, dataset.labels)
 validationDataset = ClassifierDataset()
 validationDataset.initFromFile(pathToValid)
 
-Prune(dtc, validationDataset.attrib, validationDataset.labels)
+# Uncomment the below line to Prune
+# first arg: Decision Tree Classifier object; second arg: max tree depth, third arg: compact mode
+# fourth arg: filename, fifth arg: format
+# tv = TreeVisualiser(dtc, None, True, 'noisy_compact', 'pdf')
 
-print(dtc.__repr__(10))
+
+Prune(dtc, validationDataset.attrib, validationDataset.labels, True)
+tv = TreeVisualiser(dtc, 3, False, 'full_3_prune', 'pdf')
