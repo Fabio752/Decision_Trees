@@ -19,7 +19,7 @@ def plot_confusion_matrix(cm,
                           name,
                           title='Confusion matrix',
                           cmap=None,
-                          normalize=True):
+                          normalize=False):
 
 
     import matplotlib.pyplot as plt
@@ -44,7 +44,7 @@ def plot_confusion_matrix(cm,
     plt.imshow(cm, interpolation='nearest', cmap=cmap)
     plt.title(title)
     plt.colorbar()
-    
+
     thresh = cm.max() / 1.5 if normalize else cm.max() / 2
     for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
         if normalize:
@@ -90,7 +90,7 @@ class q3_1:
             validationDataset.initFromFile(val_path)
 
             Prune(tree, validationDataset.attrib, validationDataset.labels, pruneAggressively)
-            
+
             print("FINISHED PRUNING")
 
 
@@ -98,18 +98,18 @@ class q3_1:
 
         evaluator = Evaluator()
         c_matrix = evaluator.confusion_matrix(predictions, test_labels)
-        
+
         a = ["A", "C", "E", "G", "O", "Q"]
         b = path_to_data[7:-4]
         if prune :
             if pruneAggressively:
-                b = b + "_aggressively_pruned"            
+                b = b + "_aggressively_pruned"
             else :
                 b += "_pruned"
 
         else :
             b += "_not_pruned"
-        
+
         plot_confusion_matrix(c_matrix, a, b)
         print(" ")
         print("Accuracy: " + str(evaluator.accuracy(c_matrix)))
@@ -141,7 +141,7 @@ class q3_1:
 print("FULL DATASET: ")
 full_3_1 = q3_1()
 full_3_1.calc_stats(test_path, full_dataset_path, False, False)
-full_3_1.calc_stats(test_path, full_dataset_path, True, False) 
+full_3_1.calc_stats(test_path, full_dataset_path, True, False)
 full_3_1.calc_stats(test_path, full_dataset_path, True, True)
 
 print("SUBSET: ")
@@ -155,4 +155,3 @@ noisy_3_1 = q3_1()
 noisy_3_1.calc_stats(test_path, noisy_path, False, False)
 noisy_3_1.calc_stats(test_path, noisy_path, True, False)
 noisy_3_1.calc_stats(test_path, noisy_path, True, True)
-
