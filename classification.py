@@ -232,13 +232,13 @@ class DecisionTreeClassifier(object):
     # write object (model) to a file
     def writeToFile(self, outfilepath):
         with open(outfilepath, 'wb') as file:
-            pickle.dump(self, file)
-        print("Written to file" + outfilepath)
+            pickle.dump(self.__dict__, file, 2)
+        print("Written to file: " + outfilepath)
 
     # read object (model) from a file
     def readFromFile(self, infilepath):
         with open(infilepath, 'rb') as file:
-            self = pickle.load(file)
+            self.__dict__.update(pickle.load(file))
         print("Read from file: " + infilepath)
 
     def __repr__(self, maxDepth=None):

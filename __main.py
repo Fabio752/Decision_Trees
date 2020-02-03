@@ -17,14 +17,20 @@ pathToExample = './data/example.txt'
 
 
 dataset = ClassifierDataset()
-dataset.initFromFile(pathToNoisy)
+dataset.initFromFile(pathToFull)
 
 dtc = DecisionTreeClassifier()
-dtc.train(dataset.attrib, dataset.labels)
+# dtc.train(dataset.attrib, dataset.labels)
+dtc.readFromFile('./memes.blob')
+# print(dtc.is_trained)
+# print(dtc.classifierTree)
+# dtc.writeToFile('./memes.blob')
+# print(dtc.is_trained)
 
-validationDataset = ClassifierDataset()
-validationDataset.initFromFile(pathToValid)
 
-Prune(dtc, validationDataset.attrib, validationDataset.labels)
+# validationDataset = ClassifierDataset()
+# validationDataset.initFromFile(pathToValid)
 
-print(dtc.__repr__(10))
+# Prune(dtc, validationDataset.attrib, validationDataset.labels)
+
+print(dtc.__repr__(5))
