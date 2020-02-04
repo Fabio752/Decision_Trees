@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt; plt.rcdefaults()
 import numpy as np
 import matplotlib.pyplot as plt
+from dataset import ClassifierDataset
+from eval import Evaluator
 
 
 # Question 1.1
@@ -63,3 +65,25 @@ def q4(full_dat, noisy_dat):
     return wrongNo
 
 
+'''
+Get confusion matrix for noisy predictions based on ground
+truths of train_full.txt
+'''
+def q4confmat(full_dat, noisy_dat):
+    ref_dict = full_dat.getDictionary()
+    
+    # ground truth labels
+    annotations = []
+    for attrib in noisy_dat.attrib:
+        attribString = ','.join(str(v) for v in attrib)
+        if not attribString in ref_dict:
+            print("ERROR: attribString not present!")
+            continue
+        annotations.append(ref_dict[attribString])
+    evaluator = Evaluator()
+    c_matrix = evaluator.confusion_matrix(noisy_dat.labels, annotations) # KUNAL
+   
+# full_dat = ClassifierDataset()
+# full_dat.initFromFile('./data/train_full.txt')
+# noisy_dat = ClassifierDataset()
+# noisy_dat.initFromFile('./data/train_noisy.txt')

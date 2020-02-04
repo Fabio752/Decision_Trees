@@ -20,12 +20,7 @@ dataset = ClassifierDataset()
 dataset.initFromFile(pathToFull)
 
 dtc = DecisionTreeClassifier()
-# dtc.train(dataset.attrib, dataset.labels)
-dtc.readFromFile('./memes.blob')
-# print(dtc.is_trained)
-# print(dtc.classifierTree)
-# dtc.writeToFile('./memes.blob')
-# print(dtc.is_trained)
+dtc.train(dataset.attrib, dataset.labels)
 
 
 # validationDataset = ClassifierDataset()
@@ -33,4 +28,4 @@ dtc.readFromFile('./memes.blob')
 
 # Prune(dtc, validationDataset.attrib, validationDataset.labels)
 
-print(dtc.__repr__(5))
+# print(dtc.__repr__(5))
