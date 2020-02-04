@@ -75,9 +75,8 @@ class Evaluator(object):
         float
             The accuracy (between 0.0 to 1.0 inclusive)
         """
-        accurate = confusion.trace()
 
-        accuracy = float(accurate/np.sum(confusion))
+        accuracy = float(confusion.trace()/np.sum(confusion))
 
         return accuracy
 

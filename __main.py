@@ -17,15 +17,12 @@ pathToExample = './data/example.txt'
 
 
 dataset = ClassifierDataset()
-dataset.initFromFile(pathToFull)
+dataset.initFromFile(pathToSub)
 
 dtc = DecisionTreeClassifier()
 dtc.train(dataset.attrib, dataset.labels)
+dtc.writeToFile('model_0.pickle')
 
-
-# validationDataset = ClassifierDataset()
-# validationDataset.initFromFile(pathToValid)
-
-# Prune(dtc, validationDataset.attrib, validationDataset.labels)
-
-# print(dtc.__repr__(5))
+dtc2 = DecisionTreeClassifier()
+dtc2.readFromFile('model_0.pickle')
+print(dtc.__repr__(5))
