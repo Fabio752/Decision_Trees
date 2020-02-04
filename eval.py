@@ -42,7 +42,7 @@ class Evaluator(object):
             Rows are ground truth per class, columns are predictions.
         """
 
-        if not class_labels:
+        if class_labels is None:
             class_labels = np.unique(annotation)
             class_labels = np.sort(class_labels)
 
@@ -75,9 +75,8 @@ class Evaluator(object):
         float
             The accuracy (between 0.0 to 1.0 inclusive)
         """
-        accurate = confusion.trace()
 
-        accuracy = float(accurate/np.sum(confusion))
+        accuracy = float(confusion.trace()/np.sum(confusion))
 
         return accuracy
 
@@ -171,7 +170,7 @@ class Evaluator(object):
         """
         # Initialise array to store recall for C classes
         f = np.zeros((len(confusion), ))
-        
+
         #######################################################################
         #                 ** YOUR TASK: COMPLETE THIS METHOD **
         #######################################################################
