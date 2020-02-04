@@ -124,10 +124,16 @@ class ClassifierDataset:
         unique_elems, count_elems = np.unique(self.labels, return_counts=True)
         return unique_elems, count_elems
 
+    '''
+    get dictionary of attributes to labels for dataset
+    '''
     def getDictionary(self):
         dict = {}
         for i in range(len(self.labels)):
             key = ','.join(str(v) for v in self.attrib[i])
+            # CLASH GUARD
+            if key in dict and dict[key] != self.labels[i]:
+                print("CLASH: {} with {}".format(dict[key], self.labels[i]))
             dict[key] = str(self.labels[i])
         return(dict)
 
