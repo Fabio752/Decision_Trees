@@ -118,7 +118,7 @@ and invoke the methods defined in ``classification.py`` and ``eval.py``.
     - #### Non-required files 
      - `__main_eval_test.py` :
     	- run this file with the command: <strong>`python3 __main_eval_test.py`</strong>
-    	- The purpose of this file is to generate the confusion matrix, accuracy and calculate macro average recall, precision and f1 for each training.set. 
+        	- The purpose of this file is to generate the confusion matrix, accuracy and calculate macro average recall, precision and f1 for each training.set. 
 
      - `__main_prune.py` :
     	- run this file with the command: <strong>`python3 __main_prune.py`</strong>
