@@ -149,7 +149,7 @@ def q4confmat(full_dat, noisy_dat):
             continue
         annotations.append(ref_dict[attribString])
     evaluator = Evaluator()
-    c_matrix = evaluator.confusion_matrix(noisy_dat.labels, annotations) # KUNAL
+    c_matrix = evaluator.confusion_matrix(noisy_dat.labels, annotations)
     print(c_matrix)
     target_names = ["A", "C", "E", "G", "O", "Q"]
     plot_confusion_matrix(c_matrix, target_names, "Noisy vs Full")
