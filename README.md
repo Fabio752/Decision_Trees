@@ -50,19 +50,19 @@ and invoke the methods defined in ``classification.py`` and ``eval.py``.
 ### Instructions
 - The project contains some files for visualisation and data analysis purposes as well as the required ones.
     - Non-required files 
-        - __main_eval_test.py :
-        - run this file with the command: <strong>python3 __main_eval_test.py</strong>
-        - The purpose of this file is to generate the confusion matrix, accuracy and calculate macro average recall, precision and f1 for each training.set. 
+        - `__main_eval_test.py` :
+        	- run this file with the command: <strong>`python3 __main_eval_test.py`</strong>
+        	- The purpose of this file is to generate the confusion matrix, accuracy and calculate macro average recall, precision and f1 for each training.set. 
 
-	    - __main_prune.py :
+	    - `__main_prune.py` :
     	    - run this file with the command: <strong>python3 __main_prune.py</strong>
     	    -The purpose of this file is to determine unpruned and pruned accuracy 	on input datasets, number of nodes pruned (as well as number of parent leaves) and decreasing in the tree's max depth.
 
-	    - __main_draw.py :
+	    - `__main_draw.py` :
     	    - run this file with the command: <strong>python3 __main_draw.py</strong>
     	    - The purpose of this file is to generate a pdf file to visualise the tree (pruned or unpruned).
 	
-	    -  __profiler.py:
+	    -  `__profiler.py`:
       	    - run this file with the command: <strong>python3 __profiler.py</strong>
       	    - The purpose of this file is to generate a table to assess the execution time for training different datasets.
 	
@@ -79,7 +79,7 @@ and invoke the methods defined in ``classification.py`` and ``eval.py``.
                     - dataset: the dataset to classify.
                     - splitObject: a splitObject object.
                     - treeStats: a TreeStats object.
-                    - depth (def = 0):
+                    - depth (optional, default = 0):
                     - parent (def = None):
      		
      		    - buildTree: (no arguments taken), just builds the structure
