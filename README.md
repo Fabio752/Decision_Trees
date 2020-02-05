@@ -61,7 +61,7 @@ and invoke the methods defined in ``classification.py`` and ``eval.py``.
                     - depth (optional, default = 0):
                     - parent (optional, default = None):
           		- **buildTree**: (no arguments taken), just builds the structure
-			        - predict: takes one argument, returns prediction:
+			    - **predict**: takes one argument, returns prediction:
     			    - attrib: attributes to predict.
   			    - **\_\_repr__**: takes two arguments, returns string-version of the tree
     			    - maxDepth (optional, default = None): specify a maxDepth for the tree.
@@ -82,24 +82,25 @@ and invoke the methods defined in ``classification.py`` and ``eval.py``.
             - <em>ClassifierDataset</em>: a class that has member functions to calculate best split for a given dataset and range.  
                 - **initFromFile**: a function that takes as input a path to a file(pathToFile) and returns the classifier.
                 - **initFromData**: takes two parameters (attrib and labels) that allow it to instantiate the object from the given data.  
-                - 
+                - Other functions for building the tree are included in the class.
 	    -  `eval.py`:
       	    - <em>Evaluator</em>: this class has several methods that can be called to evaluate the classifier predicitions based on various metrics.
         	    - **confusion_matrix**: Computes the confusion matrix on the given classifier. Has the following parameters.
-            	- **prediction**: np.array containing the predicted class labels
-            	- **annotation**: np.array containing the ground truths
+            	    - prediction: np.array containing the predicted class labels
+            	    - annotation: np.array containing the ground truths
             	- **class_labels**: np.array containing the ordered set of class labels. If not provided, default value will be the unique values in annotation. 
-        	    - **accuracy**: calculates accuracy given the matrix
-        	    - **precision**: calculates precision given the matrix
-            	- **recall**: calculates recall given the matrix
-        		- **f1_score**: calculates f1_score given the matrix
+        	    - **accuracy**: calculates accuracy given the confusion matrix.
+        	    - **precision**: calculates precision given the confusion matrix.
+            	- **recall**: calculates recall given the confusion matrix.
+        		- **f1_score**: calculates f1_score given the confusion matrix.
     
 	    -  `prune.py`:
             -  <em>Prune</em>: a class that can be initialised passing the following parameters and will prune the tree and print the metrics analysis on the pruned tree.
-                - **decisionTreeClassifier**: an object representing the tree to prune
-                - **validationAttrib**: the attributes for the validation set.  
-                - **validationLabel**: the labels for the validation set.
-                - **aggressive**: boolean (optional, default = false). Pruning aggressively means prune even when the accuracy after pruning stays the same.
+                - **\_\_init__**:
+                    - decisionTreeClassifier: an object representing the tree to prune
+                    - validationAttrib: the attributes for the validation set.  
+                    - validationLabel: the labels for the validation set.
+                    - aggressive: boolean (optional, default = false). Pruning aggressively means prune even when the accuracy after pruning stays the same.
     
         -  `visualise.py`:
             -  <em>TreeVisualiser</em>: class that initialises and plot the tree. Takes several parameters:
