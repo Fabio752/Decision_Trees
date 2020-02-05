@@ -104,20 +104,21 @@ and invoke the methods defined in ``classification.py`` and ``eval.py``.
     
         -  `visualise.py`:
             -  <em>TreeVisualiser</em>: class that initialises and plot the tree. Takes several parameters:
-                - **decisionTreeClassifier**: the object to print.
-                - **maxPlotDepth**: int value to indicate the depth level on which to stop the printing (optional, default = None).
-                - **compact**: boolean (optional, default = false) that enables compact mode.
-                - **filename**: the name of the output file (optional, default = visualiser_output).
-                - **format**: the format of the output file, supported svg, jpg, png or pdf. (optional, default = svg).   
+                - **\_\_init__**:
+                    - decisionTreeClassifier: the object to print.
+                    - maxPlotDepth: int value to indicate the depth level on which to stop the printing (optional, default = None).
+                    - compact: boolean (optional, default = false) that enables compact mode.
+                    - filename: the name of the output file (optional, default = visualiser_output).
+                    - format: the format of the output file, supported svg, jpg, png or pdf. (optional, default = svg).   
     
     	-  `k_fold.py`:   
   
 
 
     - #### Non-required files 
-        - `__main_eval_test.py` :
-        	- run this file with the command: <strong>`python3 __main_eval_test.py`</strong>
-        	- The purpose of this file is to generate the confusion matrix, accuracy and calculate macro average recall, precision and f1 for each training.set. 
+     - `__main_eval_test.py` :
+    	- run this file with the command: <strong>`python3 __main_eval_test.py`</strong>
+    	- The purpose of this file is to generate the confusion matrix, accuracy and calculate macro average recall, precision and f1 for each training.set. 
 
      - `__main_prune.py` :
     	- run this file with the command: <strong>`python3 __main_prune.py`</strong>
