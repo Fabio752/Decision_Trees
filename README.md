@@ -52,7 +52,7 @@ and invoke the methods defined in ``classification.py`` and ``eval.py``.
 
     - #### Required files 
         -  `classification.py`:
-            - <em>ClassifierTreeStats</em>: a class storing statistics of the ClassifierTree (nodes, leaves and maxDepth)
+            - <em>ClassifierTreeStats</em>: a class storing statistics of the ClassifierTree (node count, leaf count, etc.)
             - <em>ClassifierTree</em>: a class storing the decision tree 		with member functions:
              	- **\_\_init__**: initialise it by passing: 
                     - dataset: the dataset to classify.
@@ -62,27 +62,26 @@ and invoke the methods defined in ``classification.py`` and ``eval.py``.
                     - parent (optional, default = None):
           		- **buildTree**: (no arguments taken), just builds the structure
 			    - **predict**: takes one argument, returns prediction:
-    			    - attrib: attributes to predict.
-  			    - **\_\_repr__**: takes two arguments, returns string-version of the tree
-    			    - maxDepth (optional, default = None): specify a maxDepth for the tree.
-    			    - pre (optional, default = ""): indentation. 
+    			    - attrib: one set of attributes to predict.
+  			    - **\_\_repr__**: takes one optional argument, returns text-based visualisation of the tree
+    			    - maxDepth (optional, default = None): max depth for the visualisation
      	
 		 
 		    - <em>DecisionTreeClassifier</em>:  A class for the making a decision tree classifier object. Has an attribute <em> is_trained: bool </em> that keeps track of whether the classifier has been trained. It has also the following methods:
          	    
-         	    - **train**: this method constructs the classifier from the data. It returns a copy of the classifier tree instance.
+         	    - **train**: this method constructs the classifier from the data. It takes in arguments:
 				    - x: numpy.array (N x K) where N is the number of instances and K the number of attributes.
 				    - y: numpy.array (N x 1) storing the outcomes.   
-    			- **predict**: this method takes one argument as input and predicts the outcomes from the given samples returning a (N x 1) numpy.array. It assumes the classifier has already been trained.
+    			- **predict**: this method takes one argument as input and predicts the outcomes from the given samples returning a (N x 1) numpy.array. It assumes the classifier has already been trained. It takes in an argument:
              	    - x: numpy.array (N x K) where N is the number of instances and K the number of attributes.
-    			- **\_\_repr__**: takes two arguments, returns a text-based visualisation of the tree
-    			    - maxDepth (optional, default= None): specify a maxDepth for the tree.
+    			- **\_\_repr__**: takes one optional argument, returns a text-based visualisation of the tree
+    			    - maxDepth (optional, default = None): max depth for the visualisation
     
 	    -  `dataset.py`: 
             - <em>ClassifierDataset</em>: a class that contains the dataset and has member functions to calculate best split for a given range of data.
                 - **initFromFile**: a function that takes as input a path to a file (pathToFile) and reads the file.
                 - **initFromData**: takes two parameters (attrib and labels) that allow it to instantiate the object from the given data.  
-                - Other functions for building the tree are included in the class.
+                - Other functions for computing the best split while building the tree are included in the class.
 	    -  `eval.py`:
       	    - <em>Evaluator</em>: this class has several methods that can be called to evaluate the classifier predicitions based on various metrics.
         	    - **confusion_matrix**: Computes the confusion matrix on the given classifier. Has the following parameters:
@@ -109,7 +108,7 @@ and invoke the methods defined in ``classification.py`` and ``eval.py``.
                     - maxPlotDepth: int value to indicate the depth level on which to stop the printing (optional, default = None).
                     - compact: boolean (optional, default = false) that enables compact mode.
                     - filename: the name of the output file (optional, default = visualiser_output).
-                    - format: the format of the output file, supported svg, jpg, png or pdf. (optional, default = svg).   
+                    - format: the format of the output file (supports svg, jpg, png or pdf). (optional, default = svg).   
     
     	-  `k_fold.py`:   
   
