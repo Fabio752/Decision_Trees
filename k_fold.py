@@ -17,17 +17,15 @@ class k_fold_validator:
         n_rows = self.dataset.totalInstances
         rows_per_split = int(n_rows/self.k)
         indices = np.random.permutation(n_rows)
-        subsets = np.ndarray((self.k, rows_per_split), dtype=np.int32)
+        self.test_indices = np.ndarray((self.k, rows_per_split), dtype=np.int32)
         for i in range(self.k):
             base_index = i*rows_per_split
-            subsets[i] = indices[base_index:base_index+rows_per_split]
+            self.test_indices[i] = indices[base_index:base_index+rows_per_split]
 
         self.train_indices = np.ndarray((self.k, n_rows - rows_per_split), dtype=np.int32)
-        self.test_indices = np.ndarray((self.k, rows_per_split), dtype=np.int32)
 
         for j in range(self.k):
-            self.test_indices[j] = subsets[j]
-            self.train_indices[j] = [i for i in indices if i not in subsets[j]]
+            self.train_indices[j] = [i for i in indices if i not in self.test_indices[j]]
 
         #print(self.train_indices)
         #print(self.test_indices)
