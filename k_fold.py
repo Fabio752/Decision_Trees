@@ -14,21 +14,27 @@ class k_fold_validator:
         self.k = k
 
     def split_dataset(self):
-        n_rows = self.dataset.totalInstances
-        rows_per_split = int(n_rows/self.k)
+        n_rows = self.dataset.totalInstances # Find number of instances
+        rows_per_split = int(n_rows/self.k)  # Size of each fold
+
+        # Create a shuffled arra of integers from 0 to n_rows-1
         indices = np.random.permutation(n_rows)
+
+        # Setup 2D array to hold test indices
         self.test_indices = np.ndarray((self.k, rows_per_split), dtype=np.int32)
+        
+        # Save consecutivechunks of the shuffled indices as test indices
         for i in range(self.k):
             base_index = i*rows_per_split
             self.test_indices[i] = indices[base_index:base_index+rows_per_split]
 
+        # Setup 2D array to hold train indices
         self.train_indices = np.ndarray((self.k, n_rows - rows_per_split), dtype=np.int32)
 
+        # Add all indices to each element of the test set, except for those already used in the train set
         for j in range(self.k):
             self.train_indices[j] = [i for i in indices if i not in self.test_indices[j]]
 
-        #print(self.train_indices)
-        #print(self.test_indices)
 
     def perform_validation(self):
         self.split_dataset()
