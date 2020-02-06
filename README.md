@@ -2,7 +2,7 @@
 
 ### Introduction
 
-This repository contains the skeleton code and dataset files that you need 
+This repository contains the skeleton code and dataset files that you need
 in order to complete the coursework.
 
 ### Data
@@ -15,29 +15,29 @@ The primary datasets are:
 - ``train_noisy.txt``
 - ``validation.txt``
 
-Some simpler datasets that you may use to help you with implementation or 
+Some simpler datasets that you may use to help you with implementation or
 debugging:
 - ``toy.txt``
 - ``simple1.txt``
 - ``simple2.txt``
 
-The official test set is ``test.txt``. Please use this dataset sparingly and 
-purely to report the results of evaluation. Do not use this to optimise your 
-classifier (use ``validation.txt`` for this instead). 
+The official test set is ``test.txt``. Please use this dataset sparingly and
+purely to report the results of evaluation. Do not use this to optimise your
+classifier (use ``validation.txt`` for this instead).
 
 
 ### Codes
 
 - ``classification.py``
 
-	* Contains the skeleton code for the ``DecisionTreeClassifier`` class. Your task 
+	* Contains the skeleton code for the ``DecisionTreeClassifier`` class. Your task
 is to implement the ``train()`` and ``predict()`` methods.
 
 
 - ``eval.py``
 
-	* Contains the skeleton code for the ``Evaluator`` class. Your task is to 
-implement the ``confusion_matrix()``, ``accuracy()``, ``precision()``, 
+	* Contains the skeleton code for the ``Evaluator`` class. Your task is to
+implement the ``confusion_matrix()``, ``accuracy()``, ``precision()``,
 ``recall()``, and ``f1_score()`` methods.
 
 
@@ -50,11 +50,11 @@ and invoke the methods defined in ``classification.py`` and ``eval.py``.
 ### Instructions
 - The project contains some files for visualisation and data analysis purposes as well as the required ones.
 
-    - #### Required files 
+    - #### Required files
         -  `classification.py`:
             - <em>ClassifierTreeStats</em>: a class storing statistics of the ClassifierTree (node count, leaf count, etc.)
             - <em>ClassifierTree</em>: a class storing the decision tree 		with member functions:
-             	- **\_\_init__**: initialise it by passing: 
+             	- **\_\_init__**: initialise it by passing:
                     - dataset: the dataset to classify.
                     - splitObject: a splitObject object.
                     - treeStats: a TreeStats object.
@@ -65,10 +65,10 @@ and invoke the methods defined in ``classification.py`` and ``eval.py``.
     			    - attrib: one set of attributes to predict.
   			    - **\_\_repr__**: takes one optional argument, returns text-based visualisation of the tree
     			    - maxDepth (optional, default = None): max depth for the visualisation
-     	
-		 
+
+
 		    - <em>DecisionTreeClassifier</em>:  A class for the making a decision tree classifier object. Has an attribute <em> is_trained: bool </em> that keeps track of whether the classifier has been trained. It has also the following methods:
-         	    
+
          	    - **train**: this method constructs the classifier from the data. It takes in arguments:
 				    - x: numpy.array (N x K) where N is the number of instances and K the number of attributes.
 				    - y: numpy.array (N x 1) storing the outcomes.   
@@ -76,8 +76,8 @@ and invoke the methods defined in ``classification.py`` and ``eval.py``.
              	    - x: numpy.array (N x K) where N is the number of instances and K the number of attributes.
     			- **\_\_repr__**: takes one optional argument, returns a text-based visualisation of the tree
     			    - maxDepth (optional, default = None): max depth for the visualisation
-    
-	    -  `dataset.py`: 
+
+	    -  `dataset.py`:
             - <em>ClassifierDataset</em>: a class that contains the dataset and has member functions to calculate best split for a given range of data.
                 - **initFromFile**: a function that takes as input a path to a file (pathToFile) and reads the file.
                 - **initFromData**: takes two parameters (attrib and labels) that allow it to instantiate the object from the given data.  
@@ -87,12 +87,12 @@ and invoke the methods defined in ``classification.py`` and ``eval.py``.
         	    - **confusion_matrix**: Computes the confusion matrix on the given classifier. Has the following parameters:
             	    - prediction: np.array containing the predicted class labels
             	    - annotation: np.array containing the ground truths
-            	- **class_labels**: np.array containing the ordered set of class labels. If not provided, default value will be the unique values in annotation. 
+            	- **class_labels**: np.array containing the ordered set of class labels. If not provided, default value will be the unique values in annotation.
         	    - **accuracy**: calculates accuracy given the confusion matrix.
         	    - **precision**: calculates precision given the confusion matrix.
             	- **recall**: calculates recall given the confusion matrix.
         		- **f1_score**: calculates f1_score given the confusion matrix.
-    
+
 	    -  `prune.py`:
             -  <em>Prune</em>: a class prunes the decision tree upon initialisation.
                 - **\_\_init__**:
@@ -100,23 +100,36 @@ and invoke the methods defined in ``classification.py`` and ``eval.py``.
                     - validationAttrib: the attributes for the validation set.  
                     - validationLabel: the labels for the validation set.
                     - aggressive: boolean (optional, default = false). Pruning aggressively means prune even when the accuracy after pruning stays the same.
-    
+
         -  `visualise.py`:
-            -  <em>TreeVisualiser</em>: class that, upon initialisation, plots a image-based visualisation of a tree.
+            -  <em>TreeVisualiser</em>: a  class that, upon initialisation, plots a image-based visualisation of a tree.
                 - **\_\_init__**:
                     - decisionTreeClassifier: the decision tree to print.
                     - maxPlotDepth: int value to indicate the depth level on which to stop the printing (optional, default = None).
                     - compact: boolean (optional, default = false) that enables compact mode.
                     - filename: the name of the output file (optional, default = visualiser_output).
                     - format: the format of the output file (supports svg, jpg, png or pdf). (optional, default = svg).   
-    
-    	-  `k_fold.py`:   
-  
+
+    	-  `k_fold.py`:
+					- <em>k_fold_validator</em>: a  class that performs k-fold cross-validation given k and a dataset
+								- **\_\_init__**:
+									- dataset: the dataset, initialised using the path to the file
+									- k: the value of k
+								- **split_dataset**: this method splits the rows of the dataset into k different folds. It then generates two arrays (stored as member variables), one containing test indices and the other containing the corresponding train indices. This method takes no arguments.
+								- **perform_validation**: this method uses the previously generated arrays to train and test k different decision tree models. The accuracy of each model is stored as an element of an array (member variable). The method returns the average accuracy score of the k different models, as well as the standard deviation from that average score. This method takes no arguments.
+								- **test_best_model**: this method finds the model with the highest accuracy from the perform_validation function (by checking the saved accuracy scores) and tests it on the full test dataset. This method takes 1 argument:
+									- test_path: path to the full test set
+					- **plot_confusion_matrix**: uses matplotlib to plot a confusion matrix and save the figure. Takes 5 arguments:
+						- cm: the confusion matrix to plot
+						- target_names: names of the (ground truth) classes
+						- title: for the title of the plot, as well as the name to save the figure by
+						- cmap (optional, default = None): the colour map of the plot
+						- normalize (optional, default = False): boolean indicating whether or not to normalize the values of the confusion matrix along its rows
 
 
-    - #### Non-required files 
+    - #### Non-required files
 		- `__main_eval_test.py` :
-			- The purpose of this file is to generate the confusion matrix, accuracy and calculate macro average recall, precision and f1 for each training.set. 
+			- The purpose of this file is to generate the confusion matrix, accuracy and calculate macro average recall, precision and f1 for each training.set.
 
 		- `__main_prune.py` :
 			- The purpose of this file is to determine unpruned and pruned accuracy 	on input datasets, number of nodes pruned (as well as number of parent leaves) and decreasing in the tree's max depth.

@@ -126,7 +126,10 @@ def plot_confusion_matrix(cm,target_names,title,cmap=None,normalize=False):
         cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
 
     fig, ax = plt.subplots()
-    cmap = plt.get_cmap('Blues')
+
+    if cmap is None:
+        cmap = plt.get_cmap('Blues')
+
     plt.imshow(cm, interpolation='nearest', cmap=cmap)
     plt.title("Confusion matrix: " + title, pad = 10)
     plt.colorbar()
