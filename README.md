@@ -111,20 +111,20 @@ and invoke the methods defined in ``classification.py`` and ``eval.py``.
                     - format: the format of the output file (supports svg, jpg, png or pdf). (optional, default = svg).   
 
     	-  `k_fold.py`:
-					- <em>k_fold_validator</em>: a  class that performs k-fold cross-validation given k and a dataset
-								- **\_\_init__**:
-										- dataset: the dataset, initialised using the path to the file.
-										- k: the value of k.
-								- **split_dataset**: this method splits the rows of the dataset into k different folds. It then generates two arrays (stored as member variables), one containing test indices and the other containing the corresponding train indices. This method takes no arguments.
-								- **perform_validation**: this method uses the previously generated arrays to train and test k different decision tree models. The accuracy of each model is stored as an element of an array (member variable). The method returns the average accuracy score of the k different models, as well as the standard deviation from that average score. This method takes no arguments.
-								- **test_best_model**: this method finds the model with the highest accuracy from the perform_validation function (by checking the saved accuracy scores) and tests it on the full test dataset. This method takes 1 argument:
-										- test_path: path to the full test set
-					- **plot_confusion_matrix**: uses matplotlib to plot a confusion matrix and save the figure. Takes 5 arguments:
-							- cm: the confusion matrix to plot
-							- target_names: names of the (ground truth) classes
-							- title: for the title of the plot, as well as the name to save the figure by
-							- cmap (optional, default = None): the colour map of the plot
-							- normalize (optional, default = False): boolean indicating whether or not to normalize the values of the confusion matrix along its rows
+			- <em>k_fold_validator</em>: a  class that performs k-fold cross-validation given k and a dataset
+				- **\_\_init__**:
+					- dataset: the dataset, initialised using the path to the file.
+					- k: the value of k.
+				- **split_dataset**: this method splits the rows of the dataset into k different folds. It then generates two arrays (stored as member variables), one containing test indices and the other containing the corresponding train indices. This method takes no arguments.
+				- **perform_validation**: this method uses the previously generated arrays to train and test k different decision tree models. The accuracy of each model is stored as an element of an array (member variable). The method returns the average accuracy score of the k different models, as well as the standard deviation from that average score. This method takes no arguments.
+				- **test_best_model**: this method finds the model with the highest accuracy from the perform_validation function (by checking the saved accuracy scores) and tests it on the full test dataset. This method takes 1 argument:
+					- test_path: path to the full test set
+				- **plot_confusion_matrix**: uses matplotlib to plot a confusion matrix and save the figure. Takes 5 arguments:
+					- cm: the confusion matrix to plot
+					- target_names: names of the (ground truth) classes
+					- title: for the title of the plot, as well as the name to save the figure by
+					- cmap (optional, default = None): the colour map of the plot
+					- normalize (optional, default = False): boolean indicating whether or not to normalize the values of the confusion matrix along its rows
 
 
     - #### Non-required files

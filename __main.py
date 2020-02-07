@@ -17,12 +17,14 @@ pathToExample = './data/example.txt'
 
 
 dataset = ClassifierDataset()
-dataset.initFromFile(pathToSub)
+dataset.initFromFile(pathToToy2)
 
-dtc = DecisionTreeClassifier()
-dtc.train(dataset.attrib, dataset.labels)
-dtc.writeToFile('model_0.pickle')
+print(dataset.attrib)
+print(dataset.labels)
+# dtc = DecisionTreeClassifier()
+# dtc.train(dataset.attrib, dataset.labels)
+# dtc.writeToFile('model_0.pickle')
 
-dtc2 = DecisionTreeClassifier()
-dtc2.readFromFile('model_0.pickle')
-print(dtc.__repr__(5))
+# dtc2 = DecisionTreeClassifier()
+# dtc2.readFromFile('model_0.pickle')
+# print(dtc.__repr__(5))
