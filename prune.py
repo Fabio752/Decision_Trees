@@ -109,9 +109,4 @@ class Prune:
                 max(node.depth, self.decisionTreeClassifier.classifierTree.treeStats.maxDepth)
         else:
             self.updateMaxDepth(node.left)
-            self.updateMaxDepth(node.right)
-            
-
-
-
-
+            self.updateMaxDepth(node.right)       

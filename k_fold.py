@@ -244,11 +244,11 @@ def ensemble(path_to_data):
 
 
 
-path_to_data = "./data/train_full.txt"
-test_path = "./data/test.txt"
+# path_to_data = "./data/train_full.txt"
+# test_path = "./data/test.txt"
 
-kf = k_fold_validator(10, path_to_data)
-avg_accuracy, std_dev = kf.perform_validation()
-print(avg_accuracy, std_dev)
-kf.test_best_model(test_path)
-ensemble(test_path)
+# kf = k_fold_validator(10, path_to_data)
+# avg_accuracy, std_dev = kf.perform_validation()
+# print(avg_accuracy, std_dev)
+# kf.test_best_model(test_path)
+# ensemble(test_path)
